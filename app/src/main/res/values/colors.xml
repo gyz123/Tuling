@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 系统初始化 -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- 底部导航栏 -->
+    <color name="firstColor">#00BCD4</color>
+    <color name="secondColor">#E91E63</color>
+    <color name="thirdColor">#FF5722</color>
+    <color name="fourthColor">#4CAF50</color>
+
+    <!-- 主界面沉浸式状态栏 -->
+    <color name="status_bar_color">#00b5d4</color>
+
+    <!-- 分割线  -->
+    <color name="divider_color">#f2f2f2</color>
+    <!-- 标题文字 与 描述文字 -->
+    <color name="main_subject_color">#212121</color>
+    <color name="sub_subject_color">#888888</color>
+
+</resources>
