@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.hhuc.sillyboys.tuling.R;
 
@@ -25,5 +26,7 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        TextView toolbarText = (TextView)getActivity().findViewById(R.id.toolbar_text);
+        toolbarText.setText("漂流瓶");
     }
 }

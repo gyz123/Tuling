@@ -16,8 +16,13 @@
 
     <!-- 分割线  -->
     <color name="divider_color">#f2f2f2</color>
+
     <!-- 标题文字 与 描述文字 -->
     <color name="main_subject_color">#212121</color>
     <color name="sub_subject_color">#888888</color>
+
+    <!-- RecyclerView 子项按下与松开的颜色 -->
+    <color name="state_item_normal">#ffffff</color>
+    <color name="state_item_pressed">#e9f9ff</color>
 
 </resources>

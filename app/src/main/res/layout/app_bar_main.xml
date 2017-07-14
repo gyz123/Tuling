@@ -10,11 +10,11 @@
 
     <!-- 安卓4.4设置以下android:layout_marginTop="24dp"，空出一个状态栏的高度
          安卓5.x不需要设置  -->
-
     <LinearLayout
-
+        android:layout_marginTop="24dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:id="@+id/status_bar_height"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -53,21 +53,27 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <fragment
                 android:id="@+id/main_fragment"
                 android:name="com.hhuc.sillyboys.tuling.navi_fragment.MainFragment"
                 android:layout_width="match_parent"
-                android:layout_height="470dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="52dp"/>
             <!-- 安卓4.4，height为459px -->
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d2d2d2"
+                android:layout_above="@+id/bottomNavigation"/>
             <com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView
                 android:id="@+id/bottomNavigation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:layout_alignParentBottom="true" />
-
         </RelativeLayout>
     </LinearLayout>
 

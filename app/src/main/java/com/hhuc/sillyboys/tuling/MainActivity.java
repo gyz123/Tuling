@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.hhuc.sillyboys.tuling.navi_fragment.FirstFragment;
@@ -36,6 +39,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMenuItemClickListener {
 
+    private static final String TAG = "main";
     private BottomNavigationView bottomNavigationView;
     private android.support.v4.app.FragmentManager manager;
     private ContextMenuDialogFragment mMenuDialogFragment;
@@ -43,10 +47,22 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         // 状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         StatusBarCompat.compat(this, getResources().getColor(R.color.status_bar_color));
+        setContentView(R.layout.activity_main);
+        // 动态设置高度
+        String version_sdk = Build.VERSION.SDK; // 设备SDK版本
+        String version_release = Build.VERSION.RELEASE; // 设备的系统版本
+        Log.d(TAG,"version_sdk:" + version_sdk);
+        Log.d(TAG,"version_release:" + version_release);
+        if(Double.valueOf(version_release) >= 5.0){
+            CoordinatorLayout.LayoutParams statusBarParam = new CoordinatorLayout.LayoutParams
+                        (CoordinatorLayout.LayoutParams.WRAP_CONTENT,CoordinatorLayout.LayoutParams.MATCH_PARENT);
+            statusBarParam.topMargin = 0;
+            LinearLayout layout = (LinearLayout)findViewById(R.id.status_bar_height);
+            layout.setLayoutParams(statusBarParam);
+        }
         // 工具栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -180,20 +196,22 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             // 设置点击图标时，图标与文字的颜色变化 （需要未使用背景颜色才会生效）
             bottomNavigationView.setItemActiveColorWithoutColoredBackground(ContextCompat.getColor(this, R.color.firstColor));
             // 取消滑动效果
-            //bottomNavigationView.disableViewPagerSlide();
+            bottomNavigationView.disableViewPagerSlide();
             // 不新生成activity界面
             bottomNavigationView.willNotRecreate(true);
+            // 去除灰色影子*
+            bottomNavigationView.disableShadow();
         }
 
         // 设置导航栏各组件信息
         BottomNavigationItem bottomNavigationItem = new BottomNavigationItem
-                ("First", color[0], image[0]);
+                ("广播", color[0], image[0]);
         BottomNavigationItem bottomNavigationItem1 = new BottomNavigationItem
-                ("Second", color[1], image[1]);
+                ("聊天", color[1], image[1]);
         BottomNavigationItem bottomNavigationItem2 = new BottomNavigationItem
-                ("Third", color[2], image[2]);
+                ("漂流瓶", color[2], image[2]);
         BottomNavigationItem bottomNavigationItem3 = new BottomNavigationItem
-                ("Fourth", color[3], image[3]);
+                ("我", color[3], image[3]);
 
         // 将组件添加到底部导航栏中
         bottomNavigationView.addTab(bottomNavigationItem);
