@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:background="#002751" >
+  
+    <TextView
+        android:id="@+id/me_item"
+        android:layout_width="@dimen/me_ind_width"
+        android:layout_height="wrap_content"
+		android:drawableLeft="@drawable/member_normal"
+        android:textSize="@dimen/my_name_text_size"
+        android:textColor="#CCCCCC"
+        android:textStyle="bold"
+        android:text="@string/null_str"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:gravity="left|center"
+        android:layout_marginLeft="@dimen/me_icon_left_margin"
+        android:layout_marginTop="@dimen/me_icon_top_margin" />
+    
+    <LinearLayout
+        android:id="@+id/speaker_queue"
+    	android:layout_width="@dimen/speaker_queue_ind_width"  
+    	android:layout_height="match_parent"  
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/me_icon_top_margin"
+    	android:background="#002751" >
+	    <TextView
+	        android:id="@+id/speaker_ind"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:drawableLeft="@drawable/talking1"
+	        android:textSize="@dimen/speaker_text_size"
+	        android:textColor="#CCCCCC"
+	        android:textStyle="italic"
+	        android:text="@string/null_str"
+	        android:gravity="left|center"
+	        android:singleLine="true"
+	        android:ellipsize="end"
+	        android:visibility="invisible" />
+   	    <TextView
+	        android:id="@+id/queuer_ind"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:drawableLeft="@drawable/queueing1"
+	        android:textSize="@dimen/speaker_text_size"
+	        android:textColor="#CCCCCC"
+	        android:textStyle="italic"
+	        android:text="@string/null_str"
+	        android:gravity="left|center"
+	        android:singleLine="true"
+	        android:ellipsize="end"
+	        android:visibility="invisible" />
+    </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/playlast_button"
+        android:contentDescription="@string/null_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/play_last"
+        android:visibility="visible"
+        android:layout_toRightOf="@id/speaker_queue"
+        android:layout_marginTop="@dimen/me_icon_top_margin" />
+	<ImageView 
+	    android:id="@+id/configure_button"
+	    android:contentDescription="@string/null_str"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/config_menu"
+	    android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/me_icon_top_margin"
+	    android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/configure_right_margin" />
+
+	
+	<!-- PTT group at center of the screen -->
+	<!-- PTT group at center of the screen -->
+	
+    <FrameLayout
+        android:id="@+id/ptt_group"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true" >
+	    <ToggleButton
+	        android:id="@+id/ptt_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@+string/talk"
+	        android:background="@drawable/ptt_button"
+	        android:textOff=""
+	        android:textOn=""
+	         />
+	    <ImageView
+	        android:id="@+id/ptt_mic_ind"
+	        android:contentDescription="@string/null_str"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/mic_ind" />
+	    <ImageView
+	        android:id="@+id/ptt_spk_ind"
+	        android:contentDescription="@string/null_str"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="right"
+	        android:src="@drawable/spk_ind" />
+	    </FrameLayout>
+    
+    <ImageView
+        android:id="@+id/level_ind"
+        android:contentDescription="@string/null_str"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_toLeftOf="@id/ptt_group"
+        android:src="@drawable/level_meter"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/level_meter_right_margin" />
+    <RelativeLayout 
+        android:id="@+id/rec_ply_ind"
+	    android:layout_height="wrap_content"
+	    android:layout_width="@dimen/rec_ply_ind_width"
+        android:layout_below="@id/level_ind"
+        android:layout_alignLeft="@id/level_ind" >
+        <ImageView 
+	        android:id="@+id/record_ind"
+	        android:contentDescription="@string/null_str"
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:src="@drawable/rec_item"
+	        android:visibility="invisible" />
+	    <TextView
+	        android:id="@+id/player_ind"
+	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:drawableLeft="@drawable/play_item"
+	        android:textColor="#FFEEEEEE"
+	        android:textSize="@dimen/player_text_size"
+	        android:singleLine="true"
+	        android:ellipsize="end"
+	        android:gravity="left|center"
+	        android:text="@string/null_str"
+	        android:visibility="invisible" />
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="@dimen/rec_ply_ind_width"
+        android:layout_below="@id/rec_ply_ind"
+        android:layout_alignLeft="@id/rec_ply_ind"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical" >
+	    <TextView
+	        android:id="@+id/player_his1"
+	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:textColor="#FFEEEEEE"
+	        android:textSize="12sp"
+	        android:singleLine="true"
+	        android:ellipsize="end"
+	        android:gravity="left|center"
+	        android:text="@string/null_str"
+	        android:visibility="invisible" />
+	    <TextView
+	        android:id="@+id/player_his2"
+	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:textColor="#FFAAAAAA"
+	        android:textSize="12sp"
+	        android:singleLine="true"
+	        android:ellipsize="end"
+	        android:gravity="left|center"
+	        android:text="@string/null_str"
+	        android:visibility="invisible" />
+	    <TextView
+	        android:id="@+id/player_his3"
+	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:textColor="#FF888888"
+	        android:textSize="12sp"
+	        android:singleLine="true"
+	        android:ellipsize="end"
+	        android:gravity="left|center"
+	        android:text="@string/null_str"
+	        android:visibility="invisible" />	    
+    </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/output_select_button"
+        android:contentDescription="@string/null_str"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/output_dev"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/bluetooth_right_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/bluetooth_bottom_margin" />
+    <ImageView
+        android:id="@+id/handset_battery_level"
+        android:contentDescription="@string/null_str"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_above="@id/output_select_button"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/bluetooth_right_margin"
+        android:src="@drawable/level_battery"
+        android:visibility="gone" />
+    
+        	    
+</RelativeLayout> 

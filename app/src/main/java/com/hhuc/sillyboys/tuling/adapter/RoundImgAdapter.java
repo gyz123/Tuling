@@ -62,12 +62,13 @@ public class RoundImgAdapter extends RecyclerView.Adapter<RoundImgAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.tv1.setText(msubject.get(position));  // 加载标题
-        holder.tv2.setText(mdescription.get(position));  // 加载描述
+//        holder.tv2.setText(mdescription.get(position));  // 加载描述
         // 加载图片
         Glide.with(mContext)
                 .load(mpicture.get(position))
                 .asBitmap()
                 .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
                 .centerCrop()
                 .into(new BitmapImageViewTarget(holder.imageView){
                     @Override

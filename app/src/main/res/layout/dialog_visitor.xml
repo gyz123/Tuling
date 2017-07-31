@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/visitor_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#333344" >
+
+    <TextView
+        android:id="@+id/visitor_intro"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center|center"
+        android:textSize="16sp"
+        android:text="@string/visitor_intro" />
+    	
+	<LinearLayout
+	    android:id="@+id/visitor_operate"
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:layout_gravity="center"
+	    android:weightSum="10"
+	    android:orientation="horizontal" >
+
+	    <TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="3"
+	        android:layout_marginLeft="5dp"
+	        android:text="@string/visitor_nick" />
+
+	    <EditText
+	        android:id="@+id/visitor_nick"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="5dp"
+	        android:layout_weight="5"
+	        android:hint="@string/null_str" />
+
+	    <Button
+	        android:id="@+id/login_next"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:text="@string/ok" />
+	</LinearLayout>
+
+	<TextView
+	    android:id="@+id/user_entry"
+	    android:layout_width="wrap_content"
+	    android:layout_height="50dp"
+	    android:layout_marginLeft="30dp"
+	    android:gravity="center"
+	    android:text="@string/user_entry"
+	    android:textColor="#BB6611"
+	    android:textColorLink="#000000" />
+
+</LinearLayout>

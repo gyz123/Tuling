@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView 
+        android:id="@+id/tlchannels_hint1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_centerVertical="true"
+		android:text = "途聆"
+		android:textSize="24sp"
+		android:textColor="#e0e0e0" />
+    
+	<com.jzone.entity.ObservableScrollView
+	    android:id="@+id/tlchannels_select"
+		android:layout_width="wrap_content"
+		android:layout_height="@dimen/scrollbar_height"
+		android:layout_toRightOf="@id/tlchannels_hint1"
+		android:scrollbars="none" >
+		
+		<LinearLayout
+		    android:id="@+id/content_list1"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical" >
+			
+			<Button android:id="@+id/button0" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:text="1" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button1" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="2" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button2" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="3" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button3" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="4" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button4" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="5" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button5" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="6" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button6" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="7" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button7" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="8" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button8" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="9" android:textColor="#E0E0E0"/>
+			<Button android:id="@+id/button9" android:layout_width="@dimen/scrollbar_width" android:layout_height="@dimen/scrollbar_width" android:layout_marginTop="@dimen/scrollbar_interval" android:text="10" android:textColor="#E0E0E0"/>
+		</LinearLayout>
+	</com.jzone.entity.ObservableScrollView>
+
+    <TextView 
+        android:id="@+id/tlchannel_hint2"
+    	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/tlchannels_select"
+		android:layout_centerVertical="true"
+		android:text = "频道"
+		android:textSize="24sp"
+		android:textColor="#e0e0e0" />
+    <TextView
+        android:id="@+id/tlchannel_prescount"
+    	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/tlchannel_hint2"
+		android:layout_centerVertical="true"
+		android:text = "@string/null_str"
+		android:textSize="18sp"
+		android:textColor="#e0e0e0" />
+	
+</RelativeLayout>

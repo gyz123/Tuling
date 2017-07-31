@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/menuDialogText"
+        android:id="@+id/speaker_level_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	    android:layout_marginLeft="@dimen/menudialog_text_margin"
+        android:textSize="16sp"
+        android:text="@string/show_speaker_level" />
+	<SeekBar
+	    android:id="@+id/speaker_amplitude"
+	    android:contentDescription="@string/null_str"
+	    android:layout_width="match_parent"
+	    android:layout_height="10dp"
+		android:layout_marginTop="20dp"
+		android:layout_marginStart="30dp"
+		android:layout_marginEnd="20dp"
+		android:max="50"
+	    android:progress="1"
+	    android:thumb="@drawable/pointer2" />
+	
+    <TextView
+        style="@style/menuDialogText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+	    android:layout_marginLeft="@dimen/menudialog_text_margin"
+        android:textSize="16sp"
+        android:text="@string/notify_sound_select" />
+    
+    <RadioGroup 
+        android:id="@+id/notify_sound_hint"
+        android:contentDescription="@string/notify_sound_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/menudialog_text_margin"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+        <RadioButton 
+            android:id="@+id/notify_normally"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/normal_notify"
+            android:textColor="#ffAAAAAA"
+            android:checked="true" />
+        <RadioButton 
+            android:id="@+id/notify_simply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/simple_notify"
+            android:textColor="#ffAAAAAA"  />
+        <RadioButton 
+            android:id="@+id/notify_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/none_notify"
+            android:textColor="#ffAAAAAA"  />
+        </RadioGroup>
+</LinearLayout>

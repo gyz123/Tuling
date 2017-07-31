@@ -13,7 +13,11 @@
 
     <!-- 主界面沉浸式状态栏 -->
     <color name="status_bar_color">#00b5d4</color>
+    <!-- 登录界面状态栏颜色-->
+    <color name="login_status_bar">#C4E8DE</color>
 
+    <!-- 分隔块  -->
+    <color name="divider_block_color">#e3e3e3</color>
     <!-- 分割线  -->
     <color name="divider_color">#f2f2f2</color>
 
@@ -24,5 +28,17 @@
     <!-- RecyclerView 子项按下与松开的颜色 -->
     <color name="state_item_normal">#ffffff</color>
     <color name="state_item_pressed">#e9f9ff</color>
+
+    <!-- 聊天背景色 -->
+    <color name="chat_bg_color">#ececec</color>
+
+    <!-- 单选框按钮 -->
+    <color name="radio_char">#111111</color>
+    <color name="radio_bg_green">#90caaf</color>
+    <color name="radio_bg_gray">#d0d0d0</color>
+    <color name="transparent">#000000</color>
+
+    <!-- 编辑资料文字颜色 -->
+    <color name="modify_info_char_color">#111111</color>
 
 </resources>

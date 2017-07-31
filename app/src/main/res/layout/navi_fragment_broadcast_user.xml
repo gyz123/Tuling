@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <!-- 广播信息 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="24dp"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/broadcast_user_creator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="当前主播： XXX"
+            android:textSize="@dimen/broadcast_user_hint_char"/>
+        <TextView
+            android:id="@+id/broadcast_user_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="播放状态：广播中"
+            android:textSize="@dimen/broadcast_user_hint_char"/>
+        <TextView
+            android:id="@+id/broadcast_user_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="播出时段：11.30-12.30"
+            android:textSize="@dimen/broadcast_user_hint_char"/>
+        <TextView
+            android:id="@+id/broadcast_user_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="广播地点：XX大学"
+            android:textSize="@dimen/broadcast_user_hint_char"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/broadcast_user_talk"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/navi_broadcast_user_talk_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:layout_marginTop="32dp">
+
+    </LinearLayout>
+
+</LinearLayout>

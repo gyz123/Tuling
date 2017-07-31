@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_add_channel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    <TextView
+	        style="@style/menuDialogText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/new_channel_name"
+	        android:layout_alignParentLeft="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="20dp" />
+	    
+	    <TextView 
+	        style="@style/menuDialogText2"
+	        android:id="@+id/entry_code_hint"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:text="@string/entry_code_no"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="20dp" />
+    
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+	    <EditText
+	        style="@style/menuDialogText"
+	        android:id="@+id/make_channel_name"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:textCursorDrawable="@null"
+	        android:ems="8"
+	        android:layout_weight="3"
+	        android:inputType="text" >
+	        <requestFocus />
+	    </EditText>
+	    
+		<EditText
+	        style="@style/menuDialogText"
+	        android:id="@+id/channel_entry_code"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:textCursorDrawable="@null"
+	        android:ems="4"
+	        android:layout_weight="1"
+	        android:inputType="text"
+	        android:layout_marginRight="20dp"
+	        android:visibility="invisible" >
+	    </EditText>
+    </LinearLayout>
+	
+</LinearLayout>

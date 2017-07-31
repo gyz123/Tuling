@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <!-- 频道信息 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="24sp"
+        android:id="@+id/broadcast_channel_name"
+        android:text="频道初始化"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <!-- 对讲版块  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#002751"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <TextView
+                android:id="@+id/broadcast_me_item"
+                android:layout_width="@dimen/me_ind_width"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/member_normal"
+                android:textSize="@dimen/my_name_text_size"
+                android:textColor="#CCCCCC"
+                android:textStyle="bold"
+                android:text="@string/null_str"
+                android:layout_marginLeft="16dp"
+                android:gravity="left|center"/>
+            <ImageView
+                android:id="@+id/broadcast_configure_button"
+                android:contentDescription="@string/null_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/config_menu"
+                android:layout_marginLeft="120dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/broadcast_speaker_queue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/me_icon_top_margin"
+            android:background="#002751"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:id="@+id/speaker_ind"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/speaker_text_size"
+                android:textColor="#CCCCCC"
+                android:textStyle="italic"
+                android:text="@string/null_str"
+                android:gravity="left|center"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:drawableLeft="@drawable/talking1"
+                android:visibility="invisible" />
+            <TextView
+                android:id="@+id/queuer_ind"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/speaker_text_size"
+                android:textColor="#CCCCCC"
+                android:textStyle="italic"
+                android:text="@string/null_str"
+                android:gravity="left|center"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:drawableLeft="@drawable/queueing1"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/broadcast_ptt_group"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_gravity="center_horizontal">
+            <ToggleButton
+                android:id="@+id/broadcast_ptt_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:background="@drawable/ptt_button"/>
+            <ImageView
+                android:id="@+id/broadcast_ptt_mic_ind"
+                android:contentDescription="@string/null_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mic_ind" />
+            <ImageView
+                android:id="@+id/broadcast_ptt_spk_ind"
+                android:contentDescription="@string/null_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@drawable/spk_ind" />
+        </FrameLayout>
+
+    </LinearLayout>
+</LinearLayout>

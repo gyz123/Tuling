@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_change_pass"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+	    android:layout_marginLeft="@dimen/menudialog_text_margin"
+    	android:layout_marginRight="@dimen/menudialog_text_margin"
+        android:layout_weight="1" >
+        <TextView
+            style="@style/menuDialogText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/password" />
+        <EditText
+            style="@style/menuDialogText"
+            android:id="@+id/old_pass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:textCursorDrawable="@null"
+            android:inputType="textPassword" >
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+	    android:layout_marginLeft="@dimen/menudialog_text_margin"
+    	android:layout_marginRight="@dimen/menudialog_text_margin"
+        android:layout_weight="1" >
+        <TextView
+	        style="@style/menuDialogText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/password_new" />
+        <EditText
+            style="@style/menuDialogText"
+            android:id="@+id/new_pass1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:textCursorDrawable="@null"
+            android:inputType="textPassword" >
+        </EditText>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+	    android:layout_marginLeft="@dimen/menudialog_text_margin"
+    	android:layout_marginRight="@dimen/menudialog_text_margin"
+        android:layout_weight="1" >
+        <TextView
+            style="@style/menuDialogText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/pass_confirm" />
+        <EditText
+            style="@style/menuDialogText"
+            android:id="@+id/new_pass2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:textCursorDrawable="@null"
+            android:inputType="textPassword" >
+        </EditText>
+    </LinearLayout>
+    
+</LinearLayout>

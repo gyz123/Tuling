@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:maxLevel="0" android:drawable="@drawable/cfg_speaker" />
+    <item android:maxLevel="1" android:drawable="@drawable/bluetooth_deactived" />
+    <item android:maxLevel="2" android:drawable="@drawable/bluetooth_actived" />
+    <item android:maxLevel="4" android:drawable="@drawable/bluetooth_error" />
+    <item android:maxLevel="5" android:drawable="@drawable/bluetooth_audio_error" />
+</level-list>

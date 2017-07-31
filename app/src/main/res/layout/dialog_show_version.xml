@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_app_version"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="#FFAAAAAA"
+        android:text="@string/null_str"
+        android:layout_gravity="center|center" />
+
+    <TextView
+        android:id="@+id/tourling_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#FFAAAAAA"
+        android:text="@string/null_str"
+        android:layout_gravity="left|center" />
+    
+    <TextView
+        android:id="@+id/app_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#FFAAAAAA"
+        android:text="@string/null_str"
+        android:layout_gravity="left|center" />
+    
+    <TextView
+        android:id="@+id/app_network_used"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#FFAAAAAA"
+        android:text="@string/null_str"
+        android:layout_gravity="left|center" />
+    
+    <TextView
+        android:id="@+id/app_speech_used"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#FFAAAAAA"
+        android:text="@string/null_str"
+        android:layout_gravity="left|center" />
+    
+    <TextView
+        android:id="@+id/guanwang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#FFAAAAAA"
+        android:textStyle="italic"
+        android:text="@string/guanwang"
+        android:layout_gravity="center|bottom" />
+</LinearLayout>

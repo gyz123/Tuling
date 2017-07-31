@@ -1,10 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jzone.minitl.MainActivity" >
+
     <item
-        android:id="@+id/context_menu"
-        android:icon="@drawable/btn_add"
+        android:id="@+id/action_exit"
         android:orderInCategory="100"
-        android:title=""
-        app:showAsAction="always"/>
+        android:title="@string/action_exit" />
+
+    <!-- this is the 1st (0) item  -->
+    <item 
+        android:id="@+id/action_bluetooth"
+        android:title="@string/start_bluetooth"
+        android:checkable="true" />
+
+    <!-- this item (1) set as ptt triggleable -->
+    <item
+        android:id="@+id/action_trig_ptt"
+        android:title="@string/set_ptt_type"
+        android:checkable ="true" />
+	
+    <item
+        android:id="@+id/action_set_audio"
+        android:title="@string/set_audio" />
+    <item
+        android:id="@+id/action_change_nick"
+        android:title="@string/change_nick" />
+    
+	<!-- these item (4 & 5) set invisible when visitor login -->
+    <item
+        android:id="@+id/action_change_pass"
+        android:title="@string/change_passwd" />
+    <item
+        android:id="@+id/action_bind_phone"
+        android:title="@string/bind_phone" />"
+    
+    <item 
+        android:id="@+id/action_app_version"
+        android:title="@string/show_version" />
+
+    <item
+        android:id="@+id/action_sms"
+        android:title="@string/sms_check" />
 </menu>

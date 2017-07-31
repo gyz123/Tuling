@@ -10,6 +10,9 @@
     <!-- 导航栏字体 -->
     <dimen name="text_inactive">10dp</dimen>
     <dimen name="text_active">12dp</dimen>
+    <!-- 聊天滑块字体 -->
+    <dimen name="chat_inactive">20dp</dimen>
+    <dimen name="chat_active">20dp</dimen>
 
     <!-- 工具栏尺寸 -->
     <dimen name="tool_bar_text_size">22sp</dimen>
@@ -34,5 +37,60 @@
     <dimen name="button_char_size">18sp</dimen>
     <!-- 搜索结果中提示文字大小 -->
     <dimen name="search_hint_char">16sp</dimen>
+
+    <!-- 编辑资料文字大小 -->
+    <dimen name="modify_info_char_size">16sp</dimen>
+
+
+    <!-- TL_demo -->
+    <dimen name="channel_members_size">20sp</dimen>
+    <dimen name="channel_name_size">36sp</dimen>
+    <dimen name="channel_name_width">300dp</dimen>
+
+    <dimen name="me_ind_width">200dp</dimen>
+    <dimen name="me_icon_left_margin">20dp</dimen>
+    <dimen name="me_icon_top_margin">10dp</dimen>
+    <dimen name="my_name_left_padding">40dp</dimen>
+    <dimen name="search_right_margin">20dp</dimen>
+
+    <dimen name="my_name_text_size">24sp</dimen>
+    <dimen name="speaker_text_size">20sp</dimen>
+    <dimen name="player_text_size">14sp</dimen>
+    <dimen name="member_name_size">16sp</dimen>
+
+    <dimen name="speaker_queue_ind_width">360dp</dimen>
+    <dimen name="speaker_ind_width">180dp</dimen>
+    <dimen name="rec_ply_ind_width">90dp</dimen>
+
+    <dimen name="configure_right_margin">20dp</dimen>
+
+    <dimen name="level_meter_right_margin">30dp</dimen>
+
+    <dimen name="bluetooth_right_margin">20dp</dimen>
+    <dimen name="bluetooth_bottom_margin">25dp</dimen>
+
+    <dimen name="menudialog_text_margin">7dp</dimen>
+
+    <dimen name="scrollbar_height">50dp</dimen>
+    <dimen name="scrollbar_width">50dp</dimen>
+    <dimen name="scrollbar_interval">10dp</dimen>
+
+
+    <!-- 书评中用户信息文字大小 -->
+    <dimen name="remark_user_info">16sp</dimen>
+    <!-- 书评中评论内容文字大小 -->
+    <dimen name="remart_content">14sp</dimen>
+    <!-- 用户个人信息中文字信息宽度 -->
+    <dimen name="user_hint_width">60dp</dimen>
+    <!-- 用户个人信息中按钮高度 -->
+    <dimen name="user_button_height">48dp</dimen>
+    <!-- 按钮文字大小 -->
+    <dimen name="user_button_char_size">18sp</dimen>
+    <!-- 按钮位置 -->
+    <dimen name="user_button_margin_left">16dp</dimen>
+    <dimen name="user_button_margin_right">16dp</dimen>
+
+    <!-- 广播中，用户界面提示文字  -->
+    <dimen name="broadcast_user_hint_char">18sp</dimen>
 
 </resources>

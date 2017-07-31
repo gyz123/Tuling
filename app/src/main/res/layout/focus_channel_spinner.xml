@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="4"
+    android:orientation="horizontal" >
+    
+	<LinearLayout
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="3"
+	    android:orientation="vertical" >
+	    <Spinner
+	        android:id="@+id/channels_spinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+		    android:layout_marginLeft="@dimen/menudialog_text_margin" />
+	
+	</LinearLayout>
+
+	<EditText
+	    android:id="@+id/focus_entry_code"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:ems="4"
+	    android:textColor="#EEDDDD"
+	    android:cursorVisible="true"
+	    android:inputType="textPassword"
+	    android:hint="@string/focus_ec_hint"
+	    android:layout_gravity="center" >
+
+	    <requestFocus />
+	</EditText>
+    
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 绑定蓝牙 -->
+    <item
+        android:id="@+id/chat_action_bluetooth"
+        android:title="@string/start_bluetooth"
+        android:checkable="true" />
+
+    <!--PTT触发-->
+    <item
+        android:id="@+id/chat_action_trig_ptt"
+        android:title="@string/set_ptt_type"
+        android:checkable ="true" />
+
+    <!--音频设置-->
+    <item
+        android:id="@+id/chat_action_set_audio"
+        android:title="@string/set_audio" />
+
+
+
+    <!--    在个人信息中设置
+    <item
+        android:id="@+id/chat_action_change_nick"
+        android:title="@string/change_nick" />
+
+    <item
+        android:id="@+id/chat_action_change_pass"
+        android:title="@string/change_passwd" />
+    <item
+        android:id="@+id/chat_action_bind_phone"
+        android:title="@string/bind_phone" />
+    -->
+
+</menu>

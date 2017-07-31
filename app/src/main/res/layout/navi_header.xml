@@ -13,19 +13,17 @@
         android:layout_marginLeft="140dp"
         android:visibility="visible"/>
 
-    <Button
+    <TextView
         android:id="@+id/search_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
+        android:gravity="center"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:background="#eeeeee"
         android:text="搜索"
-        android:textStyle="bold"
         android:textColor="@color/sub_subject_color"/>
-
-
 
 </FrameLayout>

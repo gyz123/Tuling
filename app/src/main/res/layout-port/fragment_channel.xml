@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#003082" >
+
+    <RelativeLayout
+        android:id="@+id/channel_state"	
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentBottom="true" >
+    	<TextView
+			android:id="@+id/presences"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:text="@string/null_str"
+			android:textSize="@dimen/channel_members_size"
+			android:textColor="#EEEEEE"
+			android:maxLength="3"
+			android:gravity="bottom|center"
+			android:background="@drawable/members_deactived"
+			android:clickable="true" />
+    	
+    	<ImageView 
+    	    android:id="@+id/session_power"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:contentDescription="@string/null_str"
+			android:src="@drawable/session_power"
+    	    android:layout_centerVertical="true"
+    	    android:clickable="true" />
+    	
+		<ImageView 
+			android:id="@+id/channel_config"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_alignParentRight="true"
+			android:contentDescription="@string/null_str"
+			android:background="@drawable/search_add_button"
+			android:layout_centerVertical="true" />
+	</RelativeLayout>
+	
+	<ImageView
+	    android:id="@+id/channel_bimg"
+	    android:contentDescription="@string/null_str"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@id/channel_state"
+	    android:layout_centerHorizontal="true"
+	    android:src="@drawable/channel_bg" />
+
+	<FrameLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@id/channel_bimg"
+	    android:layout_alignLeft="@id/channel_bimg"
+	    android:layout_alignRight="@id/channel_bimg" >
+   		<com.hhuc.sillyboys.tuling.entity.ObservableHoriScrollView
+		    android:id="@+id/channels_scroll"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" 
+		    android:layout_marginBottom="5dp">
+		    <LinearLayout
+		        android:id="@+id/channel_list"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="left|center"
+		        android:orientation="horizontal">
+			</LinearLayout>
+		</com.hhuc.sillyboys.tuling.entity.ObservableHoriScrollView>
+		<TextView
+		    android:id="@+id/channels_scroll_hint"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:gravity="center"
+		    android:text="@string/text_shift_hint"
+		    android:textColor="#88AAAAAA"
+		    android:textSize="36sp"
+	        android:singleLine="true"
+    	    android:ellipsize="end"
+		    android:visibility="gone" /> 
+	</FrameLayout>
+</RelativeLayout>

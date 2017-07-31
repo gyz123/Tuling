@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#003082" >
+
+    <TextView
+		android:id="@+id/presences"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/null_str"
+		android:textSize="@dimen/channel_members_size"
+		android:textColor="#EEEEEE"
+		android:maxLength="3"
+		android:gravity="bottom|center"
+		android:background="@drawable/members_deactived"
+		android:clickable="true"
+		android:layout_alignParentBottom="true" />
+    
+    <LinearLayout
+		android:id="@+id/channels_pandle"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+		android:layout_toRightOf="@id/presences"
+        android:orientation="vertical"
+		android:weightSum="4" >
+		<com.hhuc.sillyboys.tuling.entity.ObservableHoriScrollView
+		    android:id="@+id/channels_scroll"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="3" >
+		    <LinearLayout
+			android:id="@+id/channel_list"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="left|center"
+			android:orientation="horizontal">
+		</LinearLayout>
+		</com.hhuc.sillyboys.tuling.entity.ObservableHoriScrollView>
+		<ImageView
+		    android:id="@+id/channel_bimg"
+		    android:contentDescription="@string/null_str"
+		    android:layout_width="wrap_content"
+		    android:layout_height="0dp"
+		    android:layout_weight="1"
+		    android:src="@drawable/channel_bg" />
+	</LinearLayout>
+	
+    <ImageView 
+    	    android:id="@+id/session_power"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/channels_pandle"
+			android:contentDescription="@string/null_str"
+			android:src="@drawable/session_power"
+    	    android:layout_centerVertical="true"
+    	    android:clickable="true" />
+    
+	<ImageView 
+		android:id="@+id/channel_config"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="@dimen/search_right_margin"
+		android:contentDescription="@string/null_str"
+		android:background="@drawable/search_add_button"
+		android:layout_centerVertical="true" />
+	
+</RelativeLayout>

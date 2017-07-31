@@ -1,21 +1,35 @@
 package com.hhuc.sillyboys.tuling.navi_fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.algebra.sdk.API;
+import com.algebra.sdk.DeviceApi;
+import com.algebra.sdk.SessionApi;
+import com.algebra.sdk.entity.CompactID;
+import com.algebra.sdk.entity.IntStr;
 import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
+import com.hhuc.sillyboys.tuling.MainActivity;
 import com.hhuc.sillyboys.tuling.R;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity2;
+import com.hhuc.sillyboys.tuling.search.SearchActivity;
 import com.hhuc.sillyboys.tuling.adapter.RoundImgAdapter;
 import com.hhuc.sillyboys.tuling.util.DividerItemDecoration;
 
@@ -24,21 +38,38 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FirstFragment extends Fragment {
+    private static final String TAG = "firstFragment";
     private RecyclerView mRecyclerView;
     private RoundImgAdapter mAdapter;
     private List<String> subject,description,pictures;
+
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String adverChannel;
+    private String userChannel;
+    private int selfId = 0;
+
+    private SessionApi sessionApi = null;
+    private Context uiContext = null;
+    private Handler uiHandler = null;
+    private DeviceApi deviceApi = null;
+    private CompactID currSession = null;
+    private List<IntStr> sessPresences = null;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.navi_fragment_first, container, false);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.first_recyclerView);
+        Log.d(TAG, "onCreatView");
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated");
         TextView toolbarText = (TextView)getActivity().findViewById(R.id.toolbar_text);
         toolbarText.setText("校园广播");
         initDatas();
@@ -64,36 +95,61 @@ public class FirstFragment extends Fragment {
         mAdapter.setOnItemClickListener(new RoundImgAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(),  "click : " + position , Toast.LENGTH_SHORT).show();
+                // 跳转对应的广播
+                String compactId = description.get(position);
+                Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity2.class);
+                broadcastIntent.putExtra("compactId", compactId).putExtra("cname", subject.get(position));
+                Log.d(TAG, "用户选择了频道: " + compactId);
+                startActivity(broadcastIntent);
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(),  "long click : " + position , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(),  "long click : " + position , Toast.LENGTH_SHORT).show();
             }
         });
 
-        // 加载顶部搜索按钮
+        // 顶部搜索
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(getActivity(),R.layout.navi_header);
         header.attachTo(mRecyclerView);
-        Button searchInfo = (Button)getActivity().findViewById(R.id.search_info);
+        TextView searchInfo = (TextView) getActivity().findViewById(R.id.search_info);
         searchInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "搜索", Toast.LENGTH_SHORT).show();
+                Intent searchBroadcastIntent = new Intent(getActivity(), SearchActivity.class);
+                searchBroadcastIntent.putExtra("search_type", "search_broadcast");
+                startActivity(searchBroadcastIntent);
             }
         });
     }
 
-    // 测试数据
+    // 广播列表
     private void initDatas(){
-        subject = new ArrayList<String>(Arrays.asList("歪歪☆纳绘昕","滋油饼","qxk",
-                "天才帅帅","神眷之樱花","李佳栋","夏雨"));
+        pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        editor = pref.edit();
+        selfId = pref.getInt("selfid", 0);    // 用户id
+        adverChannel = pref.getString("adverChannel","");
+        userChannel = pref.getString("userChannel", "");
+        Log.d(TAG, "获取系统频道:" + adverChannel);
+        Log.d(TAG, "获取用户频道:" + userChannel);
+        String[] advers = adverChannel.split(";");
+        String[] users = userChannel.split(";");
+        Log.d(TAG, advers.length + "--" + users.length);
+        subject = new ArrayList<String>();
+        description = new ArrayList<String>();
+        for(int i=0; i<advers.length-1; i++){
+            String[] temp = advers[i].split("-");
+            subject.add(temp[1]);   // 频道名
+            description.add(temp[0]);       // 频道的CompactId
+        }
+        for(int i=0; i<users.length-1; i++){
+            String[] temp = users[i].split("-");
+            subject.add(temp[1]);
+            description.add(temp[0]);
+        }
+        int length = subject.size();
 
-        description = new ArrayList<String>(Arrays.asList("真实姓名：耿元哲","真实姓名：马哲燚","真实姓名：屈肖柯",
-                "真实姓名：陶宇","真实姓名：丁翰雯","真实姓名：李佳栋",
-                "真实姓名：陈明华"));
-
+        // 测试图片
         pictures = new ArrayList<String>(
                 Arrays.asList("http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0",
                         "http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPLtPSa45uA501oSBwM34Obvl104c4AONMNVDrmAg8kbpQqjwaT5qic1AN1bNyH63tL8jAZx52bnI/0",
@@ -103,6 +159,54 @@ public class FirstFragment extends Fragment {
                         "http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPwj5u6Q2cicibb1FnXcNTm2yEuWj6icy8wb4OzL4xbXSyA6NSop5g8StTqwaqtmwxYHGeGrVPZNXf6/0",
                         "http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7beeghbibiamLumTmpOdt9qXevDvy43sKoBewzUE72acNKD37iaibcIgYuxy7REYiaUm54x99w7IhxBA1y/0"
                 ));
+        for(int i = 8; i<= length; i++){
+            pictures.add("");
+        }
     }
+
+    @Override
+    public void onAttach(Activity act) {
+        super.onAttach(act);
+        uiContext = act;
+        Log.i(TAG, "onAttach ...");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume ...");
+        uiHandler = MainActivity.getUiHandler();
+        if (sessionApi == null) {
+            uiHandler.postDelayed(delayInitApi, 100);
+        } else {
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy ...");
+        if (sessionApi != null) {
+            sessionApi.setOnSessionListener(null);
+            sessionApi = null;
+        } else if (uiHandler != null) {
+
+        }
+    }
+
+    // 初始化
+    private Runnable delayInitApi = new Runnable() {
+        @Override
+        public void run() {
+            sessionApi = API.getSessionApi();
+            if (sessionApi != null) {
+//                sessionApi.setOnSessionListener(FirstFragment.this);
+                deviceApi = API.getDeviceApi();
+            } else {
+                uiHandler.postDelayed(delayInitApi, 300);
+            }
+        }
+    };
 
 }

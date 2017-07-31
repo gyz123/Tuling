@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/status_bar_height"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/MyAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/firstColor"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chat_cname"
+                    android:text="房间名"
+                    android:gravity="center"
+                    android:textSize="@dimen/subject"
+                    android:visibility="visible"/>
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/chat_bg_color">
+            <TextView
+                android:id="@+id/chat_me_item"
+                android:layout_width="@dimen/me_ind_width"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/member_normal"
+                android:textSize="@dimen/my_name_text_size"
+                android:textColor="#CCCCCC"
+                android:textStyle="bold"
+                android:text="@string/null_str"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:gravity="left|center"
+                android:layout_marginLeft="@dimen/me_icon_left_margin"
+                android:layout_marginTop="@dimen/me_icon_top_margin"
+                android:visibility="invisible"
+                android:enabled="false"/>
+
+            <LinearLayout
+                android:id="@+id/chat_speaker_queue"
+                android:layout_width="@dimen/speaker_ind_width"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical"
+                android:layout_below="@id/chat_me_item"
+                android:layout_marginTop="@dimen/me_icon_top_margin"
+                android:background="@color/chat_bg_color" >
+                <TextView
+                    android:id="@+id/chat_speaker_ind"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/speaker_text_size"
+                    android:textColor="#CCCCCC"
+                    android:textStyle="italic"
+                    android:text="@string/null_str"
+                    android:gravity="left|center"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:drawableLeft="@drawable/talking1"
+                    android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/chat_queuer_ind"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/speaker_text_size"
+                    android:textColor="#CCCCCC"
+                    android:textStyle="italic"
+                    android:text="@string/null_str"
+                    android:gravity="left|center"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:drawableLeft="@drawable/queueing1"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/chat_playlast_button"
+                android:contentDescription="@string/null_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play_last"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/chat_me_item"
+                android:layout_alignLeft="@+id/chat_me_item"
+                android:layout_alignStart="@+id/chat_me_item"/>
+            <ImageView
+                android:id="@+id/chat_configure_button"
+                android:contentDescription="@string/null_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/config_menu"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/me_icon_top_margin"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/configure_right_margin" />
+
+            <ImageView
+                android:id="@+id/chat_user_talk"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/navi_broadcast_user_talk_bg"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/chat_level_ind"
+                android:contentDescription="@string/null_str"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_toLeftOf="@id/chat_user_talk"
+                android:src="@drawable/level_meter"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/level_meter_right_margin" />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
