@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,7 @@ public class Drift extends Activity{
 
     private Context mContext;
     private ImageView bottle;
+    private ImageView spray;
 
     MediaPlayer mediaPlayer;
 
@@ -34,13 +36,13 @@ public class Drift extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drift);
 
-
         mContext = this;
 
         bottle = (ImageView) findViewById(R.id.dbotton);
+        spray = (ImageView) findViewById(R.id.mySpray);
+        spray.setVisibility(View.INVISIBLE);
+
         drift(bottle);
-
-
     }
 
     public void drift(View view){
@@ -68,6 +70,7 @@ public class Drift extends Activity{
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
+                spray.setVisibility(View.VISIBLE);
                 upSpray();
                 MediaManager.playRaw(mContext, R.raw.spray);
                 Toast.makeText(Drift.this, "丢了一个漂流瓶", Toast.LENGTH_SHORT).show();
@@ -84,6 +87,19 @@ public class Drift extends Activity{
         imageView.setImageResource(R.drawable.spray);
         AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
         animationDrawable.start();
+
+        int duration = 0;
+        for(int i=0;i<animationDrawable.getNumberOfFrames();i++){
+            duration += animationDrawable.getDuration(i);
+        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //此处调用第二个动画播放方法
+                startActivity(new Intent(mContext, Drift_main.class));
+            }
+        }, duration);
+
     }
 
     public void back_drift(View view){

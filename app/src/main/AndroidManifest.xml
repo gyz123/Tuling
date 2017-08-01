@@ -78,6 +78,9 @@
         <activity android:name=".mzy.dritfbottle.Drift"></activity>
         <activity android:name=".mzy.dritfbottle.GetBottle"></activity>
 
+        <!--mzy悄悄话 -->
+        <activity android:name=".chat.MzySecretActivity"></activity>
+
         <service android:name="com.algebra.sdk.Controller"></service>
 
         <receiver android:name="com.hhuc.sillyboys.tuling.entity.BootUpReceiver">

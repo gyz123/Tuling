@@ -18,6 +18,7 @@ import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hhuc.sillyboys.tuling.MainActivity;
 import com.hhuc.sillyboys.tuling.R;
 
 /**
@@ -168,5 +169,11 @@ public class Drift_main extends Activity {
                 set2.start();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(mContext, MainActivity.class));
     }
 }

@@ -117,6 +117,7 @@ public class GetBottle extends Activity{
             @Override
             public void onAnimationEnd(Animator animation) {
                 view.setVisibility(View.INVISIBLE);
+                startActivity(new Intent(mContext, Drift_main.class));//返回上一界面
             }
 
             @Override
