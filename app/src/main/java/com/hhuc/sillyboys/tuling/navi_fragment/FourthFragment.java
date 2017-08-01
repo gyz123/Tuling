@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algebra.sdk.API;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.hhuc.sillyboys.tuling.MainActivity;
@@ -47,6 +48,7 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
     private Button modify,logout;
 
     private static SharedPreferences pref;
+    private static SharedPreferences.Editor editor;
     private int selfId = 0;
     private Handler handler = new Handler(){
         @Override
@@ -83,17 +85,22 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "onActivityCreated");
-        pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        selfId = pref.getInt("selfid", 0);
-        init();
         TextView toolbarText = (TextView)getActivity().findViewById(R.id.toolbar_text);
         toolbarText.setText("个人信息");
-
-        Log.d(TAG, "用户id：" + selfId);
-        queryUserInfo(selfId);
+        init();
     }
 
     private void init(){
+        pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        editor = pref.edit();
+        selfId = pref.getInt("selfid", 0);
+        if(selfId == 0){
+            selfId = getActivity().getIntent().getIntExtra("selfid", 0);
+        }
+        Log.d(TAG, "selfid：" + selfId);
+        editor.putInt("selfid", selfId);
+        editor.commit();
+        queryUserInfo(selfId);
         // 个人信息
         headimg = (ImageView)getActivity().findViewById(R.id.user_image);
         Glide.with(getActivity())
@@ -102,7 +109,10 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
                 .placeholder(R.mipmap.ic_launcher)
                 .centerCrop()
                 .into(headimg);
+        
+        ((TextView)getActivity().findViewById(R.id.user_id)).setText(selfId + "");
         String selfnick = pref.getString("selfnick", "");
+        Log.d(TAG, selfnick);
         ((TextView)getActivity().findViewById(R.id.user_nick)).setText(selfnick);
         String selfage = pref.getString("selfage", "");
         ((TextView)getActivity().findViewById(R.id.user_age)).setText(selfage);
@@ -120,8 +130,8 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
             getActivity().findViewById(R.id.user_info).setVisibility(View.INVISIBLE);
             getActivity().findViewById(R.id.user_hint).setVisibility(View.VISIBLE);
         }else{
-            getActivity().findViewById(R.id.user_info).setVisibility(View.INVISIBLE);
-            getActivity().findViewById(R.id.user_hint).setVisibility(View.VISIBLE);
+            getActivity().findViewById(R.id.user_info).setVisibility(View.VISIBLE);
+            getActivity().findViewById(R.id.user_hint).setVisibility(View.INVISIBLE);
         }
         // 功能列表
         (getActivity().findViewById(R.id.user_my_channel)).setOnClickListener(this);
@@ -146,7 +156,9 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.user_modify:
                 Log.d(TAG, "修改资料");
-                startActivity(new Intent(getActivity(), ModifyInfo.class));
+                Intent intent = new Intent(getActivity(), ModifyInfo.class);
+                intent.putExtra("selfid", selfId);
+                startActivity(intent);
                 break;
             case R.id.user_logout:
                 Log.d(TAG, "退出登录");

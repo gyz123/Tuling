@@ -105,7 +105,6 @@ public class FirstFragment extends Fragment {
 
             @Override
             public void onItemLongClick(View view, int position) {
-//                Toast.makeText(getActivity(),  "long click : " + position , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -139,8 +138,10 @@ public class FirstFragment extends Fragment {
         description = new ArrayList<String>();
         for(int i=0; i<advers.length-1; i++){
             String[] temp = advers[i].split("-");
-            subject.add(temp[1]);   // 频道名
-            description.add(temp[0]);       // 频道的CompactId
+            if(!temp[1].startsWith("TOUR_LINK")){
+                subject.add(temp[1]);   // 频道名
+                description.add(temp[0]);       // 频道的CompactId
+            }
         }
         for(int i=0; i<users.length-1; i++){
             String[] temp = users[i].split("-");

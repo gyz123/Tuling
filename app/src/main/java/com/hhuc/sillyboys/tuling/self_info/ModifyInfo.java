@@ -61,7 +61,7 @@ public class ModifyInfo extends AppCompatActivity{
         }
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
-        selfId = pref.getInt("selfid", 0);
+        selfId = getIntent().getIntExtra("selfid", 0);
     }
 
     private void initComponent(){
@@ -86,18 +86,22 @@ public class ModifyInfo extends AppCompatActivity{
                 mySchool = school.getText().toString().trim();
                 myPhone = phone.getText().toString().trim();
                 Log.d(TAG, "我的信息：" + myNick + "," + myAge + "," + mySex + "," + mySchool + "," + myPhone);
-                editor.putString("selfnick", myNick).putString("selfage", myAge)
+                editor.putString("selfnick", myNick).putString("selfage", myAge).putString("selfsex", mySex)
                         .putString("selfschool", mySchool).putString("selfphone", myPhone);
                 editor.commit();
                 Log.d(TAG, "保存信息成功");
-                startActivity(new Intent(ModifyInfo.this, MainActivity.class));
+                Intent intent = new Intent(ModifyInfo.this, MainActivity.class);
+                intent.putExtra("lastAc", "fourth").putExtra("selfid", selfId);
+                startActivity(intent);
             }
         });
         back = (TextView)findViewById(R.id.modify_info_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ModifyInfo.this, MainActivity.class));
+                Intent intent = new Intent(ModifyInfo.this, MainActivity.class);
+                intent.putExtra("lastAc", "fourth").putExtra("selfid", selfId);
+                startActivity(intent);
             }
         });
     }

@@ -208,35 +208,35 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         List<MenuObject> menuObjects = new ArrayList<>();
 
         MenuObject close = new MenuObject();
-        close.setResource(R.drawable.icn_close);
+        close.setResource(R.drawable.menu_close_24dp);
+        //        close.setResource(R.drawable.icn_close);
         close.setDividerColor(R.color.sub_subject_color);
 
-        MenuObject send = new MenuObject("漂流瓶");
-        send.setResource(R.drawable.icn_1);
+        MenuObject bottle = new MenuObject("漂流瓶");
+        bottle.setResource(R.drawable.menu_bottle_24dp);
+//        bottle.setResource(R.drawable.icn_1);
 
-        MenuObject like = new MenuObject("悄悄话");
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icn_2);
-        like.setBitmap(b);
-        like.setDividerColor(R.color.sub_subject_color);
+        MenuObject secret = new MenuObject("悄悄话");
+        secret.setResource(R.drawable.menu_secret_24dp);
+//        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icn_2);
+//        secret.setBitmap(b);
 
-        MenuObject addFr = new MenuObject("添加用户");
-        BitmapDrawable bd = new BitmapDrawable(getResources(),
-                BitmapFactory.decodeResource(getResources(), R.drawable.icn_3));
-        addFr.setDrawable(bd);
+        MenuObject addFriend = new MenuObject("加好友");
+        addFriend.setResource(R.drawable.menu_addfriend_bold_24dp);
+//        BitmapDrawable bd = new BitmapDrawable(getResources(),
+//                BitmapFactory.decodeResource(getResources(), R.drawable.icn_3));
+//        addFriend.setDrawable(bd);
 
-        MenuObject addFav = new MenuObject("添加书籍");
-        addFav.setResource(R.drawable.icn_4);
-        addFav.setDividerColor(R.color.sub_subject_color);
 
-        MenuObject block = new MenuObject("扫一扫");
-        block.setResource(R.drawable.icn_5);
+        MenuObject scan = new MenuObject("扫一扫");
+        scan.setResource(R.drawable.menu_scan_bold_24dp);
+//        block.setResource(R.drawable.icn_5);
 
         menuObjects.add(close);
-        menuObjects.add(send);
-        menuObjects.add(like);
-        menuObjects.add(addFr);
-        menuObjects.add(addFav);
-        menuObjects.add(block);
+        menuObjects.add(bottle);
+        menuObjects.add(secret);
+        menuObjects.add(addFriend);
+        menuObjects.add(scan);
         return menuObjects;
     }
 
@@ -250,13 +250,10 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             case 2: Log.d(TAG, "悄悄话");
                 startActivity(new Intent(MainActivity.this, SecretActivity.class));
                 break;
-            case 3: Log.d(TAG, "添加好友");
+            case 3: Log.d(TAG, "加好友");
 
                 break;
-            case 4: Log.d(TAG,"登录测试");
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                break;
-            case 5: Log.d(TAG,"开启扫码事件");
+            case 4: Log.d(TAG, "扫码");
                 Intent scanCodeIntent = new Intent(MainActivity.this, CaptureActivity.class);
                 startActivity(scanCodeIntent);
                 break;
@@ -271,8 +268,8 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
         // 从xml文件中获取图标与颜色信息
-        int[] image = {R.drawable.ic_mic_black_24dp, R.drawable.ic_favorite_black_24dp,
-                R.drawable.ic_book_black_24dp, R.drawable.ic_github_circle};
+        int[] image = {R.drawable.bottom_broadcast_radio_24dp, R.drawable.bottom_chat_24dp,
+                R.drawable.bottom_shop_24dp, R.drawable.bottom_me_24dp};
         int[] color = {ContextCompat.getColor(this, R.color.firstColor), ContextCompat.getColor(this, R.color.secondColor),
                 ContextCompat.getColor(this, R.color.thirdColor), ContextCompat.getColor(this, R.color.fourthColor)};
 
@@ -345,9 +342,16 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         // 初始化碎片
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        FirstFragment firstFragment = new FirstFragment();
-        transaction.replace(R.id.main_fragment,firstFragment);
-        transaction.commit();
+        String lastActivity = getIntent().getStringExtra("lastAc");
+        if(lastActivity == null){
+            FirstFragment firstFragment = new FirstFragment();
+            transaction.replace(R.id.main_fragment, firstFragment);
+            transaction.commit();
+        }else if(lastActivity.equals("fourth")){
+            FourthFragment fourthFragment = new FourthFragment();
+            transaction.replace(R.id.main_fragment, fourthFragment);
+            transaction.commit();
+        }
     }
 
 

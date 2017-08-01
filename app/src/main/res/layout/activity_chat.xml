@@ -40,6 +40,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/chat_fragment"
             android:background="@color/chat_bg_color">
             <TextView
                 android:id="@+id/chat_me_item"
