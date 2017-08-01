@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:match="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/search_anim"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/loadanim" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="正在寻找有缘人，轻触屏幕空白区域退出"
+        android:layout_alignTop="@+id/search_anim"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        />
+    <!--不支持中文-->
+    <com.roger.match.library.MatchTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        match:text="Searching..."
+        match:textColor="#ffffff"
+        match:textSize="10sp"
+        android:layout_alignBottom="@+id/search_anim"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

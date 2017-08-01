@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true" android:visible="false">
+    <!--循环一次, 第一张最后一张为透明图片-->
+    <item
+        android:drawable="@drawable/myvain"
+        android:duration="0"
+        />
+
+    <item
+        android:drawable="@drawable/bottle_spray1"
+        android:duration="382" />
+
+    <item
+        android:drawable="@drawable/bottle_spray2"
+        android:duration="382" />
+
+    <item
+        android:drawable="@drawable/bottle_spray3"
+        android:duration="382" />
+
+    <item
+        android:drawable="@drawable/myvain"
+        android:duration="382"/>
+</animation-list>

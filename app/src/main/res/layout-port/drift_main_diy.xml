@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottle_day_bg"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".mzy.dritfbottle.Drift_main">
+
+
+    <ImageView
+        android:id="@+id/board"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/bottle_board"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:id="@+id/driftbottle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/getbottle"
+        android:layout_marginLeft="60dp"
+        android:src="@drawable/bottle_button_throw"
+        android:onClick="show_voice"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:id="@+id/getbottle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/textView"
+        android:layout_alignEnd="@+id/board"
+        android:layout_marginRight="60dp"
+        android:src="@drawable/bottle_button_fish"
+        android:layout_alignRight="@+id/board" />
+
+    <com.hhuc.sillyboys.tuling.mzy.dritfbottle.AudioRecorderImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/voice_button2"
+        android:visibility="visible"
+        android:id="@+id/id_recorder_button"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/board"
+        android:layout_alignStart="@+id/getbottle"
+        android:gravity="center"
+        android:text="捡一个"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_alignLeft="@+id/getbottle" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/board"
+        android:layout_alignStart="@+id/driftbottle"
+        android:gravity="center"
+        android:text="扔一个"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_alignLeft="@+id/driftbottle" />
+</RelativeLayout>
+
+
