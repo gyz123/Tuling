@@ -1,30 +1,19 @@
 package com.hhuc.sillyboys.tuling.chat;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.algebra.sdk.API;
 import com.hhuc.sillyboys.tuling.R;
-import com.hhuc.sillyboys.tuling.util.StatusBarCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,100 +27,58 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SecretActivity  extends AppCompatActivity {
-    private static final String TAG = "secretActivity";
-    private RadioGroup sexGroup, topic;
-    private EditText age;
-    private TextView confirm;
-    private NumberPicker agePicker;
+/**
+ * Created by mzy on 2017/8/1.
+ */
 
-    private String targetAge = "";
-    private String targetSex = "male";
-    private String targetTopic = "情感";
-    private static SharedPreferences pref;
-    private static SharedPreferences.Editor editor;
-    private int selfId = 0;
-    private String selfName = "";
-    private String selfAge = "";
-    private String selfSex = "male";
+public class MzySecretActivity extends Activity{
+    private Button bt1;
     private Context mContext;
-    SearchDialog searchDialog;
+
+    private EditText ed1;
+    private EditText ed2;
+    private EditText ed3;
+    private EditText ed4;
+    private EditText ed5;
+
+    private String name;
+    private String userAge;
+    private String userSex;
+    private String targetAge;
+    private String targetSex;
+
+    SearchDialog searchDialog ;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        StatusBarCompat.compat(this, getResources().getColor(R.color.status_bar_color));
-        setContentView(R.layout.activity_chat_secret);
-        init();
+        setContentView(R.layout.mzysecretactivity);
+        bt1 = (Button) findViewById(R.id.button);
+        mContext = MzySecretActivity.this;
+
+        ed1 = (EditText) findViewById(R.id.editText);
+        ed2 = (EditText) findViewById(R.id.editText2);
+        ed3 = (EditText) findViewById(R.id.editText3);
+        ed4 = (EditText) findViewById(R.id.editText4);
+        ed5 = (EditText) findViewById(R.id.editText5);
+
+
     }
 
-    private void init(){
-        // 动态设置高度
-        String version_sdk = Build.VERSION.SDK; // 设备SDK版本
-        String version_release = Build.VERSION.RELEASE; // 设备的系统版本
-        Log.d(TAG,"version_sdk:" + version_sdk);
-        Log.d(TAG,"version_release:" + version_release);
-        if(Integer.parseInt("" + version_release.charAt(0)) >= 5){
-            Log.d(TAG,"高版本:" + version_release.charAt(0));
-            CoordinatorLayout.LayoutParams statusBarParam = new CoordinatorLayout.LayoutParams
-                    (CoordinatorLayout.LayoutParams.WRAP_CONTENT,CoordinatorLayout.LayoutParams.MATCH_PARENT);
-            statusBarParam.topMargin = 0;
-            LinearLayout layout = (LinearLayout)findViewById(R.id.status_bar_height);
-            layout.setLayoutParams(statusBarParam);
-        }
-        // 获取个人信息
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = pref.edit();
-        selfId = pref.getInt("selfid", 0);
-        selfAge = "18";     // 年龄暂时设置为18，之后将从数据库读取 ****************************************
-        try{
-            selfName = API.uid2nick(selfId);
-        }catch (Exception e){
-            Log.d(TAG,"获取用户昵称失败");
-            selfName = "testName";
-        }
-        // 性别
-        sexGroup = (RadioGroup)findViewById(R.id.secret_sex_radiogroup);
-        sexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                if(selectedId == R.id.secret_sex_male)
-                    targetSex = "male";
-                else
-                    targetSex = "female";
-            }
-        });
-        // 年龄
-        age = (EditText)findViewById(R.id.secret_age);
-//        agePicker = (NumberPicker)findViewById(R.id.secret_age);
-        // 话题
-        topic = (RadioGroup)findViewById(R.id.secret_topic);
-        topic.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                targetTopic = ((RadioButton)SecretActivity.this.findViewById(selectedId)).getText().toString();
-            }
-        });
-
-        confirm = (TextView)findViewById(R.id.secret_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                targetAge = age.getText().toString().trim();
-//                targetAge = agePicker.getValue() + "";
-                Log.d(TAG, "目标年龄：" + targetAge + "，目标性别：" + targetSex + "，目标话题：" + targetTopic);
-                start(confirm);
-            }
-        });
-    }
-
+    /**
+     * 按钮触发效果
+     * @param view
+     */
     public void start(View view){
-        show_anim(view);
 
+        show_anim(view);
+        name = ed1.getText().toString();
+        userAge = ed2.getText().toString();
+        userSex = ed3.getText().toString();
+        targetAge = ed4.getText().toString();
+        targetSex = ed5.getText().toString();
         uihandler.postDelayed(runnable, 2000);
+//        postGetID("", "", "", "", "", postGetIDUrl);
     }
 
     /**
@@ -150,8 +97,8 @@ public class SecretActivity  extends AppCompatActivity {
                     Log.d("uihandler", "handleMessage: 匹配成功");
                     uihandler.removeCallbacks(runnable);
                     searchDialog.cancel();
-//TODO                    Intent intent = new Intent(mContext, ChatMatchedActivity.class);
-//                    mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, SecretActivity.class);
+                    mContext.startActivity(intent);
                     break;
                 case 2:
                     uihandler.postDelayed(getObjectRunnable, 2000);
@@ -160,20 +107,21 @@ public class SecretActivity  extends AppCompatActivity {
                 case 3:
                     uihandler.removeCallbacks(getObjectRunnable);
                     searchDialog.cancel();
-//TODO                    Intent intent2 = new Intent(mContext, ChatMatchedActivity.class);
-//                    mContext.startActivity(intent2);
+                    Intent intent2 = new Intent(mContext, SecretActivity.class);
+                    mContext.startActivity(intent2);
                     break;
             }
         }
     };
 
-    //启动用线程
+    //测试用线程
     Runnable runnable=new Runnable() {
         @Override
         public void run() {
+            // TODO Auto-generated method stub
             //要做的事情
             //httpGet();
-            postGetID(selfName, selfAge, selfSex, targetAge, targetSex, postGetIDUrl);
+            postGetID(name, userAge, userSex, targetAge, targetSex, postGetIDUrl);
             uihandler.postDelayed(this, 2000);
         }
     };
@@ -196,7 +144,7 @@ public class SecretActivity  extends AppCompatActivity {
      */
     public void show_anim(View view){
 
-        searchDialog = new SearchDialog(SecretActivity.this, uihandler, getObjectRunnable, runnable);
+        searchDialog = new SearchDialog(MzySecretActivity.this, uihandler, getObjectRunnable, runnable);
         //设置背景透明
         searchDialog.getWindow().setBackgroundDrawable(new ColorDrawable());
         searchDialog.show();
@@ -317,7 +265,7 @@ public class SecretActivity  extends AppCompatActivity {
                         postGetID(userName,userAge,userSex,targetAge,targetSex,postGetIDUrl);
                     }else{
                         count = 0;
-                        Toast.makeText(SecretActivity.this, "服务器出了点小问题，请稍后再试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MzySecretActivity.this, "服务器出了点小问题，请稍后再试", Toast.LENGTH_SHORT).show();
                         searchDialog.cancel();
                         uihandler.removeCallbacks(runnable);
                     }

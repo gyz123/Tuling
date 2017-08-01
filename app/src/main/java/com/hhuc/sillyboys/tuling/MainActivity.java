@@ -26,7 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.algebra.sdk.API;
 import com.algebra.sdk.AccountApi;
@@ -39,11 +38,10 @@ import com.algebra.sdk.entity.Channel;
 import com.algebra.sdk.entity.CompactID;
 import com.algebra.sdk.entity.Constant;
 import com.algebra.sdk.entity.Contact;
-import com.algebra.sdk.entity.IntStr;
-import com.hhuc.sillyboys.tuling.chat.ChatAcitivity;
 import com.hhuc.sillyboys.tuling.chat.SecretActivity;
 import com.hhuc.sillyboys.tuling.entity.ChannelExt;
 import com.hhuc.sillyboys.tuling.entity.MsgCode;
+import com.hhuc.sillyboys.tuling.mzy.dritfbottle.Drift_main;
 import com.hhuc.sillyboys.tuling.navi_fragment.FirstFragment;
 import com.hhuc.sillyboys.tuling.navi_fragment.FourthFragment;
 import com.hhuc.sillyboys.tuling.navi_fragment.SecondFragment;
@@ -246,6 +244,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     public void onMenuItemClick(View clickedView, int position) {
         switch(position){
             case 1:Log.d(TAG, "漂流瓶");
+                startActivity(new Intent(MainActivity.this, Drift_main.class));
                 break;
             case 2: Log.d(TAG, "悄悄话");
                 startActivity(new Intent(MainActivity.this, SecretActivity.class));
