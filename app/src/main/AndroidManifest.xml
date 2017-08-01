@@ -73,6 +73,11 @@
             android:screenOrientation="portrait" >
         </activity>
 
+        <!-- 漂流瓶 -->
+        <activity android:name=".mzy.dritfbottle.Drift_main"></activity>
+        <activity android:name=".mzy.dritfbottle.Drift"></activity>
+        <activity android:name=".mzy.dritfbottle.GetBottle"></activity>
+
         <service android:name="com.algebra.sdk.Controller"></service>
 
         <receiver android:name="com.hhuc.sillyboys.tuling.entity.BootUpReceiver">
