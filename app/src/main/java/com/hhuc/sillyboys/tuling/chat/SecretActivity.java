@@ -158,10 +158,7 @@ public class SecretActivity  extends AppCompatActivity {
                     //postGetObject();
                     break;
                 case 3:
-                    uihandler.removeCallbacks(getObjectRunnable);
-                    searchDialog.cancel();
-//TODO                    Intent intent2 = new Intent(mContext, ChatMatchedActivity.class);
-//                    mContext.startActivity(intent2);
+                    uihandler.postDelayed(delayRunnable, 8000);
                     break;
             }
         }
@@ -189,6 +186,19 @@ public class SecretActivity  extends AppCompatActivity {
         }
     };
 
+    /**
+     * 延时调用，防止过快跳转
+     */
+    Runnable delayRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Log.d("delayRunnable", "我只是想让程序慢一点 ");
+            uihandler.removeCallbacks(getObjectRunnable);
+            searchDialog.cancel();
+//TODO            Intent intent2 = new Intent(mContext, ChatMatchedActivity.class);
+//            mContext.startActivity(intent2);
+        }
+    };
 
     /**
      * 帧动画通过dialog启动
@@ -248,8 +258,11 @@ public class SecretActivity  extends AppCompatActivity {
             Log.d("ResponseThread", "执行子线程 ");
         }
     }
+//    局域网IP
+//    private String IPv4 = "http://192.168.43.25:8888/";
 
-    private String IPv4 = "http://192.168.43.25:8888/";
+//    远程服务器
+    private String IPv4 = "http://115.159.189.169:8080/";
 
     private String postGetIDUrl = IPv4 + "web02/servlet/CreateRecordServlet";
     int count = 0;//计数器当服务器忙碌时停止调用
@@ -381,6 +394,11 @@ public class SecretActivity  extends AppCompatActivity {
                     //继续轮询
                     uihandler.sendEmptyMessage(2);
                     return;
+                }
+                //报错时停止
+                if(result.length() > 100){
+                    searchDialog.cancel();
+                    Toast.makeText(SecretActivity.this, "出错了，请稍后再试", Toast.LENGTH_SHORT).show();
                 }
                 try {
                     JSONObject jsonObject = new JSONObject(result);
