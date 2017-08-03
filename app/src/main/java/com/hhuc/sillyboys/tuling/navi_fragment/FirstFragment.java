@@ -2,6 +2,8 @@ package com.hhuc.sillyboys.tuling.navi_fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,9 +16,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algebra.sdk.API;
 import com.algebra.sdk.DeviceApi;
@@ -25,12 +31,14 @@ import com.algebra.sdk.entity.CompactID;
 import com.algebra.sdk.entity.IntStr;
 import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
+import com.hhuc.sillyboys.tuling.LoginActivity;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.MainActivity;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity2;
 import com.hhuc.sillyboys.tuling.search.SearchActivity;
 import com.hhuc.sillyboys.tuling.adapter.RoundImgAdapter;
+import com.hhuc.sillyboys.tuling.tl_demo.TalkFragment;
 import com.hhuc.sillyboys.tuling.util.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -43,8 +51,8 @@ public class FirstFragment extends Fragment {
     private RoundImgAdapter mAdapter;
     private List<String> subject,description,pictures;
 
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
+    private static SharedPreferences pref;
+    private static SharedPreferences.Editor editor;
     private String adverChannel;
     private String userChannel;
     private int selfId = 0;
@@ -97,14 +105,43 @@ public class FirstFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 // 跳转对应的广播
                 String compactId = description.get(position);
-                Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity2.class);
-                broadcastIntent.putExtra("compactId", compactId).putExtra("cname", subject.get(position));
+                Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
+                broadcastIntent.putExtra("compactId", compactId)
+                        .putExtra("cname", subject.get(position))
+                        .putExtra("type", "broadcast");
                 Log.d(TAG, "用户选择了频道: " + compactId);
                 startActivity(broadcastIntent);
             }
 
             @Override
-            public void onItemLongClick(View view, int position) {
+            public void onItemLongClick(View view, final int position) {
+                PopupMenu popCfg = new PopupMenu(uiContext, view);
+                MenuInflater menuInft = popCfg.getMenuInflater();
+                menuInft.inflate(R.menu.channel_operation, popCfg.getMenu());
+                popCfg.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.add_to_top:
+                                Log.d(TAG, "置顶");
+                                editor.putInt("addToTop", position);
+                                editor.commit();
+                                // 刷新碎片
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                FirstFragment firstFragment = new FirstFragment();
+                                transaction.replace(R.id.main_fragment, firstFragment);
+                                transaction.commit();
+                                return true;
+                            case R.id.add_to_favourate:
+                                Log.d(TAG, "关注");
+                                Toast.makeText(uiContext, "关注成功", Toast.LENGTH_SHORT).show();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popCfg.show();
             }
         });
 
@@ -136,11 +173,20 @@ public class FirstFragment extends Fragment {
         Log.d(TAG, advers.length + "--" + users.length);
         subject = new ArrayList<String>();
         description = new ArrayList<String>();
+        int top = pref.getInt("addToTop", 1);
+        Log.d(TAG, "置顶：" + 1);
+        if(top < advers.length-1){
+            String[] temp = advers[top].split("-");
+            subject.add(temp[1]);
+            description.add(temp[0]);
+        }
         for(int i=0; i<advers.length-1; i++){
-            String[] temp = advers[i].split("-");
-            if(!temp[1].startsWith("TOUR_LINK")){
-                subject.add(temp[1]);   // 频道名
-                description.add(temp[0]);       // 频道的CompactId
+            if(i != top){
+                String[] temp = advers[i].split("-");
+                if(!temp[1].startsWith("TOUR_LINK")){
+                    subject.add(temp[1]);   // 频道名
+                    description.add(temp[0]);       // 频道的CompactId
+                }
             }
         }
         for(int i=0; i<users.length-1; i++){
@@ -209,5 +255,19 @@ public class FirstFragment extends Fragment {
             }
         }
     };
+
+    // 菜单事件
+    public boolean onMainMenuItemClicked(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_to_top:
+                Log.d(TAG, "置顶");
+                return true;
+            case R.id.add_to_favourate:
+                Log.d(TAG, "关注");
+                return true;
+            default:
+                return false;
+        }
+    }
 
 }

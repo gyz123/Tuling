@@ -30,6 +30,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/before_white"
+                        android:drawablePadding="-8dp"
                         android:layout_marginLeft="-10dp"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"

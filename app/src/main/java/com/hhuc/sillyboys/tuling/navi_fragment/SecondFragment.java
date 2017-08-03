@@ -24,6 +24,7 @@ import com.algebra.sdk.entity.Contact;
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.adapter.RoundImgAdapter;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.chat.ChatAcitivity;
 import com.hhuc.sillyboys.tuling.entity.MsgCode;
 import com.hhuc.sillyboys.tuling.search.SearchActivity;
@@ -229,9 +230,15 @@ public class SecondFragment extends Fragment implements OnChannelListener{
             Log.d(TAG, "新建的频道cid为：" + cid + ",创建的房间为" + pref.getString(uid + "", ""));
             uiHandler.obtainMessage(MsgCode.SAVECRATEDCHANNEL, uid, 0, roomName + ";" + cid).sendToTarget();
 
-            Intent chatIntent = new Intent(getActivity(), ChatAcitivity.class);
-            chatIntent.putExtra("compactId", cid).putExtra("cname", roomName);
-            startActivity(chatIntent);
+//            Intent chatIntent = new Intent(getActivity(), ChatAcitivity.class);
+//            chatIntent.putExtra("compactId", cid).putExtra("cname", roomName);
+//            startActivity(chatIntent);
+            // 进入创建好的频道
+            Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
+            broadcastIntent.putExtra("compactId", cid)
+                            .putExtra("cname", roomName)
+                            .putExtra("type", "chat");
+            startActivity(broadcastIntent);
         }
     }
 

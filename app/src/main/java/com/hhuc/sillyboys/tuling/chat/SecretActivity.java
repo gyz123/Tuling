@@ -1,6 +1,7 @@
 package com.hhuc.sillyboys.tuling.chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.algebra.sdk.API;
 import com.hhuc.sillyboys.tuling.R;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.util.StatusBarCompat;
 
 import org.json.JSONException;
@@ -195,8 +197,12 @@ public class SecretActivity  extends AppCompatActivity {
             Log.d("delayRunnable", "我只是想让程序慢一点 ");
             uihandler.removeCallbacks(getObjectRunnable);
             searchDialog.cancel();
-//TODO            Intent intent2 = new Intent(mContext, ChatMatchedActivity.class);
+//            Intent intent2 = new Intent(mContext, ChatMatchedActivity.class);
 //            mContext.startActivity(intent2);
+            // TODO 在这里设置了匹配成功后的跳转
+            Intent broadcastIntent = new Intent(mContext, BroadcastActivity.class);
+            broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0").putExtra("cname", "悄悄话");
+            startActivity(broadcastIntent);
         }
     };
 

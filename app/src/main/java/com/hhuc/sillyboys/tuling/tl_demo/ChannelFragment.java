@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -49,6 +50,7 @@ import com.algebra.sdk.entity.IntStr;
 import com.algebra.sdk.entity.Room;
 import com.algebra.sdk.entity.Session;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
+import com.hhuc.sillyboys.tuling.broadcast.ShareDialog;
 import com.hhuc.sillyboys.tuling.entity.ChannelExt;
 import com.hhuc.sillyboys.tuling.entity.ContactExt;
 import com.hhuc.sillyboys.tuling.entity.MsgCode;
@@ -86,6 +88,7 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 	private List<IntStr> sessPresences = null;
 	private SharedPreferences pref;
 
+
 	@Override
 	public void onAttach(Activity act) {
 		super.onAttach(act);
@@ -101,10 +104,12 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 //		selfId = getArguments().getInt("id.self");
 		pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		selfId = pref.getInt("selfid", 0);
+
 		selfOnline = (getArguments().getInt("state.self") == Constant.CONTACT_STATE_ONLINE);
 		isVisitor = getArguments().getBoolean("visitor.self");
 
 		Log.i(TAG, "onCreate with uid " + selfId + " user online:" + selfOnline);
+
 	}
 
 	@Override
@@ -195,13 +200,6 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 		}
 	}
 
-	/*
-	 * private void addFriends(List<IntStr> membs) { boolean has = false; for
-	 * (IntStr m1 : membs) { has = false; for (IntStr is1 : friends) { if
-	 * (IntStr.isSame(is1, m1)) { has = true; break; } } if (!has)
-	 * friends.add(new IntStr(m1.i, m1.s)); } }
-	 */
-
 	private ObservableHoriScrollView myChannelsScrollor = null;
 	private int channelBackgroundImgWidth = 0;
 	private int lastDisplayChannelIdx = 0;
@@ -211,20 +209,56 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 		if (container != null) { // && ((TLActivity)uiContext).isHorizonScreen()
 			mView = inflater.inflate(R.layout.fragment_channel, container, false);
 
-			ImageView addButton = (ImageView) mView.findViewById(R.id.channel_config);
+			TextView broadcastName = (TextView) mView.findViewById(R.id.broadcast_name);
+			String name = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("broadcastname", "");
+			Log.d(TAG, "cname:" + name);
+			if(name == null || name.isEmpty())
+				name = "途聆体验频道";
+			broadcastName.setText(name);
+//			getActivity().findViewById(R.id.tl_channel_fragment).setVisibility(View.INVISIBLE);
+
+			// 分享按钮
+			// http://182.254.220.217/Weixin/erweicode.png
+			ImageView shareButton = (ImageView) mView.findViewById(R.id.broadcast_share);
+			shareButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Log.d(TAG, "分享二维码");
+//					getActivity().findViewById(R.id.share_img).setVisibility(View.VISIBLE);
+//					getActivity().findViewById(R.id.share_back).setEnabled(true);
+					ShareDialog dialog = new ShareDialog(getActivity());
+					dialog.getWindow().setBackgroundDrawable(new ColorDrawable());
+					dialog.show();
+				}
+			});
+			// 关闭分享
+//			ImageView shareBack = (ImageView)getActivity().findViewById(R.id.share_back);
+//			shareBack.setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View view) {
+//					Log.d(TAG, "关闭二维码");
+//					getActivity().findViewById(R.id.share_img).setVisibility(View.INVISIBLE);
+//					getActivity().findViewById(R.id.share_back).setEnabled(false);
+//				}
+//			});
+
+
+
+
+			ImageView addButton = (ImageView) mView.findViewById(R.id.broadcast_channel_config);
 			if (!isVisitor) {
 				addButton.setOnClickListener(new OnChannelConfigButtonPressed());
 			} else {
-				addButton.setBackgroundResource(R.drawable.nosearch_add_button);
+				addButton.setBackgroundResource(R.drawable.talk_menu_white);
 				addButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Toast.makeText(uiContext, "not auth for Visitors", Toast.LENGTH_SHORT)
-								.show();
+						Toast.makeText(uiContext, "not auth for Visitors", Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
 
+			// 频道列表
 			LinearLayout llChs = (LinearLayout) mView.findViewById(R.id.channel_list);
 			tvInitCh = new TextView(uiContext);
 			tvInitCh.setText(getResources().getString(R.string.init_channel));
@@ -292,7 +326,7 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 			myChannelsScrollor.start(channelBackgroundImgWidth);
 
 			ImageView ivSessionPower = (ImageView) mView
-					.findViewById(R.id.session_power);
+					.findViewById(R.id.broadcast_session_power);
 			ivSessionPower.setPressed(false);
 			ivSessionPower.setOnClickListener(new OnClickListener() {
 				@Override
@@ -446,10 +480,10 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 		if (myChannels != null && myChannels.size() > idx) {
 			ChannelExt che1 = myChannels.get(idx);
 			TextView memberButton = (TextView) mView
-					.findViewById(R.id.presences);
+					.findViewById(R.id.broadcast_presences);
 			memberButton.setText("" + che1.presenceCount);
 			ImageView ivPower = (ImageView) mView
-					.findViewById(R.id.session_power);
+					.findViewById(R.id.broadcast_session_power);
 			if (che1.isCurrent) {
 				memberButton.setBackgroundResource(R.drawable.members_actived);
 				memberButton
@@ -468,7 +502,7 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 
 	private void sessionChanging(boolean y) {
 		channelSelectIsBusy = y;
-		ImageView ivPower = (ImageView) mView.findViewById(R.id.session_power);
+		ImageView ivPower = (ImageView) mView.findViewById(R.id.broadcast_session_power);
 		ivPower.setActivated(y);
 	}
 
@@ -819,7 +853,7 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 			for (ChMemberInfo chm1 : channelMembers)
 				chm1.selected = false;
 			TextView memberButton = (TextView) mView
-					.findViewById(R.id.presences);
+					.findViewById(R.id.broadcast_presences);
 			popMembers.showAsDropDown((View) memberButton, 0, 5);
 		}
 
@@ -1262,7 +1296,7 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 		@Override
 		public void onClick(View v) {
 			int vid = v.getId();
-			if (vid == R.id.presences) {
+			if (vid == R.id.broadcast_presences) {
 				if (popMembers != null && !popMembers.isShowing()) {
 					for (ChMemberInfo chm1 : channelMembers)
 						chm1.selected = false;
@@ -1744,6 +1778,9 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 			@SuppressWarnings("rawtypes") List mems) {
 		@SuppressWarnings("unchecked")
 		List<Contact> members = (List<Contact>) mems;
+		// 统计房间人数
+//		int peoplenum = mems.size();
+
 		((BroadcastActivity) uiContext).dismessProgressCircle();
 		String selfNick = API.uid2nick(selfId);
 

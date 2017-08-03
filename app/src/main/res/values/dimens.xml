@@ -93,4 +93,7 @@
     <!-- 广播中，用户界面提示文字  -->
     <dimen name="broadcast_user_hint_char">18sp</dimen>
 
+    <!-- TextView中图片padding -->
+    <dimen name="textview_pic_padding">16dp</dimen>
+
 </resources>

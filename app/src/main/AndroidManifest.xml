@@ -67,6 +67,12 @@
         <activity android:name=".chat.SecretActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <!-- 修改信息Activity -->
         <activity android:name=".self_info.ModifyInfo" android:theme="@style/AppTheme.NoActionBar"/>
+        <!-- 我的频道Activity -->
+        <activity android:name=".self_info.MyChannel" android:theme="@style/AppTheme.NoActionBar"/>
+        <!-- 我的关注Activity -->
+        <activity android:name=".self_info.MyFavourate" android:theme="@style/AppTheme.NoActionBar"/>
+        <!-- 我的消息Activity -->
+        <activity android:name=".self_info.MyMessage" android:theme="@style/AppTheme.NoActionBar"/>
 
 
         <activity android:name="com.hhuc.sillyboys.tuling.tl_demo.NotificationActivity"

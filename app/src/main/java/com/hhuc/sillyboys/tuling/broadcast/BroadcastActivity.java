@@ -32,6 +32,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -53,6 +54,7 @@ import com.algebra.sdk.entity.Contact;
 import com.algebra.sdk.entity.IntStr;
 import com.algebra.sdk.entity.UserProfile;
 import com.algebra.sdk.entity.Utils;
+import com.bumptech.glide.Glide;
 import com.hhuc.sillyboys.tuling.MainActivity;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.entity.ChannelExt;
@@ -109,6 +111,8 @@ public class BroadcastActivity extends AppCompatActivity implements OnAccountLis
     private int ctype = 0;
     private int cid = 0;
     private String cname = "";
+    private String broadcastname = "";
+    private String type = "broadcast";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -128,12 +132,20 @@ public class BroadcastActivity extends AppCompatActivity implements OnAccountLis
         setContentView(R.layout.welcome);
 
         String compactId = getIntent().getStringExtra("compactId");
-        String channelId = pref.getString(compactId + "id", "");
-        String channelType = pref.getString(compactId + "type", "");
+        String channelId = pref.getString(compactId + "id", "1");
+        String channelType = pref.getString(compactId + "type", "1");
         cname = pref.getString(compactId + "name", "");
         ctype = Integer.parseInt(channelType);
         cid = Integer.parseInt(channelId);
         Log.d(TAG, "选择了频道:" + cname + ",频道id为:" + cid + ",频道类型:" + ctype);
+
+        broadcastname = getIntent().getStringExtra("cname");
+        editor.putString("broadcastname", broadcastname);
+        type = getIntent().getStringExtra("type");
+        editor.putString("type", type);
+        Log.d(TAG, "会话type:" + type);
+
+        editor.commit();
     }
 
     @Override
@@ -886,6 +898,22 @@ public class BroadcastActivity extends AppCompatActivity implements OnAccountLis
             Log.i(TAG, "create channels fragment");
             // 修改频道
             setContentView(R.layout.navi_talk);
+            // 二维码
+            ImageView shareCode = (ImageView)findViewById(R.id.share_code);
+            Glide.with(this)
+                    .load("http://182.254.220.217/Weixin/erweicode.png")
+                    .asBitmap()
+                    .placeholder(R.mipmap.ic_launcher)
+                    .centerCrop()
+                    .into(shareCode);
+            // 关闭
+            ImageView shareClose = (ImageView)findViewById(R.id.share_back);
+            Glide.with(this)
+                    .load(R.drawable.menu_close_circle_36dp)
+                    .asBitmap()
+                    .placeholder(R.mipmap.ic_launcher)
+                    .centerCrop()
+                    .into(shareClose);
 
             newChannelFragmentHori(uid, uState);
             transaction.add(R.id.id_content_channel, channelFragment);

@@ -28,6 +28,9 @@ import com.hhuc.sillyboys.tuling.MainActivity;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.entity.MsgCode;
 import com.hhuc.sillyboys.tuling.self_info.ModifyInfo;
+import com.hhuc.sillyboys.tuling.self_info.MyChannel;
+import com.hhuc.sillyboys.tuling.self_info.MyFavourate;
+import com.hhuc.sillyboys.tuling.self_info.MyMessage;
 
 import java.io.IOException;
 
@@ -144,19 +147,29 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()){
             case R.id.user_my_channel:
                 Log.d(TAG, "进入我的频道");
+                intent = new Intent(getActivity(), MyChannel.class);
+                intent.putExtra("selfid", selfId);
+                startActivity(intent);
                 break;
             case R.id.user_my_favorate:
                 Log.d(TAG, "进入我的关注");
+                intent = new Intent(getActivity(), MyFavourate.class);
+                intent.putExtra("selfid", selfId);
+                startActivity(intent);
                 break;
             case R.id.user_my_message:
                 Log.d(TAG, "进入我的消息");
+                intent = new Intent(getActivity(), MyMessage.class);
+                intent.putExtra("selfid", selfId);
+                startActivity(intent);
                 break;
             case R.id.user_modify:
                 Log.d(TAG, "修改资料");
-                Intent intent = new Intent(getActivity(), ModifyInfo.class);
+                intent = new Intent(getActivity(), ModifyInfo.class);
                 intent.putExtra("selfid", selfId);
                 startActivity(intent);
                 break;
