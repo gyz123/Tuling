@@ -1,6 +1,7 @@
 package com.hhuc.sillyboys.tuling.navi_fragment;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,10 +14,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
@@ -102,7 +107,34 @@ public class ThirdFragment extends Fragment {
             }
 
             @Override
-            public void onItemLongClick(View view, int position) {
+            public void onItemLongClick(View view,final int position) {
+                PopupMenu popCfg = new PopupMenu(getActivity(), view);
+                MenuInflater menuInft = popCfg.getMenuInflater();
+                menuInft.inflate(R.menu.channel_operation, popCfg.getMenu());
+                popCfg.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.add_to_top:
+                                Log.d(TAG, "置顶");
+                                editor.putInt("addToTop", position);
+                                editor.commit();
+                                // 刷新碎片
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                FirstFragment firstFragment = new FirstFragment();
+                                transaction.replace(R.id.main_fragment, firstFragment);
+                                transaction.commit();
+                                return true;
+                            case R.id.add_to_favourate:
+                                Log.d(TAG, "关注");
+                                Toast.makeText(getActivity(), "关注成功", Toast.LENGTH_SHORT).show();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popCfg.show();
             }
         });
 

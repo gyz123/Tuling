@@ -9,16 +9,16 @@
 
     <string name="null_str"></string>
 
-    <string name="action_exit">Exit Program</string>
-    <string name="start_bluetooth">Bluetooth</string>
-    <string name="ble_ptt">BLE PTT</string>
-    <string name="change_passwd">Change Pass</string>
-    <string name="change_nick">Change alias</string>
-    <string name="set_ptt_type">PTT trigger</string>
+    <string name="action_exit">退出登录</string>
+    <string name="start_bluetooth">开启蓝牙</string>
+    <string name="ble_ptt">ble ptt</string>
+    <string name="change_passwd">修改密码</string>
+    <string name="change_nick">修改昵称</string>
+    <string name="set_ptt_type">PTT按钮</string>
     <string name="set_ble_ptt">BLE PTT</string>
-    <string name="set_audio">Audio attributes</string>
-    <string name="show_version">APP infomation</string>
-    <string name="bind_phone">bind PhoneNo</string>
+    <string name="set_audio">音频属性</string>
+    <string name="show_version">APP介绍</string>
+    <string name="bind_phone">绑定手机</string>
 
     <string name="show_speaker_level">Speaker Volume</string>
     <string name="notify_sound_select">notify sound type:&#160;</string>
@@ -26,35 +26,35 @@
     <string name="simple_notify">Simple</string>
     <string name="none_notify">Mute</string>
 
-    <string name="register">NEW</string>
-    <string name="login">GO</string>
-    <string name="confirm">OK</string>
-    <string name="init_channel">Initializing Channels</string>
+    <string name="register">注册</string>
+    <string name="login">登录</string>
+    <string name="confirm">确认</string>
+    <string name="init_channel">频道初始化</string>
     <string name="init_channel_end">Get total:&#160;</string>
     <string name="begin_dialogsession">To these:&#160;</string>
     <string name="end_smssession">issue short message</string>
     <string name="end_dialogsession">issue one-way talking.</string>
-    <string name="user_nick">ALIAS:&#160;</string>
-    <string name="account">Tourlink NO:&#160;</string>
+    <string name="user_nick">昵称:&#160;</string>
+    <string name="account">途聆号:&#160;</string>
     <string name="invite">code:&#160;</string>
-    <string name="password">PASSWORD:&#160;</string>
-    <string name="password_new">New Pass:&#160;</string>
-    <string name="pass_confirm">Confirm:&#160;</string>
-    <string name="nick_now">old alias:&#160;</string>
-    <string name="nick_new">new alias:&#160;</string>
-    <string name="phone_no">PhoneNo:&#160;</string>
+    <string name="password">密码:&#160;</string>
+    <string name="password_new">新密码:&#160;</string>
+    <string name="pass_confirm">确认密码:&#160;</string>
+    <string name="nick_now">旧密码:&#160;</string>
+    <string name="nick_new">新昵称:&#160;</string>
+    <string name="phone_no">手机号:&#160;</string>
     <string name="auth_code">Auth-Code:&#160;</string>
 
 
-    <string name="channel_name_fragment">Channel Name:&#160;</string>
-    <string name="new_channel_name">New Channel Name:&#160;</string>
-    <string name="entry_code_yes">[use pass]</string>
-    <string name="entry_code_no">[no pass]</string>
-    <string name="focus_ec_hint">PASSWD</string>
-    <string name="modi_channel_name">Change Channel Name:</string>
+    <string name="channel_name_fragment">频道名:&#160;</string>
+    <string name="new_channel_name">新频道名:&#160;</string>
+    <string name="entry_code_yes">使用密码</string>
+    <string name="entry_code_no">无密码</string>
+    <string name="focus_ec_hint">输入密码</string>
+    <string name="modi_channel_name">修改频道名</string>
 
-    <string name="tourling">TourLink</string>
-    <string name="jzone">JZone Tech WuXi</string>
+    <string name="tourling">途聆</string>
+    <string name="jzone">无锡捷中科技</string>
     <string name="ok">OK</string>
     <string name="visitor_intro">You are TourLink Guest</string>
     <string name="visitor_nick">Use alias:&#160;</string>
