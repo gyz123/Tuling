@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content">
+    
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:more="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dip"
+            android:text="工作生活"
+            android:textColor="#0072c6"
+            android:textSize="20dip" />
+
+        <com.hhuc.sillyboys.tuling.mzy.topic.MoreTextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            more:textColor="@android:color/black"
+            more:textSize="18dip"
+            more:maxLine="0"
+            more:text="@string/topic_job"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dip"
+            android:text="愿望"
+            android:textColor="#0072c6"
+            android:textSize="20dip" />
+
+        <com.hhuc.sillyboys.tuling.mzy.topic.MoreTextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            more:textColor="@android:color/black"
+            more:textSize="18dip"
+            more:maxLine="0"
+            more:text="@string/topic_wish"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dip"
+            android:text="谈婚论嫁"
+            android:textColor="#0072c6"
+            android:textSize="20dip" />
+
+        <com.hhuc.sillyboys.tuling.mzy.topic.MoreTextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            more:textColor="@android:color/black"
+            more:textSize="18dip"
+            more:maxLine="0"
+            more:text="@string/topic_marriage"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dip"
+            android:text="兴趣爱好"
+            android:textColor="#0072c6"
+            android:textSize="20dip" />
+
+        <com.hhuc.sillyboys.tuling.mzy.topic.MoreTextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            more:textColor="@android:color/black"
+            more:textSize="18dip"
+            more:maxLine="0"
+            more:text="@string/topic_interest"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dip"
+            android:text="杂七杂八"
+            android:textColor="#0072c6"
+            android:textSize="20dip" />
+
+        <com.hhuc.sillyboys.tuling.mzy.topic.MoreTextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            more:textColor="@android:color/black"
+            more:textSize="18dip"
+            more:maxLine="0"
+            more:text="@string/topic_something"/>
+    
+</LinearLayout>
+</ScrollView>
