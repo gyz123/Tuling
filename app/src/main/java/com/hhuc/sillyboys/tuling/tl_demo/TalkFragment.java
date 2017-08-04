@@ -98,10 +98,11 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	private ImageView hs_battery_ind = null;
 
 	private ImageView topic_helper = null;
-    private TextView broadcast_creator, broadcast_status, broadcast_time, broadcast_school;
+    private TextView broadcast_title, broadcast_creator, broadcast_status, broadcast_time, broadcast_school;
     private SharedPreferences pref;
 	private String identity = "user";
 	private String type = "broadcast";
+	private TextView manage_broadcast, manage_talk, choose_user;
 
 	@Override
 	public void onAttach(Activity act) {
@@ -226,21 +227,69 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 				}
 			});
 
+			broadcast_title = (TextView) view.findViewById(R.id.broadcast_title);
             broadcast_creator = (TextView) view.findViewById(R.id.broadcast_user_creator);
             broadcast_status = (TextView) view.findViewById(R.id.broadcast_user_status);
             broadcast_time = (TextView) view.findViewById(R.id.broadcast_user_time);
             broadcast_school = (TextView) view.findViewById(R.id.broadcast_user_school);
+			manage_broadcast = (TextView) view.findViewById(R.id.broadcast_manage_broadcast);
+			manage_broadcast.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Log.d("TAG", "开始/暂停广播");
+				}
+			});
+			manage_talk = (TextView) view.findViewById(R.id.broadcast_manage_talk);
+			manage_talk.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Log.d(TAG,  "开启/关闭讨论");
+				}
+			});
+			choose_user = (TextView) view.findViewById(R.id.broadcast_manage_choose_user);
+			choose_user.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Log.d(TAG, "选择幸运用户");
+				}
+			});
+
             type = pref.getString("type", "broadcast");
-            if(!type.equals("broadcast")){
-                getActivity().findViewById(R.id.broadcast_info).setVisibility(View.INVISIBLE);
-            }
-			identity = pref.getString("identity", "user");
-			if(identity.equals("user")){
+			// 好友面板
+			if(type.equals("chat")){
+				Log.d(TAG, "会话类型为" + type);
 				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
-			}else if(identity.equals("admin")){
-				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.broadcast_user_block).setVisibility(View.INVISIBLE);
+				broadcast_title.setText("好友信息");
+				broadcast_creator.setText("昵称：豆豆");
+				broadcast_status.setText("性别：男");
+				broadcast_time.setText("爱好：编程，打游戏，和朋友出去骑车");
+				broadcast_school.setText("学校：XX大学");
+			}
+			// 悄悄话面板
+			else if(type.equals("secret")){
+				Log.d(TAG, "会话类型为" + type);
+				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
+				broadcast_title.setText("Ta的信息");
+				broadcast_creator.setText("对方是一名19岁的女生");
+				broadcast_status.setText("兴趣爱好是：读一些文学书籍，听音乐，偶尔逛街");
+				broadcast_time.setText("你们的话题：情感");
+				broadcast_school.setVisibility(View.INVISIBLE);
+			}
+			// 广播面板
+			else if(type.equals("broadcast")){
+				Log.d(TAG, "会话类型为" + type);
+				identity = pref.getString("identity", "user");
+				if(identity.equals("user")){
+					Log.d(TAG, "身份类型为" + identity);
+					view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
+					view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
+				}else if(identity.equals("admin")){
+					Log.d(TAG, "身份类型为" + identity);
+					view.findViewById(R.id.broadcast_admin_block).setVisibility(View.VISIBLE);
+					view.findViewById(R.id.broadcast_user_block).setVisibility(View.INVISIBLE);
+				}
 			}
 
 

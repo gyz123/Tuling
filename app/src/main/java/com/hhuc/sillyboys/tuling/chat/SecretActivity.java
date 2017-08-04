@@ -21,7 +21,6 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algebra.sdk.API;
 import com.hhuc.sillyboys.tuling.R;
@@ -65,6 +64,7 @@ public class SecretActivity  extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         StatusBarCompat.compat(this, getResources().getColor(R.color.status_bar_color));
         setContentView(R.layout.activity_chat_secret);
+        mContext = this;
         init();
     }
 
@@ -83,10 +83,13 @@ public class SecretActivity  extends AppCompatActivity {
             layout.setLayoutParams(statusBarParam);
         }
         // 获取个人信息
+
+
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
-        selfId = pref.getInt("selfid", 0);
-        selfAge = "18";     // 年龄暂时设置为18，之后将从数据库读取 ****************************************
+        selfId = getIntent().getIntExtra("selfid", 0);
+        //TODO 年龄暂时设置为18，之后将从数据库读取
+        selfAge = "18";
         try{
             selfName = API.uid2nick(selfId);
         }catch (Exception e){
@@ -201,7 +204,10 @@ public class SecretActivity  extends AppCompatActivity {
 //            mContext.startActivity(intent2);
             // TODO 在这里设置了匹配成功后的跳转
             Intent broadcastIntent = new Intent(mContext, BroadcastActivity.class);
-            broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0").putExtra("cname", "悄悄话");
+            broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0")
+                    .putExtra("cname", "悄悄话")
+                    .putExtra("selfid", selfId)
+                    .putExtra("type", "secret");
             startActivity(broadcastIntent);
         }
     };
@@ -336,7 +342,8 @@ public class SecretActivity  extends AppCompatActivity {
                         postGetID(userName,userAge,userSex,targetAge,targetSex,postGetIDUrl);
                     }else{
                         count = 0;
-                        Toast.makeText(SecretActivity.this, "服务器出了点小问题，请稍后再试", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SecretActivity.this, "服务器出了点小问题，请稍后再试", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "服务器出了点小问题，请稍后再试");
                         searchDialog.cancel();
                         uihandler.removeCallbacks(runnable);
                     }
@@ -404,7 +411,7 @@ public class SecretActivity  extends AppCompatActivity {
                 //报错时停止
                 if(result.length() > 100){
                     searchDialog.cancel();
-                    Toast.makeText(SecretActivity.this, "出错了，请稍后再试", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "出错了，请稍后再试");
                 }
                 try {
                     JSONObject jsonObject = new JSONObject(result);

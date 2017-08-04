@@ -1,8 +1,10 @@
 package com.hhuc.sillyboys.tuling.navi_fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -134,11 +136,17 @@ public class ThirdFragment extends Fragment {
         editor.commit();
         description = new ArrayList<String>(Arrays.asList("","","",""));
         pictures = new ArrayList<String>(Arrays.asList(
-                        "http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7bf11I2d2OvIDg2Oia20B0lrC9oFERib8chVicFj9LOmEXTicbYD8VvjoAIwyRbWnpTUNs7s2t5fqHk4h/0",
-                        "http://wx.qlogo.cn/mmopen/DZtibRDXICYYpbf4ZJZlWKL1RdZEm4RzV0eD72xHBnA9iadXWI2H3FHFBXR82NopvpXCzXiamld6UeEsbedZRzuAN354ibDCUPvz/0",
-                        "http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPwj5u6Q2cicibb1FnXcNTm2yEuWj6icy8wb4OzL4xbXSyA6NSop5g8StTqwaqtmwxYHGeGrVPZNXf6/0",
-                        "http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7beeghbibiamLumTmpOdt9qXevDvy43sKoBewzUE72acNKD37iaibcIgYuxy7REYiaUm54x99w7IhxBA1y/0"
+                "" + resourceIdToUri(getActivity(), R.drawable.shop_huangmenji),
+                "" + resourceIdToUri(getActivity(), R.drawable.shop_baoshilin),
+                "" + resourceIdToUri(getActivity(), R.drawable.shop_roujiamo),
+                "" + resourceIdToUri(getActivity(), R.drawable.shop_pingjiafandian)
                 ));
+    }
+
+    private static final String ANDROID_RESOURCE = "android.resource://";
+    private static final String FOREWARD_SLASH = "/";
+    private static Uri resourceIdToUri(Context context, int resourceId) {
+        return Uri.parse(ANDROID_RESOURCE + context.getPackageName() + FOREWARD_SLASH + resourceId);
     }
 
 }

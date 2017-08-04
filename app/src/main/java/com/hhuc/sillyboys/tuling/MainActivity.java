@@ -242,19 +242,25 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     // 弹出菜单
     @Override
     public void onMenuItemClick(View clickedView, int position) {
+        Intent intent;
         switch(position){
             case 1:Log.d(TAG, "漂流瓶");
-                startActivity(new Intent(MainActivity.this, Drift_main.class));
+                intent = new Intent(MainActivity.this, Drift_main.class);
+                intent.putExtra("selfid" ,selfId);
+                startActivity(intent);
                 break;
             case 2: Log.d(TAG, "悄悄话");
-                startActivity(new Intent(MainActivity.this, SecretActivity.class));
+                intent= new Intent(MainActivity.this, SecretActivity.class);
+                intent.putExtra("selfid" ,selfId);
+                startActivity(intent);
                 break;
             case 3: Log.d(TAG, "加好友");
 
                 break;
             case 4: Log.d(TAG, "扫码");
-                Intent scanCodeIntent = new Intent(MainActivity.this, CaptureActivity.class);
-                startActivity(scanCodeIntent);
+                intent = new Intent(MainActivity.this, CaptureActivity.class);
+                intent.putExtra("selfid" ,selfId);
+                startActivity(intent);
                 break;
             default:
                 break;
