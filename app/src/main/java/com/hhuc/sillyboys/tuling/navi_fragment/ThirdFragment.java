@@ -20,6 +20,7 @@ import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.adapter.RoundImgAdapter;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity2;
 import com.hhuc.sillyboys.tuling.chat.ChatAcitivity;
 import com.hhuc.sillyboys.tuling.search.SearchActivity;
@@ -84,11 +85,18 @@ public class ThirdFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 // 跳转对应的广播
+//                String compactId = description.get(position);
+//                Intent chatIntent = new Intent(getActivity(), ChatAcitivity.class);
+//                chatIntent.putExtra("compactId", compactId).putExtra("cname", subject.get(position));
+//                Log.d(TAG, "用户选择了频道: " + compactId);
+//                startActivity(chatIntent);
                 String compactId = description.get(position);
-                Intent chatIntent = new Intent(getActivity(), ChatAcitivity.class);
-                chatIntent.putExtra("compactId", compactId).putExtra("cname", subject.get(position));
+                Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
+                broadcastIntent.putExtra("compactId", compactId)
+                            .putExtra("cname", subject.get(position))
+                            .putExtra("type" , "chat");
                 Log.d(TAG, "用户选择了频道: " + compactId);
-                startActivity(chatIntent);
+                startActivity(broadcastIntent);
             }
 
             @Override
@@ -116,7 +124,7 @@ public class ThirdFragment extends Fragment {
         editor = pref.edit();
         selfId = pref.getInt("selfid", 0);    // 用户id
 
-        subject = new ArrayList<String>(Arrays.asList("黄焖鸡米饭","宝石林","老潼关肉夹馍","平价饭店"));
+        subject = new ArrayList<String>(Arrays.asList("黄焖鸡米饭","宝食林","老潼关肉夹馍","平价饭店"));
         sb = new StringBuffer();
         Iterator<String> i = subject.iterator();
         while(i.hasNext()){

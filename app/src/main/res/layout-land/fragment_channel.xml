@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent"
+			 xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#003082" >
+
+
+    android:background="#003082"
+	android:id="@+id/tl_channel_fragment">
 
     <TextView
 		android:id="@+id/presences"
@@ -67,3 +79,28 @@
 		android:layout_centerVertical="true" />
 	
 </RelativeLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:orientation="vertical"
+		android:background="@color/firstColor">
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/broadcast_name"
+			android:text="广播名"
+			android:textColor="#ffffff"
+			android:gravity="center"
+			android:layout_gravity="center"
+			android:textSize="@dimen/subject"
+			android:visibility="visible"/>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+		</LinearLayout>
+	</LinearLayout>
+
+
+	</FrameLayout>

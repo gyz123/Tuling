@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>  
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent">
+
+<RelativeLayout
     android:layout_width="match_parent"  
     android:layout_height="match_parent"  
-    android:background="#002751" >
+    android:background="#002751"
+	android:id="@+id/tl_talk_fragment"
+	android:visibility="invisible">
   
     <TextView
         android:id="@+id/me_item"
@@ -214,3 +220,289 @@
         android:visibility="invisible" />
         	    
 </RelativeLayout>
+
+
+
+
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/chat_bg_color"
+		android:visibility="visible">
+		<TextView
+			android:id="@+id/broadcast_me_item"
+			android:layout_width="@dimen/me_ind_width"
+			android:layout_height="wrap_content"
+			android:drawableLeft="@drawable/member_normal"
+			android:textSize="@dimen/my_name_text_size"
+			android:textColor="#CCCCCC"
+			android:textStyle="bold"
+			android:text="@string/null_str"
+			android:singleLine="true"
+			android:ellipsize="end"
+			android:gravity="left|center"
+			android:layout_marginLeft="@dimen/me_icon_left_margin"
+			android:layout_marginTop="@dimen/me_icon_top_margin"
+			android:visibility="invisible"
+			android:enabled="false"/>
+
+		<LinearLayout
+			android:id="@+id/broadcast_speaker_queue"
+			android:layout_width="@dimen/speaker_ind_width"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:background="@color/chat_bg_color"
+			android:layout_above="@+id/broadcast_configure_button"
+			android:layout_centerHorizontal="true"
+			android:layout_marginBottom="32dp">
+			<TextView
+				android:id="@+id/broadcast_queuer_ind"
+				android:layout_width="match_parent"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/speaker_text_size"
+				android:textColor="#CCCCCC"
+				android:layout_marginTop="8dp"
+				android:textStyle="italic"
+				android:text="当前发言"
+				android:gravity="left|center"
+				android:singleLine="true"
+				android:ellipsize="end"
+				android:drawableLeft="@drawable/queueing1"
+				android:visibility="invisible" />
+			<TextView
+				android:id="@+id/broadcast_speaker_ind"
+				android:layout_width="match_parent"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/speaker_text_size"
+				android:textColor="#CCCCCC"
+				android:textStyle="italic"
+				android:text="@string/null_str"
+				android:gravity="left|center"
+				android:singleLine="true"
+				android:ellipsize="end"
+				android:drawableLeft="@drawable/talking1"
+				android:visibility="invisible" />
+		</LinearLayout>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="话题拯救者"
+			android:textSize="18sp"
+			android:id="@+id/textView4"
+			android:layout_alignTop="@+id/broadcast_topic_helper"
+			android:layout_alignRight="@+id/broadcast_level_ind"
+			android:layout_alignEnd="@+id/broadcast_level_ind"/>
+		<ImageView
+			android:id="@+id/broadcast_topic_helper"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/talk_question_white_36dp"
+			android:layout_alignTop="@+id/textView3"
+			android:layout_alignRight="@+id/broadcast_ptt_group"
+			android:layout_alignEnd="@+id/broadcast_ptt_group"/>
+
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="历史消息"
+			android:textSize="18sp"
+			android:id="@+id/textView3"
+			android:layout_alignTop="@+id/broadcast_playlast_button"
+			android:layout_toLeftOf="@+id/broadcast_ptt_group"
+			android:layout_toStartOf="@+id/broadcast_ptt_group"/>
+		<ImageView
+			android:id="@+id/broadcast_playlast_button"
+			android:contentDescription="@string/null_str"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/talk_history_gray_36dp"
+			android:visibility="visible"
+			android:layout_alignBottom="@+id/broadcast_me_item"
+			android:layout_alignLeft="@+id/broadcast_me_item"
+			android:layout_alignStart="@+id/broadcast_me_item"/>
+		<ImageView
+			android:id="@+id/broadcast_configure_button"
+			android:contentDescription="@string/null_str"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/talk_settings_gray_36dp"
+			android:layout_marginBottom="40dp"
+			android:layout_alignBottom="@+id/broadcast_level_ind"
+			android:layout_alignLeft="@+id/broadcast_me_item"
+			android:layout_alignStart="@+id/broadcast_me_item"/>
+
+		<!-- 广播信息 -->
+		<LinearLayout
+			android:id="@+id/broadcast_info"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_gravity="center"
+			android:layout_below="@+id/broadcast_topic_helper"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:layout_marginTop="31dp">
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+				<LinearLayout
+					android:id="@+id/broadcast_user_block"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical"
+					android:paddingLeft="24dp"
+					android:visibility="visible">
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="广播信息"
+						android:textSize="20sp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_creator"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="当前主播： XXX"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginLeft="16dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_status"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="播放状态：广播中"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginLeft="16dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_time"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="播出时段：11.30-12.30"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginLeft="16dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_school"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="广播地点：XX大学"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginBottom="16dp"
+						android:layout_marginLeft="16dp"/>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/broadcast_admin_block"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical"
+					android:visibility="invisible">
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="亲爱的主播XXX，欢迎你~"
+						android:textSize="20sp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="你可以在广播中使用以下功能"
+						android:textSize="20sp"
+						android:layout_marginLeft="20dp"
+						android:layout_marginTop="4dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="32dp"
+						android:id="@+id/broadcast_manage_broadcast"
+						android:text="开始/暂停广播"
+						android:textColor="@color/radio_char"
+						android:gravity="center"
+						android:background="@drawable/radio_group_selector"
+						android:layout_marginLeft="32dp"
+						android:layout_marginRight="32dp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="32dp"
+						android:id="@+id/broadcast_manage_talk"
+						android:text="开启/关闭讨论"
+						android:textColor="@color/radio_char"
+						android:gravity="center"
+						android:background="@drawable/radio_group_selector"
+						android:layout_marginLeft="32dp"
+						android:layout_marginRight="32dp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="32dp"
+						android:id="@+id/broadcast_manage_choose_user"
+						android:text="选择幸运用户"
+						android:textColor="@color/radio_char"
+						android:gravity="center"
+						android:background="@drawable/radio_group_selector2"
+						android:layout_marginLeft="32dp"
+						android:layout_marginRight="32dp"
+						android:layout_marginTop="8dp"/>
+				</LinearLayout>
+			</FrameLayout>
+		</LinearLayout>
+
+
+		<FrameLayout
+			android:id="@+id/broadcast_ptt_group"
+			android:layout_height="128dp"
+			android:layout_width="128dp"
+			android:layout_alignParentBottom="true"
+			android:layout_marginBottom="32dp"
+			android:layout_centerInParent="true">
+			<ToggleButton
+				android:id="@+id/broadcast_ptt_button"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@drawable/navi_broadcast_user_talk_bg"
+				android:textOff=""
+				android:textOn=""
+				style="?attr/borderlessButtonStyle"
+				/>
+			<ImageView
+				android:id="@+id/broadcast_ptt_mic_ind"
+				android:contentDescription="@string/null_str"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/mic_ind"
+				android:visibility="invisible"/>
+			<ImageView
+				android:id="@+id/broadcast_ptt_spk_ind"
+				android:contentDescription="@string/null_str"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="right"
+				android:src="@drawable/spk_ind"
+				android:visibility="invisible"/>
+		</FrameLayout>
+
+
+		<ImageView
+			android:id="@+id/broadcast_level_ind"
+			android:contentDescription="@string/null_str"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:src="@drawable/level_meter"
+			android:layout_alignTop="@+id/broadcast_ptt_group"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentEnd="true"
+			android:layout_marginRight="27dp"
+			android:layout_marginEnd="27dp"/>
+
+	</RelativeLayout>
+
+
+
+	</FrameLayout>

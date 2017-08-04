@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -80,19 +82,25 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	private ArrayList<Integer> waitList = new ArrayList<Integer>();
 	private static boolean pttTriggerable = false;
 
-	private TextView me_item = null;
-	private ToggleButton ptt_button = null;
-	private ImageView playlast_button = null;
-	private ImageView ptt_mic_ind = null;
-	private ImageView ptt_spk_ind = null;
-	private ImageView level_ind = null;
+	private TextView broadcast_me_item = null;
+	private ToggleButton broadcast_ptt_button = null;
+	private ImageView broadcast_playlast_button = null;
+	private ImageView broadcast_ptt_mic_ind = null;
+	private ImageView broadcast_ptt_spk_ind = null;
+	private ImageView broadcast_level_ind = null;
 	private TextView speaker_item = null;
 	private TextView queuer_item = null;
 	private ImageView record_ind = null;
 	private TextView player_ind = null;
-	private ImageView configure_button = null;
+	private ImageView broadcast_configure_button = null;
 	private ImageView output_ind = null;
 	private ImageView hs_battery_ind = null;
+
+	private ImageView topic_helper = null;
+    private TextView broadcast_creator, broadcast_status, broadcast_time, broadcast_school;
+    private SharedPreferences pref;
+	private String identity = "user";
+	private String type = "broadcast";
 
 	@Override
 	public void onAttach(Activity act) {
@@ -112,6 +120,8 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 
 		mAudioManager = ((AudioManager) uiContext.getSystemService(Context.AUDIO_SERVICE));
 		talkHistory = new TalkHistory(selfId);
+
+        pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 	}
 
 	@Override
@@ -123,23 +133,23 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 		if (sessionApi == null) {
 			uiHandler.postDelayed(delayInitApi, 300);
 		}
-		if (playlast_button != null) // crash catched button is null!
+		if (broadcast_playlast_button != null) // crash catched button is null!
 		{
 			if (newLastSpeaking != null && !newLastSpeaking.played) {
-				playlast_button.setSelected(true);
+				broadcast_playlast_button.setSelected(true);
 			} else {
-				playlast_button.setSelected(false);
+				broadcast_playlast_button.setSelected(false);
 			}
-			playlast_button.setActivated(false);
+			broadcast_playlast_button.setActivated(false);
 
 			output_ind.getDrawable().setLevel(getOutputDev());
 
 			boolean bound = ((BroadcastActivity) uiContext).isUserBoundPhone();
 			if (bound) {
-				// me_item.setTextColor(Color.rgb(232, 237, 35));
+				// broadcast_me_item.setTextColor(Color.rgb(232, 237, 35));
 				Drawable dBound = uiContext.getResources().getDrawable(
 						R.drawable.member_bound);
-				me_item.setCompoundDrawablesWithIntrinsicBounds(dBound, null,
+				broadcast_me_item.setCompoundDrawablesWithIntrinsicBounds(dBound, null,
 						null, null);
 			}
 
@@ -205,37 +215,63 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 			View view = inflater.inflate(R.layout.fragment_talk, container,
 					false);
 
-			me_item = (TextView) view.findViewById(R.id.me_item);
+			topic_helper = (ImageView) view.findViewById(R.id.broadcast_topic_helper);
+			topic_helper.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Log.d(TAG, "话题帮助");
+				}
+			});
+
+            broadcast_creator = (TextView) view.findViewById(R.id.broadcast_user_creator);
+            broadcast_status = (TextView) view.findViewById(R.id.broadcast_user_status);
+            broadcast_time = (TextView) view.findViewById(R.id.broadcast_user_time);
+            broadcast_school = (TextView) view.findViewById(R.id.broadcast_user_school);
+            type = pref.getString("type", "broadcast");
+            if(!type.equals("broadcast")){
+                getActivity().findViewById(R.id.broadcast_info).setVisibility(View.INVISIBLE);
+            }
+			identity = pref.getString("identity", "user");
+			if(identity.equals("user")){
+				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
+			}else if(identity.equals("admin")){
+				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.broadcast_user_block).setVisibility(View.INVISIBLE);
+			}
+
+
+			broadcast_me_item = (TextView) view.findViewById(R.id.broadcast_me_item);
 			setUndistubeIcon(isUndistube);
-			me_item.setText(selfNick != null ? selfNick : API.uid2nick(selfId));
+			broadcast_me_item.setText(selfNick != null ? selfNick : API.uid2nick(selfId));
 
-			ptt_button = (ToggleButton) view.findViewById(R.id.ptt_button);
+			broadcast_ptt_button = (ToggleButton) view.findViewById(R.id.broadcast_ptt_button);
 			if (selfStatus == Constant.CONTACT_STATE_ONLINE)
-				ptt_button.setSelected(true);
-			ptt_button.setOnTouchListener(this);
+				broadcast_ptt_button.setSelected(true);
+			broadcast_ptt_button.setOnTouchListener(this);
 
-			configure_button = (ImageView) view.findViewById(R.id.configure_button);
-			configure_button.setOnClickListener(this);
+			broadcast_configure_button = (ImageView) view.findViewById(R.id.broadcast_configure_button);
+			broadcast_configure_button.setOnClickListener(this);
 
-			ptt_mic_ind = (ImageView) view.findViewById(R.id.ptt_mic_ind);
-			ptt_mic_ind.setSelected(true);
-			ptt_mic_ind.setPressed(false);
-			ptt_spk_ind = (ImageView) view.findViewById(R.id.ptt_spk_ind);
-			ptt_spk_ind.setSelected(true);
-			ptt_spk_ind.setPressed(false);
+			broadcast_ptt_mic_ind = (ImageView) view.findViewById(R.id.broadcast_ptt_mic_ind);
+			broadcast_ptt_mic_ind.setSelected(true);
+			broadcast_ptt_mic_ind.setPressed(false);
+			broadcast_ptt_spk_ind = (ImageView) view.findViewById(R.id.broadcast_ptt_spk_ind);
+			broadcast_ptt_spk_ind.setSelected(true);
+			broadcast_ptt_spk_ind.setPressed(false);
 
-			level_ind = (ImageView) view.findViewById(R.id.level_ind);
-			level_ind.getDrawable().setLevel(0);
+			broadcast_level_ind = (ImageView) view.findViewById(R.id.broadcast_level_ind);
+			broadcast_level_ind.getDrawable().setLevel(0);
 
-			speaker_item = (TextView) view.findViewById(R.id.speaker_ind);
+			speaker_item = (TextView) view.findViewById(R.id.broadcast_speaker_ind);
 			speaker_item.setVisibility(View.INVISIBLE);
-			queuer_item = (TextView) view.findViewById(R.id.queuer_ind);
+			queuer_item = (TextView) view.findViewById(R.id.broadcast_queuer_ind);
 			queuer_item.setVisibility(View.INVISIBLE);
 
-			playlast_button = (ImageView) view
-					.findViewById(R.id.playlast_button);
-			playlast_button.setOnClickListener(this);
-			playlast_button.setActivated(false);
+			broadcast_playlast_button = (ImageView) view
+					.findViewById(R.id.broadcast_playlast_button);
+			broadcast_playlast_button.setOnClickListener(this);
+			broadcast_playlast_button.setActivated(false);
 
 			record_ind = (ImageView) view.findViewById(R.id.record_ind);
 			record_ind.setVisibility(View.INVISIBLE);
@@ -270,7 +306,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 		if (on) {
 			Drawable dUndist = uiContext.getResources().getDrawable(
 					R.drawable.member_undistube);
-			me_item.setCompoundDrawablesWithIntrinsicBounds(dUndist, null,
+			broadcast_me_item.setCompoundDrawablesWithIntrinsicBounds(dUndist, null,
 					null, null);
 		}
 	}
@@ -344,11 +380,11 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 
 	private void uiTalkSessionChange() {
 		if (Channel.sameCid(currSession, dispSession)) {
-			asyncSetUiItem(R.id.ptt_button, TRUE);
+			asyncSetUiItem(R.id.broadcast_ptt_button, TRUE);
 			flushPlaylastButton();
 		} else {
-			asyncSetUiItem(R.id.ptt_button, FALSE);
-			asyncSetUiItem(R.id.playlast_button, PLS.LASTSPEAKING_END);
+			asyncSetUiItem(R.id.broadcast_ptt_button, FALSE);
+			asyncSetUiItem(R.id.broadcast_playlast_button, PLS.LASTSPEAKING_END);
 		}
 
 		clearHisPlayers();
@@ -356,33 +392,33 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 
 	private void flushPlaylastButton() {
 		if (newLastSpeaking != null && !newLastSpeaking.played) {
-			asyncSetUiItem(R.id.playlast_button, PLS.LASTSPEAKING_NEW);
+			asyncSetUiItem(R.id.broadcast_playlast_button, PLS.LASTSPEAKING_NEW);
 		} else {
-			asyncSetUiItem(R.id.playlast_button, PLS.LASTSPEAKING_END);
+			asyncSetUiItem(R.id.broadcast_playlast_button, PLS.LASTSPEAKING_END);
 		}
 	}
 
 	public void onSelfStatusChange(int state) {
 		selfStatus = state;
 
-		if (ptt_button == null)
+		if (broadcast_ptt_button == null)
 			return;
 
 		if (state == Constant.CONTACT_STATE_ONLINE)
-			asyncSetUiItem(R.id.ptt_button, TRUE);
+			asyncSetUiItem(R.id.broadcast_ptt_button, TRUE);
 		else
-			asyncSetUiItem(R.id.ptt_button, FALSE);
+			asyncSetUiItem(R.id.broadcast_ptt_button, FALSE);
 	}
 
 	public void setSelfUndistubeInd(boolean undist) {
 		boolean bound = ((BroadcastActivity) uiContext).isUserBoundPhone();
 		if (!undist) {
 			if (bound)
-				asyncSetUiItem(R.id.me_item, 3);
+				asyncSetUiItem(R.id.broadcast_me_item, 3);
 			else
-				asyncSetUiItem(R.id.me_item, 2);
+				asyncSetUiItem(R.id.broadcast_me_item, 2);
 		} else {
-			asyncSetUiItem(R.id.me_item, 1);
+			asyncSetUiItem(R.id.broadcast_me_item, 1);
 		}
 	}
 
@@ -394,7 +430,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 			uiHandler.post(new Runnable() {
 				@Override
 				public void run() {
-					me_item.setText(selfNick);
+					broadcast_me_item.setText(selfNick);
 				}
 			});
 		}
@@ -406,7 +442,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 			public void run() {
 				Drawable dBound = uiContext.getResources().getDrawable(
 						R.drawable.member_bound);
-				me_item.setCompoundDrawablesWithIntrinsicBounds(dBound, null,
+				broadcast_me_item.setCompoundDrawablesWithIntrinsicBounds(dBound, null,
 						null, null);
 			}
 		});
@@ -475,9 +511,9 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	public void onPttButtonPressed(int uid, int state) {
 		Log.i(TAG, "onPttButtonPressed state: " + state);
 		if ((state & 0xff) == 0 || state == 0x8000) {
-			asyncSetUiItem(R.id.ptt_button, TRUE);
+			asyncSetUiItem(R.id.broadcast_ptt_button, TRUE);
 		} else {
-			asyncSetUiItem(R.id.ptt_button, FALSE);
+			asyncSetUiItem(R.id.broadcast_ptt_button, FALSE);
 			if (deviceApi != null) {
 			//	deviceApi.setDefaultSpeakerOn(true);
 			//	deviceApi.playNotifySound(Sound.PLAYER_MEDIA_ERROR);
@@ -486,26 +522,26 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 
 		if (isMeInQueue && state == Constant.TALKREL_SUCCESSFUL) {
 			isMeInQueue = false;
-			asyncSetUiItem(R.id.queuer_ind, -1 * selfId);
+			asyncSetUiItem(R.id.broadcast_queuer_ind, -1 * selfId);
 		}
 	}
 
 	@Override
 	public void onTalkRequestConfirm(int uid, int ctype, int sid, int tag, boolean enRed) {
 		Log.i(TAG, "onTalkRequestConfirm " + ctype + ":" + sid + " " + tag);
-		int[] ids = { R.id.ptt_mic_ind, R.id.record_ind };
+		int[] ids = { R.id.broadcast_ptt_mic_ind, R.id.record_ind };
 		int[] sts = { enRed ? 2 : TRUE, TRUE };
 		asyncSetUiItems(ids, sts);
 
 		if (isMeInQueue) {
 			isMeInQueue = false;
-			asyncSetUiItem(R.id.queuer_ind, -1 * selfId);
+			asyncSetUiItem(R.id.broadcast_queuer_ind, -1 * selfId);
 		}
 	}
 
 	@Override
 	public void onTalkRequestDeny(int uid, int ctype, int sid) {
-		int[] ids = { R.id.ptt_button, R.id.record_ind };
+		int[] ids = { R.id.broadcast_ptt_button, R.id.record_ind };
 		int[] sts = { FALSE, FALSE };
 		asyncSetUiItems(ids, sts);
 	}
@@ -515,13 +551,13 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	@Override
 	public void onTalkRequestQueued(int uid, int ctype, int sid) {
 		isMeInQueue = true;
-		asyncSetUiItem(R.id.queuer_ind, selfId);
+		asyncSetUiItem(R.id.broadcast_queuer_ind, selfId);
 	}
 
 	@Override
 	public void onTalkReleaseConfirm(int arg0, int arg1) {
 		Log.i(TAG, "onTalkReleaseConfirm " + arg0 + " " + arg1);
-		int[] ids = { R.id.ptt_mic_ind, R.id.level_ind, R.id.record_ind };
+		int[] ids = { R.id.broadcast_ptt_mic_ind, R.id.broadcast_level_ind, R.id.record_ind };
 		int[] sts = { FALSE, 0, FALSE };
 		asyncSetUiItems(ids, sts);
 	}
@@ -538,7 +574,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 		if (deviceApi != null) {
 	//		deviceApi.makeVibrate(300);
 		}
-		asyncSetUiItem(R.id.ptt_button, FALSE);
+		asyncSetUiItem(R.id.broadcast_ptt_button, FALSE);
 	}
 
 	@Override
@@ -557,7 +593,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	@Override
 	public void onNewSpeakingCatched(final HistoryRecord hisRec) {
 		if (hisRec.owner != selfId) {
-			asyncSetUiItem(R.id.playlast_button, PLS.LASTSPEAKING_NEW);
+			asyncSetUiItem(R.id.broadcast_playlast_button, PLS.LASTSPEAKING_NEW);
 			newLastSpeaking = hisRec;
 			((BroadcastActivity) uiContext).runOnUiThread(new Runnable(){
 				@Override
@@ -584,7 +620,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	public void onPlayLastSpeaking(int idx, int dur10ms) {
 		Log.i(TAG, "onPlayLastSpeaking idx:" + idx + " dur:" + dur10ms);
 		if (dur10ms > 0) {		// start successfully
-			int[] ids = {R.id.playlast_button, R.id.player_ind};
+			int[] ids = {R.id.broadcast_playlast_button, R.id.player_ind};
 			int[] sts = {PLS.LASTSPEAKING_PLAYING, idx};
 			asyncSetUiItems(ids, sts);
 			showSpeakingLevel = true;
@@ -593,7 +629,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 
 	@Override
 	public void onPlayLastSpeakingEnd(int speaker) {
-		int[] ids = { R.id.playlast_button, R.id.player_ind, R.id.level_ind };
+		int[] ids = { R.id.broadcast_playlast_button, R.id.player_ind, R.id.broadcast_level_ind };
 		int[] sts = { PLS.LASTSPEAKING_END, 0, 0 };
 		asyncSetUiItems(ids, sts);
 		showSpeakingLevel = false;
@@ -625,9 +661,9 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 		} else {
 			delayShowSpeaking = false;
 			delaySpeaker = 0;
-			asyncSetUiItem(R.id.speaker_ind, speaker);
+			asyncSetUiItem(R.id.broadcast_speaker_ind, speaker);
 		}
-		asyncSetUiItem(R.id.queuer_ind, -1 * speaker);
+		asyncSetUiItem(R.id.broadcast_queuer_ind, -1 * speaker);
 		uiHandler.obtainMessage(MsgCode.MC_SESSIONACTIVE, ctype, sessionId).sendToTarget();
 	}
 
@@ -635,19 +671,19 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	public void onThatoneSayOver(int speaker, int tag) {
 		delayShowSpeaking = false;
 		delaySpeaker = 0;
-		asyncSetUiItem(R.id.speaker_ind, 0);
+		asyncSetUiItem(R.id.broadcast_speaker_ind, 0);
 	}
 
 	@Override
 	public void onStartPlaying(int speaker, int ctype, int session, int tag) {
 		Log.i(TAG, "onStartPlaying " + speaker + " " + session + " " + tag);
-		int[] ids = { R.id.ptt_spk_ind, R.id.player_ind };
+		int[] ids = { R.id.broadcast_ptt_spk_ind, R.id.player_ind };
 		int[] sts = { TRUE, speaker };
 		asyncSetUiItems(ids, sts);
 
 		showSpeakingLevel = true;
 		if (delayShowSpeaking) {
-			asyncSetUiItem(R.id.speaker_ind, delaySpeaker);
+			asyncSetUiItem(R.id.broadcast_speaker_ind, delaySpeaker);
 			delayShowSpeaking = false;
 			delaySpeaker = 0;
 		}
@@ -656,7 +692,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	@Override
 	public void onPlayStopped(int tag) {
 		Log.i(TAG, "onPlayStopped " + tag);
-		int[] ids = { R.id.ptt_spk_ind, R.id.level_ind, R.id.player_ind };
+		int[] ids = { R.id.broadcast_ptt_spk_ind, R.id.broadcast_level_ind, R.id.player_ind };
 		int[] sts = { FALSE, 0, 0 };
 		asyncSetUiItems(ids, sts);
 		showSpeakingLevel = false;
@@ -664,12 +700,12 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 
 	@Override
 	public void onSomeoneAttempt(int userId, int ctype, int sessionId) {
-		asyncSetUiItem(R.id.queuer_ind, userId);
+		asyncSetUiItem(R.id.broadcast_queuer_ind, userId);
 	}
 
 	@Override
 	public void onThatAttemptQuit(int userId, int ctype, int sessionId) {
-		asyncSetUiItem(R.id.queuer_ind, -1 * userId);
+		asyncSetUiItem(R.id.broadcast_queuer_ind, -1 * userId);
 	}
 
 	@Override
@@ -688,16 +724,16 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	public void onPlayerMeter(int uid, int level) {
 		if (showSpeakingLevel) {
 			if (level != lastLevel)
-				asyncSetUiItem(R.id.level_ind, level);
+				asyncSetUiItem(R.id.broadcast_level_ind, level);
 			lastLevel = level;
 		} else
-			asyncSetUiItem(R.id.level_ind, 0);
+			asyncSetUiItem(R.id.broadcast_level_ind, 0);
 	}
 
 	@Override
 	public void onRecorderMeter(int uid, int level) {
 		if (level != lastLevel)
-			asyncSetUiItem(R.id.level_ind, level);
+			asyncSetUiItem(R.id.broadcast_level_ind, level);
 		lastLevel = level;
 	}
 
@@ -816,18 +852,21 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	public void onClick(View v) {
 		int id = v.getId();
 		switch (id) {
-		case R.id.playlast_button:
-			if (playlast_button.isActivated()) { // is playing
-				playlast_button.setActivated(false);
+		case R.id.broadcast_playlast_button:
+			if (broadcast_playlast_button.isActivated()) { // is playing
+				broadcast_playlast_button.setActivated(false);
+                Log.d(TAG, "历史按钮1");
 				if (sessionApi != null)
 					sessionApi.stopPlayLastSpeaking(selfId);
-			} else if (playlast_button.isSelected()) {
+			} else if (broadcast_playlast_button.isSelected()) {
 				if (Channel.sameCid(dispSession, currSession)) {
-					if (sessionApi != null)
+                    Log.d(TAG, "历史按钮2");
+                    if (sessionApi != null)
 						sessionApi.playLastSpeaking(selfId, 0, newLastSpeaking.mediaData);
 					if (newLastSpeaking != null && !newLastSpeaking.played)
 						newLastSpeaking.played = true;
 				} else {
+                    Log.d(TAG, "历史按钮3");
 					if (currSession != null)
 						uiHandler.obtainMessage(MsgCode.MC_SESSIONACTIVE,
 								currSession.getType(), currSession.getId())
@@ -835,6 +874,10 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 				}
 			} else {
 				if (popLastSpk == null) {
+                    Log.d(TAG, "历史按钮4：打开历史记录");
+                    // 隐藏广播信息
+                    getActivity().findViewById(R.id.broadcast_info).setVisibility(View.INVISIBLE);
+
 					HistoryRecord[] hisRecs = null;
 					if (sessionApi != null)
 						hisRecs = talkHistory.getAllHistoryRecords(dispSession.getCompactId());
@@ -848,13 +891,14 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 								Toast.LENGTH_SHORT).show();
 					}
 				} else {
+                    Log.d(TAG, "历史按钮5");
 					if (popLastSpk.isShowing())
 						popLastSpk.dismiss();
 					popLastSpk = null;
 				}
 			}
 			break;
-		case R.id.configure_button:
+		case R.id.broadcast_configure_button:
 			Log.i(TAG, "configure button clicked.");
 			PopupMenu popCfg = new PopupMenu(uiContext, v);
 			MenuInflater menuInft = popCfg.getMenuInflater();
@@ -953,14 +997,17 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 		popLastSpk.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss() {
-				Log.i(TAG, "play last speaking popup window dismissed");
+				Log.i(TAG, "关闭历史记录");
+                // 显示广播信息
+                getActivity().findViewById(R.id.broadcast_info).setVisibility(View.VISIBLE);
+
 				popLastSpk = null;
 				lastPlaying = -1;
 				recsData = null;
 				plDatAdapter = null;
 			}
 		});
-		popLastSpk.showAsDropDown((View) playlast_button, 0, 5);
+		popLastSpk.showAsDropDown((View) broadcast_playlast_button, 0, 5);
 	}
 
 	private class DelayPlayLast implements Runnable {
@@ -1043,20 +1090,20 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 
 		private void doUpdateUI(int id, int state) {
 			switch (id) {
-			case R.id.ptt_button:
-				ptt_button.setSelected(state == TRUE);
-				ptt_mic_ind.setSelected(state == TRUE);
-				ptt_spk_ind.setSelected(state == TRUE);
+			case R.id.broadcast_ptt_button:
+				broadcast_ptt_button.setSelected(state == TRUE);
+				broadcast_ptt_mic_ind.setSelected(state == TRUE);
+				broadcast_ptt_spk_ind.setSelected(state == TRUE);
 				break;
-			case R.id.ptt_mic_ind:
-				ptt_mic_ind.setPressed(state >= TRUE);
+			case R.id.broadcast_ptt_mic_ind:
+				broadcast_ptt_mic_ind.setPressed(state >= TRUE);
 				if (state > TRUE)
-					ptt_mic_ind.setColorFilter(0x44FF0000);
+					broadcast_ptt_mic_ind.setColorFilter(0x44FF0000);
 				else
-					ptt_mic_ind.setColorFilter(null);
+					broadcast_ptt_mic_ind.setColorFilter(null);
 				break;
-			case R.id.ptt_spk_ind:
-				ptt_spk_ind.setPressed(state == TRUE);
+			case R.id.broadcast_ptt_spk_ind:
+				broadcast_ptt_spk_ind.setPressed(state == TRUE);
 				break;
 			case R.id.record_ind:
 				if (state == FALSE) {
@@ -1073,39 +1120,39 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 						: View.VISIBLE);
 				player_ind.setText(API.uid2nick(state));
 				break;
-			case R.id.level_ind:
-				level_ind.getDrawable().setLevel(state);
+			case R.id.broadcast_level_ind:
+				broadcast_level_ind.getDrawable().setLevel(state);
 				break;
-			case R.id.playlast_button:
+			case R.id.broadcast_playlast_button:
 				if (state == PLS.LASTSPEAKING_GONE) {
-					playlast_button.setVisibility(View.INVISIBLE);
+					broadcast_playlast_button.setVisibility(View.INVISIBLE);
 				} else if (state == PLS.LASTSPEAKING_NEW) {
-					playlast_button.setVisibility(View.VISIBLE);
-					playlast_button.setSelected(true);
-					playlast_button.setActivated(false);
+					broadcast_playlast_button.setVisibility(View.VISIBLE);
+					broadcast_playlast_button.setSelected(true);
+					broadcast_playlast_button.setActivated(false);
 				} else if (state == PLS.LASTSPEAKING_PLAYING) {
-					playlast_button.setSelected(false);
-					playlast_button.setActivated(true);
-					ptt_spk_ind.setPressed(true);
+					broadcast_playlast_button.setSelected(false);
+					broadcast_playlast_button.setActivated(true);
+					broadcast_ptt_spk_ind.setPressed(true);
 				} else if (state == PLS.LASTSPEAKING_END) {
-					playlast_button.setSelected(false);
-					playlast_button.setActivated(false);
-					ptt_spk_ind.setPressed(false);
+					broadcast_playlast_button.setSelected(false);
+					broadcast_playlast_button.setActivated(false);
+					broadcast_ptt_spk_ind.setPressed(false);
 				}
 				break;
-			case R.id.speaker_ind:
+			case R.id.broadcast_speaker_ind:
 				if (state == 0) {
 					speaker_item.setText("");
 					speaker_item.setVisibility(View.INVISIBLE);
-					// ptt_spk_ind.setPressed(false);
+					// broadcast_ptt_spk_ind.setPressed(false);
 				} else {
 					speaker_item.setText(API.uid2nick(state));
 					speaker_item.setVisibility(View.VISIBLE);
-					// ptt_spk_ind.setPressed(true);
+					// broadcast_ptt_spk_ind.setPressed(true);
 				}
 				break;
-			case R.id.queuer_ind:
-				// Log.d(TAG, "queuer_ind state: "+state);
+			case R.id.broadcast_queuer_ind:
+				// Log.d(TAG, "broadcast_queuer_ind state: "+state);
 				if (state == 0) {
 					queuer_item.setText("");
 					queuer_item.setVisibility(View.INVISIBLE);
@@ -1137,7 +1184,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 					hs_battery_ind.setVisibility(View.INVISIBLE);
 				}
 				break;
-			case R.id.me_item:
+			case R.id.broadcast_me_item:
 				Drawable dUndist = uiContext.getResources().getDrawable(
 						R.drawable.member_normal);
 				if (state == 1) {
@@ -1147,7 +1194,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 					dUndist = uiContext.getResources().getDrawable(
 							R.drawable.member_bound);
 				}
-				me_item.setCompoundDrawablesWithIntrinsicBounds(dUndist, null,
+				broadcast_me_item.setCompoundDrawablesWithIntrinsicBounds(dUndist, null,
 						null, null);
 				break;
 			}

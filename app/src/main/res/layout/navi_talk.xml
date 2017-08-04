@@ -1,25 +1,60 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" >
+
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="match_parent"
+    android:id="@+id/navi_talk_background">
     <FrameLayout
         android:id="@+id/id_content_channel"
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1" />
+        android:layout_height="104dp" />
 
     <View
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FF0000" />
+        android:background="@color/divider_block_color" />
 
     <FrameLayout
         android:id="@+id/id_fragment_talk"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#002751" />
 
 </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/share_img"
+        android:visibility="invisible">
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="24dp"
+            android:id="@+id/share_back"/>
+        <ImageView
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:id="@+id/share_code"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="分享二维码给朋友，一起加入频道吧~"
+            android:textSize="16dp"
+            android:textColor="@color/firstColor"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
+    </FrameLayout>
