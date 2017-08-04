@@ -237,6 +237,14 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 				@Override
 				public void onClick(View view) {
 					Log.d("TAG", "开始/暂停广播");
+					boolean wheatherBroadcast = false;
+					if(wheatherBroadcast){
+						manage_broadcast.setText("开始广播");
+						wheatherBroadcast = false;
+					}else{
+						manage_broadcast.setText("暂停广播");
+						wheatherBroadcast = true;
+					}
 				}
 			});
 			manage_talk = (TextView) view.findViewById(R.id.broadcast_manage_talk);
@@ -244,6 +252,14 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 				@Override
 				public void onClick(View view) {
 					Log.d(TAG,  "开启/关闭讨论");
+					boolean wheatherChat = false;
+					if(wheatherChat){
+						manage_broadcast.setText("开启讨论");
+						wheatherChat = false;
+					}else{
+						manage_broadcast.setText("关闭讨论");
+						wheatherChat = true;
+					}
 				}
 			});
 			choose_user = (TextView) view.findViewById(R.id.broadcast_manage_choose_user);

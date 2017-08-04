@@ -253,9 +253,9 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:background="@color/chat_bg_color"
-			android:layout_above="@+id/broadcast_configure_button"
+			android:layout_above="@+id/broadcast_ptt_group"
 			android:layout_centerHorizontal="true"
-			android:layout_marginBottom="32dp">
+			android:layout_marginBottom="16dp">
 			<TextView
 				android:id="@+id/broadcast_queuer_ind"
 				android:layout_width="match_parent"
@@ -423,10 +423,10 @@
 						android:layout_width="match_parent"
 						android:layout_height="32dp"
 						android:id="@+id/broadcast_manage_broadcast"
-						android:text="开始/暂停广播"
+						android:text="开始广播"
 						android:textColor="@color/radio_char"
 						android:gravity="center"
-						android:background="@drawable/radio_group_selector"
+						android:background="@drawable/radio_group_selector2"
 						android:layout_marginLeft="32dp"
 						android:layout_marginRight="32dp"
 						android:layout_marginTop="8dp"/>
@@ -434,10 +434,10 @@
 						android:layout_width="match_parent"
 						android:layout_height="32dp"
 						android:id="@+id/broadcast_manage_talk"
-						android:text="开启/关闭讨论"
+						android:text="开启讨论"
 						android:textColor="@color/radio_char"
 						android:gravity="center"
-						android:background="@drawable/radio_group_selector"
+						android:background="@drawable/radio_group_selector2"
 						android:layout_marginLeft="32dp"
 						android:layout_marginRight="32dp"
 						android:layout_marginTop="8dp"/>

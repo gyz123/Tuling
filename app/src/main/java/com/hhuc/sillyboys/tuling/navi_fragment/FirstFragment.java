@@ -41,6 +41,7 @@ import com.hhuc.sillyboys.tuling.adapter.RoundImgAdapter;
 import com.hhuc.sillyboys.tuling.tl_demo.TalkFragment;
 import com.hhuc.sillyboys.tuling.util.DividerItemDecoration;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -174,7 +175,7 @@ public class FirstFragment extends Fragment {
         subject = new ArrayList<String>();
         description = new ArrayList<String>();
         int top = pref.getInt("addToTop", 1);
-        Log.d(TAG, "置顶：" + 1);
+        Log.d(TAG, "置顶：" + top);
         if(top < advers.length-1){
             String[] temp = advers[top].split("-");
             subject.add(temp[1]);
@@ -186,6 +187,10 @@ public class FirstFragment extends Fragment {
                 if(!temp[1].startsWith("TOUR_LINK")){
                     if(temp[1].equals("ECHO")){
                         subject.add("XX大学广播台");
+                        description.add(temp[0]);
+                        continue;
+                    }else if(temp[1].equals("LOCAL")){
+                        subject.add("g17");
                         description.add(temp[0]);
                         continue;
                     }else{
@@ -202,16 +207,23 @@ public class FirstFragment extends Fragment {
         }
         int length = subject.size();
 
+        String[] pics = new String[]{
+                "http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0"
+                ,"http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPLtPSa45uA501oSBwM34Obvl104c4AONMNVDrmAg8kbpQqjwaT5qic1AN1bNyH63tL8jAZx52bnI/0"
+                ,"http://wx.qlogo.cn/mmopen/yFGN6Nl8WAzDiaMENnsGRHayiby5jCvPuK08ibF1LBzAku1tQ4icliceNraFL2iaILzcPWBibDHTYFkkkyH8woMjca9XEiaYtUtYm4hia/0"
+                ,"http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7bf11I2d2OvIDg2Oia20B0lrC9oFERib8chVicFj9LOmEXTicbYD8VvjoAIwyRbWnpTUNs7s2t5fqHk4h/0"
+                ,"http://wx.qlogo.cn/mmopen/DZtibRDXICYYpbf4ZJZlWKL1RdZEm4RzV0eD72xHBnA9iadXWI2H3FHFBXR82NopvpXCzXiamld6UeEsbedZRzuAN354ibDCUPvz/0"
+                ,"http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPwj5u6Q2cicibb1FnXcNTm2yEuWj6icy8wb4OzL4xbXSyA6NSop5g8StTqwaqtmwxYHGeGrVPZNXf6/0"
+                ,"http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7beeghbibiamLumTmpOdt9qXevDvy43sKoBewzUE72acNKD37iaibcIgYuxy7REYiaUm54x99w7IhxBA1y/0"
+        };
         // 测试图片
-        pictures = new ArrayList<String>(
-                Arrays.asList("http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0",
-                        "http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPLtPSa45uA501oSBwM34Obvl104c4AONMNVDrmAg8kbpQqjwaT5qic1AN1bNyH63tL8jAZx52bnI/0",
-                        "http://wx.qlogo.cn/mmopen/yFGN6Nl8WAzDiaMENnsGRHayiby5jCvPuK08ibF1LBzAku1tQ4icliceNraFL2iaILzcPWBibDHTYFkkkyH8woMjca9XEiaYtUtYm4hia/0",
-                        "http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7bf11I2d2OvIDg2Oia20B0lrC9oFERib8chVicFj9LOmEXTicbYD8VvjoAIwyRbWnpTUNs7s2t5fqHk4h/0",
-                        "http://wx.qlogo.cn/mmopen/DZtibRDXICYYpbf4ZJZlWKL1RdZEm4RzV0eD72xHBnA9iadXWI2H3FHFBXR82NopvpXCzXiamld6UeEsbedZRzuAN354ibDCUPvz/0",
-                        "http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPwj5u6Q2cicibb1FnXcNTm2yEuWj6icy8wb4OzL4xbXSyA6NSop5g8StTqwaqtmwxYHGeGrVPZNXf6/0",
-                        "http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7beeghbibiamLumTmpOdt9qXevDvy43sKoBewzUE72acNKD37iaibcIgYuxy7REYiaUm54x99w7IhxBA1y/0"
-                ));
+        pictures = new ArrayList<String>();
+        pictures.add(pics[top]);
+        for(int i = 0; i<=6; i++){
+           if(i != top){
+               pictures.add(pics[i]);
+           }
+        }
         for(int i = 8; i<= length; i++){
             pictures.add("");
         }
