@@ -113,6 +113,7 @@ public class BroadcastActivity extends AppCompatActivity implements OnAccountLis
     private String cname = "";
     private String broadcastname = "";
     private String type = "broadcast";
+    private String identity = "user";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -140,10 +141,16 @@ public class BroadcastActivity extends AppCompatActivity implements OnAccountLis
         Log.d(TAG, "选择了频道:" + cname + ",频道id为:" + cid + ",频道类型:" + ctype);
 
         broadcastname = getIntent().getStringExtra("cname");
-        editor.putString("broadcastname", broadcastname);
-        type = getIntent().getStringExtra("type");
-        editor.putString("type", type);
-        Log.d(TAG, "会话type:" + type);
+        if( TextUtils.isEmpty(getIntent().getStringExtra("type")) ){
+            type = getIntent().getStringExtra("type");
+        }
+        if( API.uid2nick(selfId).equals("GUEST-C") ){
+            identity = "admin";
+        }
+        editor.putString("broadcastname", broadcastname)
+                .putString("type", type)
+                .putString("identity", identity);
+        Log.d(TAG, "会话type:" + type + ",身份：" + identity + "，id为：" + selfId);
 
         editor.commit();
     }

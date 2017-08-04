@@ -253,9 +253,9 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:background="@color/chat_bg_color"
-			android:layout_marginBottom="24dp"
-			android:layout_above="@+id/broadcast_ptt_group"
-			android:layout_centerHorizontal="true">
+			android:layout_above="@+id/broadcast_configure_button"
+			android:layout_centerHorizontal="true"
+			android:layout_marginBottom="32dp">
 			<TextView
 				android:id="@+id/broadcast_queuer_ind"
 				android:layout_width="match_parent"
@@ -342,51 +342,116 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			android:paddingLeft="24dp"
 			android:layout_gravity="center"
 			android:layout_below="@+id/broadcast_topic_helper"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentStart="true"
 			android:layout_marginTop="31dp">
-			<TextView
+			<FrameLayout
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="广播信息"
-				android:textSize="20sp"
-				android:layout_marginTop="8dp"/>
-			<TextView
-				android:id="@+id/broadcast_user_creator"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="当前主播： XXX"
-				android:textSize="@dimen/broadcast_user_hint_char"
-				android:layout_marginTop="8dp"
-				android:layout_marginLeft="16dp"/>
-			<TextView
-				android:id="@+id/broadcast_user_status"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="播放状态：广播中"
-				android:textSize="@dimen/broadcast_user_hint_char"
-				android:layout_marginTop="8dp"
-				android:layout_marginLeft="16dp"/>
-			<TextView
-				android:id="@+id/broadcast_user_time"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="播出时段：11.30-12.30"
-				android:textSize="@dimen/broadcast_user_hint_char"
-				android:layout_marginTop="8dp"
-				android:layout_marginLeft="16dp"/>
-			<TextView
-				android:id="@+id/broadcast_user_school"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="广播地点：XX大学"
-				android:textSize="@dimen/broadcast_user_hint_char"
-				android:layout_marginTop="8dp"
-				android:layout_marginBottom="8dp"
-				android:layout_marginLeft="16dp"/>
+				android:layout_height="match_parent">
+				<LinearLayout
+					android:id="@+id/broadcast_user_block"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical"
+					android:paddingLeft="24dp"
+					android:visibility="visible">
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="广播信息"
+						android:textSize="20sp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_creator"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="当前主播： XXX"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginLeft="16dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_status"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="播放状态：广播中"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginLeft="16dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_time"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="播出时段：11.30-12.30"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginLeft="16dp"/>
+					<TextView
+						android:id="@+id/broadcast_user_school"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="广播地点：XX大学"
+						android:textSize="@dimen/broadcast_user_hint_char"
+						android:layout_marginTop="8dp"
+						android:layout_marginBottom="16dp"
+						android:layout_marginLeft="16dp"/>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/broadcast_admin_block"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical"
+					android:visibility="invisible">
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="亲爱的主播XXX，欢迎你~"
+						android:textSize="20sp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="你可以在广播中使用以下功能"
+						android:textSize="20sp"
+						android:layout_marginLeft="20dp"
+						android:layout_marginTop="4dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="32dp"
+						android:id="@+id/broadcast_manage_broadcast"
+						android:text="开始/暂停广播"
+						android:textColor="@color/radio_char"
+						android:gravity="center"
+						android:background="@drawable/radio_group_selector"
+						android:layout_marginLeft="32dp"
+						android:layout_marginRight="32dp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="32dp"
+						android:id="@+id/broadcast_manage_talk"
+						android:text="开启/关闭讨论"
+						android:textColor="@color/radio_char"
+						android:gravity="center"
+						android:background="@drawable/radio_group_selector"
+						android:layout_marginLeft="32dp"
+						android:layout_marginRight="32dp"
+						android:layout_marginTop="8dp"/>
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="32dp"
+						android:id="@+id/broadcast_manage_choose_user"
+						android:text="选择幸运用户"
+						android:textColor="@color/radio_char"
+						android:gravity="center"
+						android:background="@drawable/radio_group_selector2"
+						android:layout_marginLeft="32dp"
+						android:layout_marginRight="32dp"
+						android:layout_marginTop="8dp"/>
+				</LinearLayout>
+			</FrameLayout>
 		</LinearLayout>
 
 
@@ -395,7 +460,7 @@
 			android:layout_height="128dp"
 			android:layout_width="128dp"
 			android:layout_alignParentBottom="true"
-			android:layout_marginBottom="64dp"
+			android:layout_marginBottom="32dp"
 			android:layout_centerInParent="true">
 			<ToggleButton
 				android:id="@+id/broadcast_ptt_button"

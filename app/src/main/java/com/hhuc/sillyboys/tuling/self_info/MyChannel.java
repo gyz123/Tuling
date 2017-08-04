@@ -91,7 +91,8 @@ public class MyChannel extends AppCompatActivity{
                 Intent broadcastIntent = new Intent(context, BroadcastActivity.class);
                 broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0")
                             .putExtra("cname", subject.get(position))
-                            .putExtra("type", "chat");
+                            .putExtra("type", "chat")
+                            .putExtra("identity", "admin");
                 startActivity(broadcastIntent);
             }
             @Override

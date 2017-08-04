@@ -99,6 +99,8 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	private ImageView topic_helper = null;
     private TextView broadcast_creator, broadcast_status, broadcast_time, broadcast_school;
     private SharedPreferences pref;
+	private String identity = "user";
+	private String type = "broadcast";
 
 	@Override
 	public void onAttach(Activity act) {
@@ -225,10 +227,18 @@ public class TalkFragment extends Fragment implements OnMediaListener,
             broadcast_status = (TextView) view.findViewById(R.id.broadcast_user_status);
             broadcast_time = (TextView) view.findViewById(R.id.broadcast_user_time);
             broadcast_school = (TextView) view.findViewById(R.id.broadcast_user_school);
-            String type = pref.getString("type", "broadcast");
+            type = pref.getString("type", "broadcast");
             if(!type.equals("broadcast")){
                 getActivity().findViewById(R.id.broadcast_info).setVisibility(View.INVISIBLE);
             }
+			identity = pref.getString("identity", "user");
+			if(identity.equals("user")){
+				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
+			}else if(identity.equals("admin")){
+				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.broadcast_user_block).setVisibility(View.INVISIBLE);
+			}
 
 
 			broadcast_me_item = (TextView) view.findViewById(R.id.broadcast_me_item);
