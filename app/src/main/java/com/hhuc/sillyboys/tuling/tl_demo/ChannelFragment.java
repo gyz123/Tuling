@@ -212,8 +212,11 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 			TextView broadcastName = (TextView) mView.findViewById(R.id.broadcast_name);
 			String name = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("broadcastname", "");
 			Log.d(TAG, "cname:" + name);
-			if(name == null || name.isEmpty())
+			if(name == null || name.isEmpty()){
 				name = "途聆体验频道";
+			}else if(name.equals("ECHO")){
+				name = "XX大学广播站";
+			}
 			broadcastName.setText(name);
 //			getActivity().findViewById(R.id.tl_channel_fragment).setVisibility(View.INVISIBLE);
 

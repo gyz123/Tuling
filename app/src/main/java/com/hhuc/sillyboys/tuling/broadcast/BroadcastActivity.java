@@ -141,7 +141,7 @@ public class BroadcastActivity extends AppCompatActivity implements OnAccountLis
         Log.d(TAG, "选择了频道:" + cname + ",频道id为:" + cid + ",频道类型:" + ctype);
 
         broadcastname = getIntent().getStringExtra("cname");
-        if( TextUtils.isEmpty(getIntent().getStringExtra("type")) ){
+        if( !TextUtils.isEmpty(getIntent().getStringExtra("type")) ){
             type = getIntent().getStringExtra("type");
         }
         if( API.uid2nick(selfId).equals("GUEST-C") ){

@@ -184,8 +184,14 @@ public class FirstFragment extends Fragment {
             if(i != top){
                 String[] temp = advers[i].split("-");
                 if(!temp[1].startsWith("TOUR_LINK")){
-                    subject.add(temp[1]);   // 频道名
-                    description.add(temp[0]);       // 频道的CompactId
+                    if(temp[1].equals("ECHO")){
+                        subject.add("XX大学广播台");
+                        description.add(temp[0]);
+                        continue;
+                    }else{
+                        subject.add(temp[1]);   // 频道名
+                        description.add(temp[0]);       // 频道的CompactId
+                    }
                 }
             }
         }

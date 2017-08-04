@@ -1,8 +1,10 @@
 package com.hhuc.sillyboys.tuling.navi_fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -134,10 +136,10 @@ public class SecondFragment extends Fragment implements OnChannelListener{
         description = new ArrayList<String>(Arrays.asList("","","",""));
         // 测试图片
         pictures = new ArrayList<String>(
-                Arrays.asList("http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0",
-                        "http://wx.qlogo.cn/mmopen/6klL4b65U1MPibPtbQ0N4nPLtPSa45uA501oSBwM34Obvl104c4AONMNVDrmAg8kbpQqjwaT5qic1AN1bNyH63tL8jAZx52bnI/0",
-                        "http://wx.qlogo.cn/mmopen/yFGN6Nl8WAzDiaMENnsGRHayiby5jCvPuK08ibF1LBzAku1tQ4icliceNraFL2iaILzcPWBibDHTYFkkkyH8woMjca9XEiaYtUtYm4hia/0",
-                        "http://wx.qlogo.cn/mmopen/2sTJHesZN78BxgFpicXd7bf11I2d2OvIDg2Oia20B0lrC9oFERib8chVicFj9LOmEXTicbYD8VvjoAIwyRbWnpTUNs7s2t5fqHk4h/0"
+                Arrays.asList("" + resourceIdToUri(getActivity(), R.drawable.friend_doudou),
+                        "" + resourceIdToUri(getActivity(), R.drawable.friend_xiaoke),
+                        "" + resourceIdToUri(getActivity(), R.drawable.friend_mazhe),
+                        "" + resourceIdToUri(getActivity(), R.drawable.friend_hongge)
                 ));
 
         mAdapter = new RoundImgAdapter(getActivity(),subject,description,pictures);
@@ -159,9 +161,15 @@ public class SecondFragment extends Fragment implements OnChannelListener{
             public void onItemClick(View view, int position) {
                 // 创建频道
                 String roomName = nickname + "-" + subject.get(position);
-                channelApi.createPublicChannel(selfId, roomName, null);   // 用户id，频道名，密码
-                editor.putString(selfId+"", roomName);
-                editor.commit();
+                if(channelApi != null){
+                    channelApi.createPublicChannel(selfId, roomName, null);   // 用户id，频道名，密码
+                    editor.putString(selfId+"", roomName);
+                    editor.commit();
+                }else{
+                    Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
+                    broadcastIntent.putExtra("cname", "好友聊天").putExtra("type", "chat");
+                    startActivity(broadcastIntent);
+                }
             }
 
             @Override
@@ -205,9 +213,15 @@ public class SecondFragment extends Fragment implements OnChannelListener{
             public void onItemClick(View view, int position) {
                 // 创建频道
                 String roomName = subject2.get(position);
-                channelApi.createPublicChannel(selfId, roomName, null);   // 用户id，频道名，密码
-                editor.putString(selfId + "", roomName);
-                editor.commit();
+                if(channelApi != null){
+                    channelApi.createPublicChannel(selfId, roomName, null);   // 用户id，频道名，密码
+                    editor.putString(selfId + "", roomName);
+                    editor.commit();
+                }else{
+                    Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
+                    broadcastIntent.putExtra("cname", "好友聊天").putExtra("type", "chat");
+                    startActivity(broadcastIntent);
+                }
             }
 
             @Override
@@ -216,6 +230,11 @@ public class SecondFragment extends Fragment implements OnChannelListener{
         });
     }
 
+    public static final String ANDROID_RESOURCE = "android.resource://";
+    public static final String FOREWARD_SLASH = "/";
+    private static Uri resourceIdToUri(Context context, int resourceId) {
+        return Uri.parse(ANDROID_RESOURCE + context.getPackageName() + FOREWARD_SLASH + resourceId);
+    }
 
 
     /**
@@ -224,7 +243,8 @@ public class SecondFragment extends Fragment implements OnChannelListener{
     @Override   // 频道创建
     public void onPubChannelCreate(int uid, int reason, int cid) {
         if (uid > 0) {
-            String roomName = pref.getString(uid + "", "");
+//            String roomName = pref.getString(uid + "", "");
+            String roomName = "好友聊天";
             editor.putString(uid + "", roomName + ";" + cid);
             editor.commit();
             Log.d(TAG, "新建的频道cid为：" + cid + ",创建的房间为" + pref.getString(uid + "", ""));

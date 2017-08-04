@@ -22,7 +22,7 @@
         android:layout_alignTop="@+id/search_anim"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
-        />
+        android:id="@+id/textView5"/>
     <!--不支持中文-->
     <com.roger.match.library.MatchTextView
         android:layout_width="wrap_content"
@@ -31,6 +31,6 @@
         match:textColor="#ffffff"
         match:textSize="10sp"
         android:layout_alignBottom="@+id/search_anim"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.hhuc.sillyboys.tuling.self_info;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -104,8 +105,14 @@ public class MyFavourate extends AppCompatActivity {
         pictures = new ArrayList<String>(
                 Arrays.asList("http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0"
                 ,"http://wx.qlogo.cn/mmopen/yFGN6Nl8WAzDiaMENnsGRHayiby5jCvPuK08ibF1LBzAku1tQ4icliceNraFL2iaILzcPWBibDHTYFkkkyH8woMjca9XEiaYtUtYm4hia/0"
-                ,"http://wx.qlogo.cn/mmopen/DZtibRDXICYYpbf4ZJZlWKL1RdZEm4RzV0eD72xHBnA9iadXWI2H3FHFBXR82NopvpXCzXiamld6UeEsbedZRzuAN354ibDCUPvz/0"
+                ,"" + resourceIdToUri(this, R.drawable.shop_baoshilin)
                 ));
+    }
+
+    private static final String ANDROID_RESOURCE = "android.resource://";
+    private static final String FOREWARD_SLASH = "/";
+    private static Uri resourceIdToUri(Context context, int resourceId) {
+        return Uri.parse(ANDROID_RESOURCE + context.getPackageName() + FOREWARD_SLASH + resourceId);
     }
 
 }

@@ -68,7 +68,7 @@
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
-                android:paddingRight="32dp">
+                android:paddingRight="16dp">
                 <TextView
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
@@ -168,6 +168,33 @@
                         android:layout_marginLeft="24dp"/>
                 </RadioGroup>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_block_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="32dp">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:text="爱好"
+                    android:textSize="@dimen/modify_info_char_size"
+                    android:textColor="@color/modify_info_char_color"
+                    android:gravity="center_vertical"/>
+                <EditText
+                    android:id="@+id/modify_info_interest"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minLines="1"
+                    android:maxLines="1"
+                    android:textSize="16sp"
+                    android:background="@drawable/modify_info_edittext"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -223,13 +250,21 @@
                     android:gravity="center_vertical"/>
                 <EditText
                     android:id="@+id/modify_info_phone"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:minLines="1"
                     android:maxLines="1"
                     android:inputType="phone"
                     android:textSize="16sp"
                     android:background="@drawable/modify_info_edittext"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="发送验证码"
+                    android:textSize="@dimen/modify_info_char_size"
+                    android:textColor="@color/firstColor"
+                    android:gravity="center_vertical"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

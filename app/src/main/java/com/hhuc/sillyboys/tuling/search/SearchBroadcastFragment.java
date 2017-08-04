@@ -112,12 +112,17 @@ public class SearchBroadcastFragment extends Fragment {
         String[] advers = adverChannel.split(";");
         String[] users = userChannel.split(";");
 
+        int cnt = 0;
         for(int i=0; i<advers.length-1; i++){
             String[] temp = advers[i].split("-");
             String channelName = temp[1];
             if(channelName.contains(keyword)){
                 subject.add(channelName);   // 频道名
                 description.add(temp[0]);       // 频道的CompactId
+                if(channelName.contains("途聆")){
+                    pictures.add("http://wx.qlogo.cn/mmopen/yFGN6Nl8WAzDiaMENnsGRHayiby5jCvPuK08ibF1LBzAku1tQ4icliceNraFL2iaILzcPWBibDHTYFkkkyH8woMjca9XEiaYtUtYm4hia/0");
+                    cnt++;
+                }
             }
         }
         for(int i=0; i<users.length-1; i++){
@@ -128,7 +133,7 @@ public class SearchBroadcastFragment extends Fragment {
                 description.add(temp[0]);       // 频道的CompactId
             }
         }
-        for(int i = 0; i<subject.size(); i++){
+        for(int i = cnt; i<subject.size(); i++){
             pictures.add("");
         }
     }
