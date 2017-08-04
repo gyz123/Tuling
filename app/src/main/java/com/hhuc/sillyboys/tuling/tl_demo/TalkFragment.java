@@ -41,6 +41,7 @@ import com.algebra.sdk.entity.HistoryRecord;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.entity.MsgCode;
+import com.hhuc.sillyboys.tuling.mzy.topic.TopicDialog;
 import com.hhuc.sillyboys.tuling.util.MediaKeys;
 
 import java.util.ArrayList;
@@ -220,6 +221,8 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 				@Override
 				public void onClick(View view) {
 					Log.d(TAG, "话题帮助");
+					TopicDialog topicDialog = new TopicDialog(getActivity());
+					topicDialog.show();
 				}
 			});
 

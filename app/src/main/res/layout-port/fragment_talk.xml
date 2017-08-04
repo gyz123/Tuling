@@ -98,7 +98,7 @@
 	        android:id="@+id/ptt_button"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@+string/talk"
+	        
 	        android:background="@drawable/ptt_button"
 	        android:textOff=""
 	        android:textOn=""
