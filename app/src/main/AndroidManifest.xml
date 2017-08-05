@@ -75,6 +75,8 @@
         <activity android:name=".self_info.MyMessage" android:theme="@style/AppTheme.NoActionBar"/>
         <!-- 添加好友Activity -->
         <activity android:name=".add_friend.AddFriendActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <!-- 好友申请Activity -->
+        <activity android:name=".add_friend.PermitFriendActivity" android:theme="@style/AppTheme.NoActionBar"/>
 
 
         <activity android:name="com.hhuc.sillyboys.tuling.tl_demo.NotificationActivity"

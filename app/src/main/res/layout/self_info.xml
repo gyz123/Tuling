@@ -23,7 +23,6 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/firstColor"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -31,16 +30,17 @@
                     android:gravity="center"
                     android:textSize="@dimen/subject"
                     android:visibility="visible"/>
-
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
+
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/mychannel_recyclerView">
         </android.support.v7.widget.RecyclerView>
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -144,7 +144,7 @@ public class BroadcastActivity extends AppCompatActivity implements OnAccountLis
         if( !TextUtils.isEmpty(getIntent().getStringExtra("type")) ){
             type = getIntent().getStringExtra("type");
         }
-        if( API.uid2nick(selfId).equals("00662794") ){
+        if( API.uid2nick(selfId).equals("00662794")){
             identity = "admin";
         }
         editor.putString("broadcastname", broadcastname)

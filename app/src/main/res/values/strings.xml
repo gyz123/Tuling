@@ -67,14 +67,14 @@
     <string name="dengdeng">&#160;... &#160;</string>
     <string name="ren">&#160;man</string>
     <string name="gong">&#160;total&#160;</string>
-    <string name="select_bluetooth">select bluetooth</string>
-    <string name="pair_hint">turn on and pair bluetooth</string>
-    <string name="connect_bluetooth_failed1">link to&#160;</string>
-    <string name="connect_bluetooth_failed2">&#160;failed</string>
+    <string name="select_bluetooth">选择蓝牙</string>
+    <string name="pair_hint">匹配蓝牙</string>
+    <string name="connect_bluetooth_failed1">正在连接&#160;</string>
+    <string name="connect_bluetooth_failed2">&#160;连接失败</string>
     <string name="update_hint">检测到新版本可下载</string>
 
-    <string name="spk_volume_hint">Speaker Volume</string>
-    <string name="as_system_vol">System</string>
+    <string name="spk_volume_hint">音量</string>
+    <string name="as_system_vol">系统</string>
     <string name="that_is">&#160;:&#160;</string>
 
     <string name="tl_sms_hint">Tourlink Summon</string>

@@ -18,8 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
+import com.hhuc.sillyboys.tuling.MainActivity;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.adapter.MyMessageAdapter;
+import com.hhuc.sillyboys.tuling.add_friend.PermitFriendActivity;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.util.DividerItemDecoration;
 import com.hhuc.sillyboys.tuling.util.StatusBarCompat;
@@ -88,16 +90,26 @@ public class MyMessage extends AppCompatActivity {
                 Log.d(TAG, "跳转频道");
                 String type = "chat";
                 String cname = user.get(position);
-                if(cname.equals("g17")){
-                    type = "group";
-                }else if(cname.equals("豆豆")){
-                    type = "chat";
-                }
                 Intent broadcastIntent = new Intent(context, BroadcastActivity.class);
                 broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0")
-                        .putExtra("cname", cname)
-                        .putExtra("type", type);
-                startActivity(broadcastIntent);
+                        .putExtra("cname", cname);
+                if(cname.equals("g17")){
+                    type = "group";
+                    broadcastIntent.putExtra("type", type);
+                    Log.d(TAG, "群聊");
+                    startActivity(broadcastIntent);
+                }
+                else if(cname.equals("豆豆")){
+                    type = "chat";
+                    broadcastIntent.putExtra("type", type);
+                    Log.d(TAG, "单聊");
+                    startActivity(broadcastIntent);
+                }
+                else if(cname.equals("刘大师")){
+                    Log.d(TAG, "好友申请");
+                    startActivity(new Intent(context, PermitFriendActivity.class));
+                }
+
             }
             @Override
             public void onItemLongClick(View view, int position) {

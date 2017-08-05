@@ -261,7 +261,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         Intent broadcastIntent = new Intent(this, BroadcastActivity.class);
         broadcastIntent.putExtra("compactId", result)
                 .putExtra("cname", "XX大学广播台")
-                .putExtra("type", "broadcast");
+                .putExtra("type", "broadcast")
+                .putExtra("identity", "user");
         startActivity(broadcastIntent);
     }
 

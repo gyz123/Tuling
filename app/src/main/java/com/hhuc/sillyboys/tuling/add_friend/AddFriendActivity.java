@@ -77,7 +77,7 @@ public class AddFriendActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 searchKeyword = keyword.getText().toString().trim();
-                Log.d(TAG, "关键字：" + searchKeyword);
+                Log.d(TAG, "关键字：" + searchKeyword + "，搜索方式：" + searchMethod);
                 FragmentTransaction transaction =  getFragmentManager().beginTransaction();
                 SearchResultFragment searchResultFragment = new SearchResultFragment();
                 transaction.replace(R.id.add_friend_fragment, searchResultFragment);

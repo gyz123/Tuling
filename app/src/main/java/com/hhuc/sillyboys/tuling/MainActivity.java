@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         Log.d(TAG, "selfid = " + selfId);
         editor.putInt("selfid", selfId);
         editor.commit();
-        Toast.makeText(uiContext, "请先进入个人界面完善信息", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(uiContext, "请先进入个人界面完善信息", Toast.LENGTH_SHORT).show();
     }
 
 

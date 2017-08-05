@@ -287,7 +287,12 @@
                 android:text="保存设置"
                 android:textSize="@dimen/modify_info_char_size"
                 android:textColor="@color/firstColor"
+                android:background="@drawable/navi_single_item_bg"
                 android:gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_block_color"/>
         </LinearLayout>
 
 
