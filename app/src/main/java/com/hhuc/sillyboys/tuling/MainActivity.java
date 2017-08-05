@@ -7,9 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.algebra.sdk.API;
 import com.algebra.sdk.AccountApi;
@@ -161,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         Log.d(TAG, "selfid = " + selfId);
         editor.putInt("selfid", selfId);
         editor.commit();
-
+        Toast.makeText(uiContext, "请先进入个人界面完善信息", Toast.LENGTH_SHORT).show();
     }
 
 

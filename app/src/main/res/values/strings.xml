@@ -36,7 +36,7 @@
     <string name="end_dialogsession">issue one-way talking.</string>
     <string name="user_nick">昵称:&#160;</string>
     <string name="account">途聆号:&#160;</string>
-    <string name="invite">code:&#160;</string>
+    <string name="invite">注册码:&#160;</string>
     <string name="password">密码:&#160;</string>
     <string name="password_new">新密码:&#160;</string>
     <string name="pass_confirm">确认密码:&#160;</string>
@@ -55,13 +55,13 @@
 
     <string name="tourling">途聆</string>
     <string name="jzone">无锡捷中科技</string>
-    <string name="ok">OK</string>
-    <string name="visitor_intro">You are TourLink Guest</string>
-    <string name="visitor_nick">Use alias:&#160;</string>
-    <string name="user_entry">USER</string>
-    <string name="reset_pw">FORGET-PASS</string>
+    <string name="ok">登录</string>
+    <string name="visitor_intro">当前为游客登录</string>
+    <string name="visitor_nick">游客昵称:&#160;</string>
+    <string name="user_entry">账号登录</string>
+    <string name="reset_pw">忘记密码</string>
 
-    <string name="entry_channel">ENTER</string>
+    <string name="entry_channel">登录</string>
     <string name="sending_sms">Issue SMS</string>
     <string name="dialog">one-way talk</string>
     <string name="dengdeng">&#160;... &#160;</string>
@@ -150,28 +150,28 @@
     <string name="cherr_unknown">Unknown</string>
     <string name="need_account">need account</string>
     <string name="error_phoneno">Err phoneNo</string>
-    <string name="need_passwd">need pass</string>
-    <string name="input_phoneno">need phoneNo</string>
-    <string name="phoneno_hint">PhoneNo:&#160;</string>
-    <string name="user_hint">Account</string>
-    <string name="auth_code_error">Err auth-code</string>
-    <string name="unidentiry_pass">Err input</string>
-    <string name="no_session">Err session</string>
-    <string name="no_history">No history records</string>
-    <string name="today">Today&#160;</string>
-    <string name="back_exit_ui_hint">twice to exit UI</string>
-    <string name="sms_check">send sms</string>
+    <string name="need_passwd">需要密码</string>
+    <string name="input_phoneno">需要手机号</string>
+    <string name="phoneno_hint">手机:&#160;</string>
+    <string name="user_hint">账号</string>
+    <string name="auth_code_error">权限码错误</string>
+    <string name="unidentiry_pass">输入错误</string>
+    <string name="no_session">会话发生错误</string>
+    <string name="no_history">暂时没有历史消息</string>
+    <string name="today">今天&#160;</string>
+    <string name="back_exit_ui_hint">双击退出</string>
+    <string name="sms_check">发送短信</string>
 
-    <string name="err_timeout">Err timeout</string>
-    <string name="err_account">Err account</string>
-    <string name="err_userpass">Err password</string>
-    <string name="err_serverunava">Err service</string>
-    <string name="err_network">Err network</string>
-    <string name="err_nouser">Err account</string>
-    <string name="register_failed">Register failed</string>
+    <string name="err_timeout">登录超时</string>
+    <string name="err_account">账号错误</string>
+    <string name="err_userpass">密码错误</string>
+    <string name="err_serverunava">服务发生故障</string>
+    <string name="err_network">网络发生故障</string>
+    <string name="err_nouser">账号错误</string>
+    <string name="register_failed">注册失败</string>
     <string name="callmeeting_head">CallMeeting by&#160;</string>
 
-    <string name="visitor_welcome">You are tourlink guest</string>
+    <string name="visitor_welcome">当前为游客登录</string>
     <string name="visitor_nick_err">,&#160;too short&#160;</string>
     <string name="luren">GUEST</string>
     <string name="tg1">-A</string>

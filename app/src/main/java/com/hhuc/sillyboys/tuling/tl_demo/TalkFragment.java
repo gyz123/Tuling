@@ -254,10 +254,10 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 					Log.d(TAG,  "开启/关闭讨论");
 					boolean wheatherChat = false;
 					if(wheatherChat){
-						manage_broadcast.setText("开启讨论");
+						manage_talk.setText("开启讨论");
 						wheatherChat = false;
 					}else{
-						manage_broadcast.setText("关闭讨论");
+						manage_talk.setText("关闭讨论");
 						wheatherChat = true;
 					}
 				}
@@ -287,9 +287,14 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 				Log.d(TAG, "会话类型为" + type);
 				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
+//				broadcast_title.setText("Ta的信息");
+//				broadcast_creator.setText("对方是一名19岁的女生");
+//				broadcast_status.setText("兴趣爱好是：读一些文学书籍，听音乐，偶尔逛街");
+//				broadcast_time.setText("你们的话题：情感");
+//				broadcast_school.setVisibility(View.INVISIBLE);
 				broadcast_title.setText("Ta的信息");
-				broadcast_creator.setText("对方是一名19岁的女生");
-				broadcast_status.setText("兴趣爱好是：读一些文学书籍，听音乐，偶尔逛街");
+				broadcast_creator.setText("对方是一名18岁的男生");
+				broadcast_status.setText("兴趣爱好是：游戏，足球，骑车");
 				broadcast_time.setText("你们的话题：情感");
 				broadcast_school.setVisibility(View.INVISIBLE);
 			}
