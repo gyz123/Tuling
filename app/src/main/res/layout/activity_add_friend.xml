@@ -4,43 +4,48 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/MyAppBar"
+    <LinearLayout
+        android:layout_marginTop="24dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        android:layout_height="match_parent"
+        android:id="@+id/status_bar_height"
+        android:orientation="vertical">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/MyAppBar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/firstColor"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-            <FrameLayout
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/add_friend_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/before_white"
-                    android:drawablePadding="-8dp"
-                    android:layout_marginLeft="-10dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/subject"
-                    android:text="返回"/>
-                <TextView
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/firstColor"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="添加好友"
-                    android:gravity="center"
-                    android:textSize="@dimen/subject"
-                    android:visibility="visible"/>
-            </FrameLayout>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/add_friend_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/before_white"
+                        android:drawablePadding="-8dp"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/subject"
+                        android:text="返回"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="添加好友"
+                        android:gravity="center"
+                        android:textSize="@dimen/subject"
+                        android:visibility="visible"/>
+                </FrameLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+    </LinearLayout>
 
 
 
