@@ -108,16 +108,19 @@ public class MyMessage extends AppCompatActivity {
 
 
     private void initDatas(){
-        user = new ArrayList<String>(Arrays.asList("g17", "豆豆"));
+        user = new ArrayList<String>(Arrays.asList("g17", "豆豆", "刘大师"));
         pictures = new ArrayList<String>(
                 Arrays.asList(
                         "http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0"
                             ,"" + resourceIdToUri(this, R.drawable.friend_doudou)
+                        , "" + resourceIdToUri(this, R.drawable.friend_dashi)
                 ));
         time = new ArrayList<String>(Arrays.asList("2017-7-1"
-                        ,"2017-7-1"));
+                        ,"2017-7-1"
+                        ,"2017-7-2"));
         content = new ArrayList<String>(Arrays.asList("我们正在广播~快来收听吧"
-                        ,"向你发起了语言聊天"));
+                        ,"向你发起了语言聊天"
+                        ,"请求添加你为好友"));
 
     }
 

@@ -73,6 +73,8 @@
         <activity android:name=".self_info.MyFavourate" android:theme="@style/AppTheme.NoActionBar"/>
         <!-- 我的消息Activity -->
         <activity android:name=".self_info.MyMessage" android:theme="@style/AppTheme.NoActionBar"/>
+        <!-- 添加好友Activity -->
+        <activity android:name=".add_friend.AddFriendActivity" android:theme="@style/AppTheme.NoActionBar"/>
 
 
         <activity android:name="com.hhuc.sillyboys.tuling.tl_demo.NotificationActivity"

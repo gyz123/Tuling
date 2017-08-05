@@ -36,6 +36,7 @@ import com.algebra.sdk.entity.Channel;
 import com.algebra.sdk.entity.CompactID;
 import com.algebra.sdk.entity.Constant;
 import com.algebra.sdk.entity.Contact;
+import com.hhuc.sillyboys.tuling.add_friend.AddFriendActivity;
 import com.hhuc.sillyboys.tuling.chat.SecretActivity;
 import com.hhuc.sillyboys.tuling.entity.ChannelExt;
 import com.hhuc.sillyboys.tuling.entity.MsgCode;
@@ -253,7 +254,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                 startActivity(intent);
                 break;
             case 3: Log.d(TAG, "加好友");
-
+                intent = new Intent(MainActivity.this, AddFriendActivity.class);
+                intent.putExtra("selfid", selfId);
+                startActivity(intent);
                 break;
             case 4: Log.d(TAG, "扫码");
                 intent = new Intent(MainActivity.this, CaptureActivity.class);

@@ -18,6 +18,7 @@ package com.hhuc.sillyboys.tuling.zxing.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,7 @@ import android.widget.RelativeLayout;
 
 import com.google.zxing.Result;
 import com.hhuc.sillyboys.tuling.R;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.zxing.camera.CameraManager;
 import com.hhuc.sillyboys.tuling.zxing.decode.DecodeThread;
 import com.hhuc.sillyboys.tuling.zxing.utils.BeepManager;
@@ -253,11 +255,14 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
         Log.d("CaptureActivity", mCropRect.width()/3*2 + "---" + mCropRect.height()/3*2);
 
-        Log.d("CaptureActivity", "扫码结果： " + rawResult.getText());
-
-        //  处理扫码结果
         String result = rawResult.getText().toString();
-        Log.d("test","订单号：" + result);
+        Log.d("CaptureActivity", "扫码结果： " + result);
+        //  处理扫码结果
+        Intent broadcastIntent = new Intent(this, BroadcastActivity.class);
+        broadcastIntent.putExtra("compactId", result)
+                .putExtra("cname", "XX大学广播台")
+                .putExtra("type", "broadcast");
+        startActivity(broadcastIntent);
     }
 
     private void confirmOrder(String subscribenum){
