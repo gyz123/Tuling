@@ -54,7 +54,7 @@ public class SecretActivity  extends AppCompatActivity {
     private int selfId = 0;
     private String selfName = "";
     private String selfAge = "";
-    private String selfSex = "male";
+    private String selfSex = "female";
     private Context mContext;
     SearchDialog searchDialog;
 
@@ -89,7 +89,7 @@ public class SecretActivity  extends AppCompatActivity {
         editor = pref.edit();
         selfId = getIntent().getIntExtra("selfid", 0);
         //TODO 年龄暂时设置为18，之后将从数据库读取
-        selfAge = "18";
+        selfAge = "19";
         try{
             selfName = API.uid2nick(selfId);
         }catch (Exception e){

@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
 import com.hhuc.sillyboys.tuling.R;
-import com.hhuc.sillyboys.tuling.adapter.MyChannelAdapter;
 import com.hhuc.sillyboys.tuling.adapter.MyMessageAdapter;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.util.DividerItemDecoration;
@@ -102,10 +101,11 @@ public class MyMessage extends AppCompatActivity {
 
 
     private void initDatas(){
-        user = new ArrayList<String>(Arrays.asList("g17", "马哲"));
+        user = new ArrayList<String>(Arrays.asList("g17", "豆豆"));
         pictures = new ArrayList<String>(
-                Arrays.asList("http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0"
-                            ,"" + resourceIdToUri(this, R.drawable.friend_mazhe)
+                Arrays.asList(
+                        "http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0"
+                            ,"" + resourceIdToUri(this, R.drawable.friend_doudou)
                 ));
         time = new ArrayList<String>(Arrays.asList("2017-7-1"
                         ,"2017-7-1"));
