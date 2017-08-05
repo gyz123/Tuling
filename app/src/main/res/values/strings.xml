@@ -71,7 +71,7 @@
     <string name="pair_hint">turn on and pair bluetooth</string>
     <string name="connect_bluetooth_failed1">link to&#160;</string>
     <string name="connect_bluetooth_failed2">&#160;failed</string>
-    <string name="update_hint">There is a new version for download</string>
+    <string name="update_hint">检测到新版本可下载</string>
 
     <string name="spk_volume_hint">Speaker Volume</string>
     <string name="as_system_vol">System</string>
@@ -83,11 +83,11 @@
     <string name="comes_from">From&#160;</string>
     <string name="tl_new_sms">New TL-Summon</string>
 
-    <string name="channel_create">New Channel</string>
-    <string name="channel_search">Search/select</string>
-    <string name="channel_delete">Un-select Channel</string>
-    <string name="channel_modify">Channel Name</string>
-    <string name="channel_default">Default Channel</string>
+    <string name="channel_create">创建频道</string>
+    <string name="channel_search">搜索频道</string>
+    <string name="channel_delete">删除频道</string>
+    <string name="channel_modify">修改频道名称</string>
+    <string name="channel_default">设置默认频道</string>
 
     <string name="binderr_auth_code">Error Auth-code</string>
     <string name="binderr_bound_exist">Error Bound existed</string>

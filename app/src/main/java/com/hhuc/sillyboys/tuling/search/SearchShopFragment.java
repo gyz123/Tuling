@@ -73,7 +73,9 @@ public class SearchShopFragment  extends Fragment {
             public void onItemClick(View view, int position) {
                 String compactId = description.get(position);
                 Intent enterBroadcastIntent = new Intent(getActivity(), ChatAcitivity.class);
-                enterBroadcastIntent.putExtra("compactId", compactId).putExtra("cname", subject.get(position));
+                enterBroadcastIntent.putExtra("compactId", compactId)
+                        .putExtra("cname", subject.get(position))
+                        .putExtra("type", "shop");
                 Log.d(TAG, "用户选择了商家: " + subject.get(position) + "；频道id：" + compactId);
                 startActivity(enterBroadcastIntent);
             }

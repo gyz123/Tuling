@@ -16,9 +16,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
-import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity2;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.adapter.RoundImgAdapter;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.util.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -73,8 +73,10 @@ public class SearchBroadcastFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 String compactId = description.get(position);
-                Intent enterBroadcastIntent = new Intent(getActivity(), BroadcastActivity2.class);
-                enterBroadcastIntent.putExtra("compactId", compactId);
+                Intent enterBroadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
+                enterBroadcastIntent.putExtra("compactId", compactId)
+                            .putExtra("type", "broadcast")
+                            .putExtra("cname", subject.get(position));
                 Log.d(TAG, "用户选择了频道: " + compactId);
                 startActivity(enterBroadcastIntent);
             }

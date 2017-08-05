@@ -25,6 +25,7 @@ import com.algebra.sdk.entity.Contact;
 import com.dinuscxj.itemdecoration.ShaderItemDecoration;
 import com.hhuc.sillyboys.tuling.R;
 import com.hhuc.sillyboys.tuling.adapter.RoundImgAdapter;
+import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.chat.ChatAcitivity;
 import com.hhuc.sillyboys.tuling.entity.MsgCode;
 import com.hhuc.sillyboys.tuling.navi_fragment.SecondFragment;
@@ -96,9 +97,16 @@ public class SearchPeopleFragment extends Fragment implements OnChannelListener{
             public void onItemClick(View view, int position) {
                 // 房间名：我的昵称-对方昵称
                 String roomName = API.uid2nick(selfId) + "-" + subject.get(position);
-                channelApi.createPublicChannel(selfId, roomName, null);   // 用户id，频道名，密码
-                editor.putString(selfId+"", roomName);
-                editor.commit();
+                if(channelApi != null){
+                    channelApi.createPublicChannel(selfId, roomName, null);   // 用户id，频道名，密码
+                    editor.putString(selfId+"", roomName);
+                    editor.commit();
+                }else {
+                    Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
+                    broadcastIntent.putExtra("cname", "好友聊天").putExtra("type", "chat");
+                    startActivity(broadcastIntent);
+                }
+
             }
 
             @Override
@@ -159,8 +167,10 @@ public class SearchPeopleFragment extends Fragment implements OnChannelListener{
             Log.d(TAG, "新建的频道cid为：" + cid + ",创建的房间为" + pref.getString(uid + "", ""));
             uiHandler.obtainMessage(MsgCode.SAVECRATEDCHANNEL, uid, 0, roomName + ";" + cid).sendToTarget();
 
-            Intent chatIntent = new Intent(getActivity(), ChatAcitivity.class);
-            chatIntent.putExtra("compactId", cid).putExtra("cname", roomName);
+            Intent chatIntent = new Intent(getActivity(), BroadcastActivity.class);
+            chatIntent.putExtra("compactId", cid)
+                    .putExtra("cname", roomName)
+                    .putExtra("type", "chat");
             startActivity(chatIntent);
         }
     }

@@ -271,7 +271,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 			});
 
             type = pref.getString("type", "broadcast");
-			// 好友面板
+			// 好友面板:豆豆
 			if(type.equals("chat")){
 				Log.d(TAG, "会话类型为" + type);
 				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
@@ -296,6 +296,28 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 				broadcast_creator.setText("对方是一名18岁的男生");
 				broadcast_status.setText("兴趣爱好是：游戏，足球，骑车");
 				broadcast_time.setText("你们的话题：情感");
+				broadcast_school.setVisibility(View.INVISIBLE);
+			}
+			// 外面面板:宝食林
+			else if(type.equals("shop")){
+				Log.d(TAG, "会话类型为" + type);
+				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
+				broadcast_title.setText("店家信息");
+				broadcast_creator.setText("名称：宝食林");
+				broadcast_status.setText("位置：xx市xx区xx路xx号");
+				broadcast_time.setText("小提示：外卖正在路上~请保持语音畅通");
+				broadcast_school.setVisibility(View.INVISIBLE);
+			}
+			// 群聊面板:g17
+			else if(type.equals("group")){
+				Log.d(TAG, "会话类型为" + type);
+				view.findViewById(R.id.broadcast_user_block).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.broadcast_admin_block).setVisibility(View.INVISIBLE);
+				broadcast_title.setText("群组信息");
+				broadcast_creator.setText("名称：g17");
+				broadcast_status.setText("创建时间：2017-07-02");
+				broadcast_time.setText("成员：乐乐，豆豆，小柯，马哲，红哥");
 				broadcast_school.setVisibility(View.INVISIBLE);
 			}
 			// 广播面板

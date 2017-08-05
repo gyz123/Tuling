@@ -86,10 +86,17 @@ public class MyMessage extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 // 跳转对应的广播
                 Log.d(TAG, "跳转频道");
+                String type = "chat";
+                String cname = user.get(position);
+                if(cname.equals("g17")){
+                    type = "group";
+                }else if(cname.equals("豆豆")){
+                    type = "chat";
+                }
                 Intent broadcastIntent = new Intent(context, BroadcastActivity.class);
                 broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0")
-                        .putExtra("cname", user.get(position))
-                        .putExtra("type", "chat");
+                        .putExtra("cname", cname)
+                        .putExtra("type", type);
                 startActivity(broadcastIntent);
             }
             @Override

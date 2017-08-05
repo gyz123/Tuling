@@ -183,7 +183,7 @@ public class SecondFragment extends Fragment implements OnChannelListener{
     private void initGroup(){
         mRecyclerView2 = (RecyclerView)getActivity().findViewById(R.id.second_recyclerView_group);
 
-        subject2 = new ArrayList<String>(Arrays.asList("silly boys"));
+        subject2 = new ArrayList<String>(Arrays.asList("g17"));
         Iterator<String> i = subject2.iterator();
         while(i.hasNext()){
             sb.append(i.next().toString() + ";");
@@ -219,7 +219,7 @@ public class SecondFragment extends Fragment implements OnChannelListener{
                     editor.commit();
                 }else{
                     Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
-                    broadcastIntent.putExtra("cname", "好友聊天").putExtra("type", "chat");
+                    broadcastIntent.putExtra("cname", "好友聊天").putExtra("type", "group");
                     startActivity(broadcastIntent);
                 }
             }

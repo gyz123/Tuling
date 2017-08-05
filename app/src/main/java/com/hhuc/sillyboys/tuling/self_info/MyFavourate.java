@@ -88,10 +88,19 @@ public class MyFavourate extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 // 跳转对应的广播
                 Log.d(TAG, "跳转频道");
+                String type = "group";
+                String cname  = subject.get(position);
+                if(cname.equals("g17")){
+                    type = "group";
+                }else if(cname.equals("途聆体验频道")){
+                    type = "broadcast";
+                }else if(cname.equals("宝食林")){
+                    type = "shop";
+                }
                 Intent broadcastIntent = new Intent(context, BroadcastActivity.class);
                 broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0")
-                        .putExtra("cname", subject.get(position))
-                        .putExtra("type", "broadcast");
+                        .putExtra("cname", cname)
+                        .putExtra("type", type);
                 startActivity(broadcastIntent);
             }
             @Override
@@ -101,7 +110,7 @@ public class MyFavourate extends AppCompatActivity {
     }
 
     private void initDatas(){
-        subject = new ArrayList<String>(Arrays.asList("silly boys","途聆体验频道","宝食林"));
+        subject = new ArrayList<String>(Arrays.asList("g17","途聆体验频道","宝食林"));
         pictures = new ArrayList<String>(
                 Arrays.asList("http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0"
                 ,"http://wx.qlogo.cn/mmopen/yFGN6Nl8WAzDiaMENnsGRHayiby5jCvPuK08ibF1LBzAku1tQ4icliceNraFL2iaILzcPWBibDHTYFkkkyH8woMjca9XEiaYtUtYm4hia/0"

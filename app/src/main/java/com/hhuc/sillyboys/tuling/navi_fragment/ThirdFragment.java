@@ -101,7 +101,7 @@ public class ThirdFragment extends Fragment {
                 Intent broadcastIntent = new Intent(getActivity(), BroadcastActivity.class);
                 broadcastIntent.putExtra("compactId", compactId)
                             .putExtra("cname", subject.get(position))
-                            .putExtra("type" , "chat");
+                            .putExtra("type" , "shop");
                 Log.d(TAG, "用户选择了频道: " + compactId);
                 startActivity(broadcastIntent);
             }
@@ -121,8 +121,8 @@ public class ThirdFragment extends Fragment {
                                 editor.commit();
                                 // 刷新碎片
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                FirstFragment firstFragment = new FirstFragment();
-                                transaction.replace(R.id.main_fragment, firstFragment);
+                                ThirdFragment thirdFragment = new ThirdFragment();
+                                transaction.replace(R.id.main_fragment, thirdFragment);
                                 transaction.commit();
                                 return true;
                             case R.id.add_to_favourate:
@@ -157,23 +157,37 @@ public class ThirdFragment extends Fragment {
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = pref.edit();
         selfId = pref.getInt("selfid", 0);    // 用户id
+        int top = pref.getInt("addToTop", 0);
+        Log.d(TAG, "置顶：" + top);
 
-        subject = new ArrayList<String>(Arrays.asList("黄焖鸡米饭","宝食林","老潼关肉夹馍","平价饭店"));
-        sb = new StringBuffer();
-        Iterator<String> i = subject.iterator();
-        while(i.hasNext()){
-            sb.append(i.next().toString() + ";");
-        }
-        editor.putString("shopChannels", sb.toString());
-        editor.commit();
-        description = new ArrayList<String>(Arrays.asList("","","",""));
-        pictures = new ArrayList<String>(Arrays.asList(
+        String[] subs = new String[]{
+                "黄焖鸡米饭","宝食林","老潼关肉夹馍","平价饭店"
+        };
+        String[] pics = new String[]{
                 "" + resourceIdToUri(getActivity(), R.drawable.shop_huangmenji),
                 "" + resourceIdToUri(getActivity(), R.drawable.shop_baoshilin),
                 "" + resourceIdToUri(getActivity(), R.drawable.shop_roujiamo),
                 "" + resourceIdToUri(getActivity(), R.drawable.shop_pingjiafandian)
-                ));
+        };
+        subject = new ArrayList<String>();
+        sb = new StringBuffer();
+        description = new ArrayList<String>(Arrays.asList("","","",""));
+        pictures = new ArrayList<String>();
+
+        subject.add(subs[top]);
+        sb.append(subs[top] + ";");
+        pictures.add(pics[top]);
+        for(int i=0; i<4; i++){
+            if(i != top){
+                subject.add(subs[i]);
+                sb.append(subs[i] + ";");
+                pictures.add(pics[i]);
+            }
+        }
+        editor.putString("shopChannels", sb.toString());
+        editor.commit();
     }
+
 
     private static final String ANDROID_RESOURCE = "android.resource://";
     private static final String FOREWARD_SLASH = "/";

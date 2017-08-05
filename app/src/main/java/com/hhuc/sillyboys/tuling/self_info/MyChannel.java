@@ -91,7 +91,7 @@ public class MyChannel extends AppCompatActivity{
                 Intent broadcastIntent = new Intent(context, BroadcastActivity.class);
                 broadcastIntent.putExtra("compactId", "com.algebra.sdk.entity.CompactID@42cc5ce0")
                             .putExtra("cname", subject.get(position))
-                            .putExtra("type", "chat")
+                            .putExtra("type", "group")
                             .putExtra("identity", "admin");
                 startActivity(broadcastIntent);
             }
@@ -102,7 +102,7 @@ public class MyChannel extends AppCompatActivity{
     }
 
     private void initDatas(){
-        subject = new ArrayList<String>(Arrays.asList("silly boys"));
+        subject = new ArrayList<String>(Arrays.asList("g17"));
         pictures = new ArrayList<String>(
                 Arrays.asList("http://wx.qlogo.cn/mmopen/DZtibRDXICYabayGEnDE945eS02pbcBP53kI6LjyLODJqt59NpHVdXf1MHU1CwzRKNXcXt3cEdshTHTEIXsibNh4dVuIMyGfM5/0"
                 ));
