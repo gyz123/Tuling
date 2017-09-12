@@ -116,7 +116,7 @@ public class SecretActivity  extends AppCompatActivity {
         topic.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selectedId = radioGroup.getCheckedRadioButtonId();
+                   int selectedId = radioGroup.getCheckedRadioButtonId();
                 targetTopic = ((RadioButton)SecretActivity.this.findViewById(selectedId)).getText().toString();
             }
         });

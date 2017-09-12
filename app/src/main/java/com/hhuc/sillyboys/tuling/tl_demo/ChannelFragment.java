@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ import com.algebra.sdk.entity.Contact;
 import com.algebra.sdk.entity.IntStr;
 import com.algebra.sdk.entity.Room;
 import com.algebra.sdk.entity.Session;
+import com.hhuc.sillyboys.tuling.LoginActivity;
 import com.hhuc.sillyboys.tuling.broadcast.BroadcastActivity;
 import com.hhuc.sillyboys.tuling.broadcast.ShareDialog;
 import com.hhuc.sillyboys.tuling.entity.ChannelExt;
@@ -121,7 +123,13 @@ public class ChannelFragment extends Fragment implements OnChannelListener, OnSe
 
 		uiHandler = BroadcastActivity.getUiHandler();
 		if (channelApi == null) {
-			uiHandler.postDelayed(delayInitApi, 100);
+			// 修改demo，发生异常直接返回登录
+			try{
+				uiHandler.postDelayed(delayInitApi, 100);
+			}catch(Exception e){
+				e.printStackTrace();
+//				startActivity(new Intent(getActivity(), LoginActivity.class));
+			}
 		} else {
 			resumeChannelFragment();
 		}

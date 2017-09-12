@@ -7,13 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -22,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -36,6 +43,8 @@ import com.algebra.sdk.entity.Channel;
 import com.algebra.sdk.entity.CompactID;
 import com.algebra.sdk.entity.Constant;
 import com.algebra.sdk.entity.Contact;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.hhuc.sillyboys.tuling.add_friend.AddFriendActivity;
 import com.hhuc.sillyboys.tuling.chat.SecretActivity;
 import com.hhuc.sillyboys.tuling.entity.ChannelExt;
@@ -61,8 +70,9 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnMenuItemClickListener,OnChannelListener,
-        OnSessionListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,
+        OnMenuItemClickListener,OnChannelListener,OnSessionListener {
     private static final String TAG = "main";
     private BottomNavigationView bottomNavigationView;
     private android.support.v4.app.FragmentManager manager;
@@ -110,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     private boolean simpleChannelMode = false;
     private Channel defaultCh = null;
 
+    // 侧边导航栏
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +147,10 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        setSideNavi();
+        // 设置侧边导航子项监听
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         // 菜单栏
         manager = getSupportFragmentManager();
         setContextMenu();
@@ -161,6 +177,55 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         editor.putInt("selfid", selfId);
         editor.commit();
 //        Toast.makeText(uiContext, "请先进入个人界面完善信息", Toast.LENGTH_SHORT).show();
+    }
+
+    // 设置侧边导航栏
+    private void setSideNavi() {
+        ImageView toolbarIcon = (ImageView)findViewById(R.id.toolbar_icon);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbarIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int drawerLockMode = mDrawerLayout.getDrawerLockMode(GravityCompat.START);
+                if (mDrawerLayout.isDrawerVisible(GravityCompat.START)
+                        && (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_OPEN)) {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                } else if (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_CLOSED) {
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+    }
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override   // 侧边导航栏点击事件
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_english) {
+            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+        }
+        else if (id == R.id.nav_talk) {
+        }
+        else if (id == R.id.nav_music) {
+        }
+        else if (id == R.id.nav_news) {
+        }
+
+
+        else if (id == R.id.nav_org) {
+            Toast.makeText(MainActivity.this,"5",Toast.LENGTH_SHORT).show();
+        }
+        else if (id == R.id.nav_lesson) {
+            Toast.makeText(MainActivity.this,"6",Toast.LENGTH_SHORT).show();
+        }else if (id == R.id.nav_broadcast) {
+            Toast.makeText(MainActivity.this,"7" +
+                    "" +
+                    "",Toast.LENGTH_SHORT).show();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 
@@ -360,7 +425,15 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         }
     }
 
-
+    @Override  // 设置返回键操作
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 
 

@@ -62,6 +62,8 @@ public class ModifyInfo extends AppCompatActivity{
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
         selfId = getIntent().getIntExtra("selfid", 0);
+        // 获取用户信息
+
     }
 
     private void initComponent(){

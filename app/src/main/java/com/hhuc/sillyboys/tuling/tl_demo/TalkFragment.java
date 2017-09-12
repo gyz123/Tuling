@@ -107,7 +107,7 @@ public class TalkFragment extends Fragment implements OnMediaListener,
 	@Override
 	public void onAttach(Activity act) {
 		super.onAttach(act);
-		uiContext = (BroadcastActivity) act;
+		uiContext = act;
 		Log.i(TAG, "onAttach ....");
 	}
 

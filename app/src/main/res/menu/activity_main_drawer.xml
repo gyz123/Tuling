@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_english"
+            android:icon="@drawable/navi_english"
+            android:title="英语"/>
+        <item
+            android:id="@+id/nav_talk"
+            android:icon="@drawable/navi_talk"
+            android:title="讲座"/>
+        <item
+            android:id="@+id/nav_music"
+            android:icon="@drawable/navi_music"
+            android:title="音乐"/>
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/navi_news"
+            android:title="资讯"/>
+        <item
+            android:id="@+id/nav_org"
+            android:icon="@drawable/navi_org"
+            android:title="社团"/>
+        <item
+            android:id="@+id/nav_lesson"
+            android:icon="@drawable/navi_lesson"
+            android:title="课堂"/>
+        <item
+            android:id="@+id/nav_broadcast"
+            android:icon="@drawable/navi_broadcast"
+            android:title="直播"/>
+    </group>
+
+</menu>
